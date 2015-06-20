@@ -32,21 +32,11 @@ describe('Html2React', function() {
             assert.equal(reactHtml, htmlInput);
         });
 
-        it.skip('should return a valid HTML string with data attributes', function() {
-            var htmlInput = '<div data-wrapping-attribute="wrapping"></div>';
+        it('should return a valid HTML string with inline styles', function() {
+            var htmlInput = '<div style="background-color: red;color: white;"></div>';
 
             var reactComponent = html2react.parse(htmlInput,
-                IsValidNodeDefinitions.isAlwaysValidNode, processingInstructions.defaultProcessingInstructions);
-            var reactHtml = React.renderToStaticMarkup(reactComponent);
-
-            assert.equal(reactHtml, htmlInput);
-        });
-
-        it.skip('should return a valid HTML string with inline styles', function() {
-            var htmlInput = '<div style="background-color: red; color: white;"></div>';
-
-            var reactComponent = html2react.parse(htmlInput,
-                IsValidNodeDefinitions.isAlwaysValidNode, processingInstructions.defaultProcessingInstructions);
+                IsValidNodeDefinitions.isAlwaysValidNode, processingInstructions.defaultProcessingInstructionsWithInlineStyle);
             var reactHtml = React.renderToStaticMarkup(reactComponent);
 
             assert.equal(reactHtml, htmlInput);
