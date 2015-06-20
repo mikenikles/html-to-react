@@ -1,0 +1,24 @@
+{
+  "name": "html2react",
+  "version": "0.0.1",
+  "description": "A lightweight library that converts raw HTML to a React DOM structure.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mikenikles/html2react.git"
+  },
+  "keywords": [
+    "react",
+    "component",
+    "html"
+  ],
+  "author": "Mike Nikles",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mikenikles/html2react/issues"
+  },
+  "homepage": "https://github.com/mikenikles/html2react"
+}
