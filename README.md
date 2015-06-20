@@ -45,3 +45,7 @@ var reactHtml = React.renderToStaticMarkup(reactComponent);
 
 assert.equal(reactHtml, htmlInput);
 ```
+
+## Installation
+
+`$ npm install --save html2react`
