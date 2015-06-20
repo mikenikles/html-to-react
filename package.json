@@ -20,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/mikenikles/html2react/issues"
   },
-  "homepage": "https://github.com/mikenikles/html2react"
+  "homepage": "https://github.com/mikenikles/html2react",
+  "dependencies": {
+    "htmlparser2": "^3.8.3"
+  }
 }
