@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/mikenikles/html2react",
   "dependencies": {
-    "htmlparser2": "^3.8.3"
+    "htmlparser2": "^3.8.3",
+    "lodash": "^3.9.3"
   }
 }
