@@ -29,6 +29,10 @@ that have no common parent.
 The **html-to-react** module solves this problem by parsing each DOM element and converting it to a React tree with one
 single parent.
 
+## Installation
+
+`$ npm install --save html-to-react`
+
 ## Examples
 
 ### Simple
@@ -50,7 +54,7 @@ assert.equal(reactHtml, htmlInput); // true
 ### With custom processing instructions
 
 If certain DOM nodes require specific processing, for example if you want to capitalize each `<h1>` tag, the following
-example outlines this:
+example demonstrates this:
 
 ```javascript
 var React = require('react');
@@ -85,7 +89,3 @@ var reactComponent = htmlToReactParser.parseWithInstructions(htmlInput, isValidN
 var reactHtml = React.renderToStaticMarkup(reactComponent);
 assert.equal(reactHtml, htmlExpected);
 ```
-
-## Installation
-
-`$ npm install --save html-to-react`
