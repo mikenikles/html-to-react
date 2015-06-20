@@ -14,7 +14,7 @@ I did have control over. The template basically contains something like:
     </div>
     <div class="col-sm-6">
         <div data-report-id="report-2">
-        <!-- A React component for report-2 -->
+          <!-- A React component for report-2 -->
         </div>
     </div>
 </div>
