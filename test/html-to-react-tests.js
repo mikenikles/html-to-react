@@ -144,6 +144,35 @@ describe('Html2React with custom processing instructions', function() {
             var reactHtml = React.renderToStaticMarkup(reactComponent);
             assert.equal(reactHtml, htmlExpected);
         });
+
+        it('should return capitalized content for all <h1> elements', function() {
+            var htmlInput = '<div><h1>Title</h1><p>Paragraph</p><h1>Another title</h1></div>';
+            var htmlExpected = '<div><h1>TITLE</h1><p>Paragraph</p><h1>ANOTHER TITLE</h1></div>';
+
+            var isValidNode = function() {
+                return true;
+            };
+
+            var processingInstructions = [
+                {
+                    // Custom <h1> processing
+                    shouldProcessNode: function(node) {
+                        return node.parent && node.parent.name && node.parent.name === 'h1';
+                    },
+                    processNode: function(node, children) {
+                        return node.data.toUpperCase();
+                    }
+                }, {
+                    // Anything else
+                    shouldProcessNode: function(node) {
+                        return true;
+                    },
+                    processNode: processNodeDefinitions.processDefaultNode
+                }];
+            var reactComponent = parser.parseWithInstructions(htmlInput, isValidNode, processingInstructions);
+            var reactHtml = React.renderToStaticMarkup(reactComponent);
+            assert.equal(reactHtml, htmlExpected);
+        });
     });
 });
 

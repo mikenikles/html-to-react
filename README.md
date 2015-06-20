@@ -33,17 +33,57 @@ single parent.
 
 ### Simple
 
-The following example parses each node and its attributes and returns a React component.
+The following example parses each node and its attributes and returns a tree of React components.
 
 ```javascript
 var React = require('react');
-var htmlToReactParser = new require('html-to-react').Parser(React);
+var HtmlToReact = new require('html-to-react');
 
 var htmlInput = '<div><h1>Title</h1><p>A paragraph</p></div>';
+var htmlToReactParser = new HtmlToReact.Parser(React);
 var reactComponent = htmlToReactParser.parse(htmlInput);
 var reactHtml = React.renderToStaticMarkup(reactComponent);
 
-assert.equal(reactHtml, htmlInput);
+assert.equal(reactHtml, htmlInput); // true
+```
+
+### With custom processing instructions
+
+If certain DOM nodes require specific processing, for example if you want to capitalize each `<h1>` tag, the following
+example outlines this:
+
+```javascript
+var React = require('react');
+var HtmlToReact = new require('html-to-react');
+
+var htmlInput = '<div><h1>Title</h1><p>Paragraph</p><h1>Another title</h1></div>';
+var htmlExpected = '<div><h1>TITLE</h1><p>Paragraph</p><h1>ANOTHER TITLE</h1></div>';
+
+var isValidNode = function() {
+    return true;
+};
+
+// Order matters. Instructions are processed in the order they're defined
+var processingInstructions = [
+    {
+        // Custom <h1> processing
+        shouldProcessNode: function(node) {
+            return node.parent && node.parent.name && node.parent.name === 'h1';
+        },
+        processNode: function(node, children) {
+            return node.data.toUpperCase();
+        }
+    }, {
+        // Anything else
+        shouldProcessNode: function(node) {
+            return true;
+        },
+        processNode: processNodeDefinitions.processDefaultNode
+    }];
+var htmlToReactParser = new HtmlToReact.Parser(React);
+var reactComponent = htmlToReactParser.parseWithInstructions(htmlInput, isValidNode, processingInstructions);
+var reactHtml = React.renderToStaticMarkup(reactComponent);
+assert.equal(reactHtml, htmlExpected);
 ```
 
 ## Installation
