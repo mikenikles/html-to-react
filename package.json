@@ -4,7 +4,7 @@
   "description": "A lightweight library that converts raw HTML to a React DOM structure.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "./node_modules/mocha/bin/mocha"
   },
   "repository": {
     "type": "git",
@@ -23,6 +23,10 @@
   "homepage": "https://github.com/mikenikles/html2react",
   "dependencies": {
     "htmlparser2": "^3.8.3",
-    "lodash": "^3.9.3"
+    "lodash": "^3.9.3",
+    "react": "^0.13.3"
+  },
+  "devDependencies": {
+    "mocha": "^2.2.5"
   }
 }
