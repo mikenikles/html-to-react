@@ -1,4 +1,4 @@
-# html-to-react
+# html-to-react [![Build Status](https://travis-ci.org/mikenikles/html-to-react.svg?branch=master)](https://travis-ci.org/mikenikles/html-to-react)
 A lightweight library that converts raw HTML to a React DOM structure.
 
 ## Why?
