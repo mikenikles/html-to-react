@@ -63,6 +63,16 @@ describe('Html2React', function() {
 
             assert.equal(reactHtml, htmlInput);
         });
+
+        // FIXME: See lib/process-node-definitions.js -> processDefaultNode()
+        it.skip('should return a valid HTML string with comments', function() {
+            var htmlInput = '<div><!-- This is a comment --></div>';
+
+            var reactComponent = parser.parse(htmlInput);
+            var reactHtml = React.renderToStaticMarkup(reactComponent);
+
+            assert.equal(reactHtml, htmlInput);
+        });
     });
 
     describe('parse invalid HTML', function() {
@@ -95,7 +105,7 @@ describe('Html2React', function() {
 });
 
 describe('Html2React with custom processing instructions', function() {
-    var html2react = new Html2React(React);
+    var parser = new Parser(React);
     var processNodeDefinitions = new ProcessNodeDefinitions(React);
 
     describe('parse valid HTML', function() {
@@ -110,7 +120,7 @@ describe('Html2React with custom processing instructions', function() {
                 },
                 processNode: processNodeDefinitions.processDefaultNode
             }];
-            var reactComponent = html2react.parseWithInstructions(htmlInput, isValidNode, processingInstructions);
+            var reactComponent = parser.parseWithInstructions(htmlInput, isValidNode, processingInstructions);
 
             // With only 1 <p> element, nothing is rendered
             assert.equal(reactComponent, false);
@@ -130,7 +140,7 @@ describe('Html2React with custom processing instructions', function() {
                 },
                 processNode: processNodeDefinitions.processDefaultNode
             }];
-            var reactComponent = html2react.parseWithInstructions(htmlInput, isValidNode, processingInstructions);
+            var reactComponent = parser.parseWithInstructions(htmlInput, isValidNode, processingInstructions);
             var reactHtml = React.renderToStaticMarkup(reactComponent);
             assert.equal(reactHtml, htmlExpected);
         });
