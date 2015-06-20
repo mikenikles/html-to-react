@@ -37,10 +37,10 @@ The following example parses each node and its attributes and returns a React co
 
 ```javascript
 var React = require('react');
-var parser = new require('html-to-react').Parser(React);
+var htmlToReactParser = new require('html-to-react').Parser(React);
 
 var htmlInput = '<div><h1>Title</h1><p>A paragraph</p></div>';
-var reactComponent = parser.parse(htmlInput);
+var reactComponent = htmlToReactParser.parse(htmlInput);
 var reactHtml = React.renderToStaticMarkup(reactComponent);
 
 assert.equal(reactHtml, htmlInput);
