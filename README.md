@@ -1,4 +1,4 @@
-# html-2-react
+# html-to-react
 A lightweight library that converts raw HTML to a React DOM structure.
 
 ## Why?
@@ -26,7 +26,7 @@ than a React component.
 Simply replacing the `<div>` elements with a React component would end up with multiple top-level React components
 that have no common parent.
 
-The **html-2-react** module solves this problem by parsing each DOM element and converting it to a React tree with one
+The **html-to-react** module solves this problem by parsing each DOM element and converting it to a React tree with one
 single parent.
 
 ## Examples
@@ -37,7 +37,7 @@ The following example parses each node and its attributes and returns a React co
 
 ```javascript
 var React = require('react');
-var parser = new require('html-2-react').Parser(React);
+var parser = new require('html-to-react').Parser(React);
 
 var htmlInput = '<div><h1>Title</h1><p>A paragraph</p></div>';
 var reactComponent = parser.parse(htmlInput);
@@ -48,4 +48,4 @@ assert.equal(reactHtml, htmlInput);
 
 ## Installation
 
-`$ npm install --save html-2-react`
+`$ npm install --save html-to-react`
