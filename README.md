@@ -85,6 +85,7 @@ var processingInstructions = [
         processNode: processNodeDefinitions.processDefaultNode
     }];
 var htmlToReactParser = new HtmlToReact.Parser(React);
+var processNodeDefinitions = new HtmlToReact.ProcessNodeDefinitions(React);
 var reactComponent = htmlToReactParser.parseWithInstructions(htmlInput, isValidNode, processingInstructions);
 var reactHtml = React.renderToStaticMarkup(reactComponent);
 assert.equal(reactHtml, htmlExpected);
