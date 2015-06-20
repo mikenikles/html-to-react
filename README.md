@@ -28,3 +28,20 @@ that have no common parent.
 
 The **html2react** module solves this problem by parsing each DOM element and converting it to a React tree with one
 single parent.
+
+## Examples
+
+### Simple
+
+The following example parses each node and its attributes and returns a React component.
+
+```javascript
+var React = require('react');
+var parser = new require('html2react').Parser(React);
+
+var htmlInput = '<div><h1>Title</h1><p>A paragraph</p></div>';
+var reactComponent = parser.parse(htmlInput);
+var reactHtml = React.renderToStaticMarkup(reactComponent);
+
+assert.equal(reactHtml, htmlInput);
+```

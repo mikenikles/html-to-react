@@ -3,17 +3,17 @@
 var assert = require("assert");
 var React = require('react');
 
-var Html2React = require('../index').Html2React;
+var Parser = require('../index').Parser;
 var ProcessNodeDefinitions = require('../index').ProcessNodeDefinitions;
 
 describe('Html2React', function() {
-    var html2react = new Html2React(React);
+    var parser = new Parser(React);
 
     describe('parse valid HTML', function() {
         it('should return a valid HTML string', function() {
             var htmlInput = '<p>Does this work?</p>';
 
-            var reactComponent = html2react.parse(htmlInput);
+            var reactComponent = parser.parse(htmlInput);
             var reactHtml = React.renderToStaticMarkup(reactComponent);
 
             assert.equal(reactHtml, htmlInput);
@@ -22,7 +22,7 @@ describe('Html2React', function() {
         it('should return a valid HTML string with nested elements', function() {
             var htmlInput = '<div><h1>Heading</h1></div>';
 
-            var reactComponent = html2react.parse(htmlInput);
+            var reactComponent = parser.parse(htmlInput);
             var reactHtml = React.renderToStaticMarkup(reactComponent);
 
             assert.equal(reactHtml, htmlInput);
@@ -31,7 +31,7 @@ describe('Html2React', function() {
         it('should return a valid HTML string with inline styles', function() {
             var htmlInput = '<div style="background-color: red;color: white;"></div>';
 
-            var reactComponent = html2react.parse(htmlInput);
+            var reactComponent = parser.parse(htmlInput);
             var reactHtml = React.renderToStaticMarkup(reactComponent);
 
             assert.equal(reactHtml, htmlInput);
@@ -40,7 +40,7 @@ describe('Html2React', function() {
         it('should return a valid HTML string with data attributes', function() {
             var htmlInput = '<div data-test-attribute="data attribute value"></div>';
 
-            var reactComponent = html2react.parse(htmlInput);
+            var reactComponent = parser.parse(htmlInput);
             var reactHtml = React.renderToStaticMarkup(reactComponent);
 
             assert.equal(reactHtml, htmlInput);
@@ -49,7 +49,7 @@ describe('Html2React', function() {
         it('should return a valid HTML string with aria attributes', function() {
             var htmlInput = '<div aria-labelledby="label1"></div>';
 
-            var reactComponent = html2react.parse(htmlInput);
+            var reactComponent = parser.parse(htmlInput);
             var reactHtml = React.renderToStaticMarkup(reactComponent);
 
             assert.equal(reactHtml, htmlInput);
@@ -58,7 +58,7 @@ describe('Html2React', function() {
         it('should return a valid HTML string with a class attribute', function() {
             var htmlInput = '<div class="class-one"></div>';
 
-            var reactComponent = html2react.parse(htmlInput);
+            var reactComponent = parser.parse(htmlInput);
             var reactHtml = React.renderToStaticMarkup(reactComponent);
 
             assert.equal(reactHtml, htmlInput);
@@ -70,7 +70,7 @@ describe('Html2React', function() {
             var htmlInput = '<div></div><div></div>';
 
             assert.throws(function() {
-                html2react.parse(htmlInput);
+                parser.parse(htmlInput);
             }, Error);
         });
 
@@ -78,7 +78,7 @@ describe('Html2React', function() {
             var htmlInput = '<div></div><div></div><div></div>';
 
             assert.throws(function() {
-                html2react.parse(htmlInput);
+                parser.parse(htmlInput);
             }, /contains 3 root elements/);
         });
 
@@ -86,7 +86,7 @@ describe('Html2React', function() {
             var htmlInput = '<div><p></div>';
             var htmlExpected = '<div><p></p></div>';
 
-            var reactComponent = html2react.parse(htmlInput);
+            var reactComponent = parser.parse(htmlInput);
             var reactHtml = React.renderToStaticMarkup(reactComponent);
 
             assert.equal(reactHtml, htmlExpected);
