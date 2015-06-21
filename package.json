@@ -1,6 +1,6 @@
 {
   "name": "html-to-react",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A lightweight library that converts raw HTML to a React DOM structure.",
   "main": "index.js",
   "scripts": {
@@ -25,8 +25,13 @@
   "homepage": "https://github.com/mikenikles/html-to-react",
   "config": {
     "blanket": {
-      "pattern": [""],
-      "data-cover-never": ["node_modules", "test"]
+      "pattern": [
+        ""
+      ],
+      "data-cover-never": [
+        "node_modules",
+        "test"
+      ]
     }
   },
   "dependencies": {
