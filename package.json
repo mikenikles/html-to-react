@@ -4,7 +4,7 @@
   "description": "A lightweight library that converts raw HTML to a React DOM structure.",
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/mocha/bin/mocha"
+    "test": "./node_modules/mocha/bin/mocha --require blanket --reporter mocha-lcov-reporter | ./node_modules/coveralls/bin/coveralls.js"
   },
   "repository": {
     "type": "git",
@@ -21,12 +21,21 @@
     "url": "https://github.com/mikenikles/html-to-react/issues"
   },
   "homepage": "https://github.com/mikenikles/html-to-react",
+  "config": {
+    "blanket": {
+      "pattern": [""],
+      "data-cover-never": ["node_modules", "test"]
+    }
+  },
   "dependencies": {
     "htmlparser2": "^3.8.3",
     "lodash": "^3.9.3",
     "react": "^0.13.3"
   },
   "devDependencies": {
-    "mocha": "^2.2.5"
+    "blanket": "^1.1.7",
+    "coveralls": "^2.11.2",
+    "mocha": "^2.2.5",
+    "mocha-lcov-reporter": "0.0.2"
   }
 }
