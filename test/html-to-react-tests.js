@@ -37,6 +37,16 @@ describe('Html2React', function() {
             assert.equal(reactHtml, htmlInput);
         });
 
+        it('should return a valid HTML string with empty inline styles', function() {
+            var htmlInput = '<div style=""></div>';
+            var htmlExpected = '<div></div>';
+
+            var reactComponent = parser.parse(htmlInput);
+            var reactHtml = React.renderToStaticMarkup(reactComponent);
+
+            assert.equal(reactHtml, htmlExpected);
+        });
+
         it('should return a valid HTML string with data attributes', function() {
             var htmlInput = '<div data-test-attribute="data attribute value"></div>';
 
@@ -72,6 +82,17 @@ describe('Html2React', function() {
             var reactHtml = React.renderToStaticMarkup(reactComponent);
 
             assert.equal(reactHtml, htmlInput);
+        });
+
+        // FIXME: If / when React implements HTML comments, this test can be removed
+        it('should return a valid HTML string without comments', function() {
+            var htmlInput = '<div><!-- This is a comment --></div>';
+            var htmlExpected = '<div></div>';
+
+            var reactComponent = parser.parse(htmlInput);
+            var reactHtml = React.renderToStaticMarkup(reactComponent);
+
+            assert.equal(reactHtml, htmlExpected);
         });
     });
 

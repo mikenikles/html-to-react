@@ -90,3 +90,8 @@ var reactComponent = htmlToReactParser.parseWithInstructions(htmlInput, isValidN
 var reactHtml = React.renderToStaticMarkup(reactComponent);
 assert.equal(reactHtml, htmlExpected);
 ```
+
+## Tests & Coverage
+
+`$ npm run test-locally`
+`$ npm run test-html-coverage`

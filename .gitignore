@@ -4,3 +4,6 @@ node_modules
 
 # IDE files / folders
 .idea
+
+# Test coverage
+coverage.html
