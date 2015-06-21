@@ -1,4 +1,4 @@
-# html-to-react [![Build Status](https://travis-ci.org/mikenikles/html-to-react.svg?branch=master)](https://travis-ci.org/mikenikles/html-to-react) [![npm version](https://badge.fury.io/js/html-to-react.svg)](http://badge.fury.io/js/html-to-react)
+# html-to-react [![Build Status](https://travis-ci.org/mikenikles/html-to-react.svg?branch=master)](https://travis-ci.org/mikenikles/html-to-react) [![npm version](https://badge.fury.io/js/html-to-react.svg)](http://badge.fury.io/js/html-to-react) [![Dependency Status](https://david-dm.org/mikenikles/html-to-react.svg)](https://david-dm.org/mikenikles/html-to-react)
 A lightweight library that converts raw HTML to a React DOM structure.
 
 ## Why?
