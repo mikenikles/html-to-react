@@ -36,10 +36,10 @@
   },
   "dependencies": {
     "htmlparser2": "^3.8.3",
-    "lodash": "^3.9.3",
-    "react": "^0.13.3"
+    "lodash": "^3.9.3"
   },
   "devDependencies": {
+    "react": "^0.13.3",
     "blanket": "^1.1.7",
     "coveralls": "^2.11.2",
     "mocha": "^2.2.5",
