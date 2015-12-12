@@ -94,6 +94,13 @@ describe('Html2React', function() {
 
             assert.equal(reactHtml, htmlExpected);
         });
+
+        it('should not generate children for br tags', function() {
+            var htmlInput = '<br/>';
+
+            var reactComponent = parser.parse(htmlInput);
+            assert.strictEqual((reactComponent.props.children || []).length, 0);
+        });
     });
 
     describe('parse invalid HTML', function() {
@@ -196,4 +203,3 @@ describe('Html2React with custom processing instructions', function() {
         });
     });
 });
-
