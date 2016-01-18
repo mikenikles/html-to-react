@@ -40,7 +40,7 @@
     "react": "^0.13.3"
   },
   "devDependencies": {
-    "blanket": "^1.1.7",
+    "blanket": "1.1.7",
     "coveralls": "^2.11.2",
     "mocha": "^2.2.5",
     "mocha-lcov-reporter": "0.0.2"
