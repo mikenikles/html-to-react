@@ -2,6 +2,7 @@
 
 var assert = require("assert");
 var React = require('react');
+var ReactDOMServer = require('react-dom/server')
 
 var Parser = require('../index').Parser;
 var ProcessNodeDefinitions = require('../index').ProcessNodeDefinitions;
@@ -14,7 +15,7 @@ describe('Html2React', function() {
             var htmlInput = '<p>Does this work?</p>';
 
             var reactComponent = parser.parse(htmlInput);
-            var reactHtml = React.renderToStaticMarkup(reactComponent);
+            var reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
 
             assert.equal(reactHtml, htmlInput);
         });
@@ -23,7 +24,7 @@ describe('Html2React', function() {
             var htmlInput = '<div><h1>Heading</h1></div>';
 
             var reactComponent = parser.parse(htmlInput);
-            var reactHtml = React.renderToStaticMarkup(reactComponent);
+            var reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
 
             assert.equal(reactHtml, htmlInput);
         });
@@ -32,7 +33,7 @@ describe('Html2React', function() {
             var htmlInput = '<div style="background-color: red;color: white;"></div>';
 
             var reactComponent = parser.parse(htmlInput);
-            var reactHtml = React.renderToStaticMarkup(reactComponent);
+            var reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
 
             assert.equal(reactHtml, htmlInput);
         });
@@ -42,7 +43,7 @@ describe('Html2React', function() {
             var htmlExpected = '<div></div>';
 
             var reactComponent = parser.parse(htmlInput);
-            var reactHtml = React.renderToStaticMarkup(reactComponent);
+            var reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
 
             assert.equal(reactHtml, htmlExpected);
         });
@@ -51,7 +52,7 @@ describe('Html2React', function() {
             var htmlInput = '<div data-test-attribute="data attribute value"></div>';
 
             var reactComponent = parser.parse(htmlInput);
-            var reactHtml = React.renderToStaticMarkup(reactComponent);
+            var reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
 
             assert.equal(reactHtml, htmlInput);
         });
@@ -60,7 +61,7 @@ describe('Html2React', function() {
             var htmlInput = '<div aria-labelledby="label1"></div>';
 
             var reactComponent = parser.parse(htmlInput);
-            var reactHtml = React.renderToStaticMarkup(reactComponent);
+            var reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
 
             assert.equal(reactHtml, htmlInput);
         });
@@ -69,7 +70,7 @@ describe('Html2React', function() {
             var htmlInput = '<div class="class-one"></div>';
 
             var reactComponent = parser.parse(htmlInput);
-            var reactHtml = React.renderToStaticMarkup(reactComponent);
+            var reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
 
             assert.equal(reactHtml, htmlInput);
         });
@@ -79,7 +80,7 @@ describe('Html2React', function() {
             var htmlInput = '<div><!-- This is a comment --></div>';
 
             var reactComponent = parser.parse(htmlInput);
-            var reactHtml = React.renderToStaticMarkup(reactComponent);
+            var reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
 
             assert.equal(reactHtml, htmlInput);
         });
@@ -90,7 +91,7 @@ describe('Html2React', function() {
             var htmlExpected = '<div></div>';
 
             var reactComponent = parser.parse(htmlInput);
-            var reactHtml = React.renderToStaticMarkup(reactComponent);
+            var reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
 
             assert.equal(reactHtml, htmlExpected);
         });
@@ -118,7 +119,7 @@ describe('Html2React', function() {
             var htmlExpected = '<div><p></p></div>';
 
             var reactComponent = parser.parse(htmlInput);
-            var reactHtml = React.renderToStaticMarkup(reactComponent);
+            var reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
 
             assert.equal(reactHtml, htmlExpected);
         });
@@ -162,7 +163,7 @@ describe('Html2React with custom processing instructions', function() {
                 processNode: processNodeDefinitions.processDefaultNode
             }];
             var reactComponent = parser.parseWithInstructions(htmlInput, isValidNode, processingInstructions);
-            var reactHtml = React.renderToStaticMarkup(reactComponent);
+            var reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
             assert.equal(reactHtml, htmlExpected);
         });
 
@@ -191,9 +192,8 @@ describe('Html2React with custom processing instructions', function() {
                     processNode: processNodeDefinitions.processDefaultNode
                 }];
             var reactComponent = parser.parseWithInstructions(htmlInput, isValidNode, processingInstructions);
-            var reactHtml = React.renderToStaticMarkup(reactComponent);
+            var reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
             assert.equal(reactHtml, htmlExpected);
         });
     });
 });
-
