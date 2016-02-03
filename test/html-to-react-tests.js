@@ -1,8 +1,9 @@
 'use strict';
 
-var assert = require("assert");
+var assert = require('assert');
 var React = require('react');
 var ReactDOMServer = require('react-dom/server')
+var _ = require('lodash');
 
 var Parser = require('../index').Parser;
 var ProcessNodeDefinitions = require('../index').ProcessNodeDefinitions;
@@ -101,6 +102,20 @@ describe('Html2React', function() {
 
             assert.equal(reactHtml, htmlExpected);
         });
+
+        it('should generate keys for sequence items', function () {
+            var htmlInput = '<ul><li>Item 1</li><li>Item 2</li><</ul>';
+
+            var reactComponent = parser.parse(htmlInput);
+
+            var children = _.filter(_.flatten(reactComponent.props.children), function (c) {
+              return _.has(c, 'key');
+            });
+            var keys = _.map(children, function (child) {
+              return child.key;
+            });
+            assert.deepStrictEqual(keys, ['1', '2', ]);
+        })
     });
 
     describe('parse invalid HTML', function() {
