@@ -1,3 +1,10 @@
+## 0.1.2 (January 19, 2016)
+
+### Bug Fixes
+
+* Fixed [\#11](https://github.com/mikenikles/html-to-react/issues/7) - Key warning
+  * Thanks [@lithin](https://github.com/lithin) for this fix
+
 ## 0.1.1 (June 21, 2015)
 
 ### New Features
