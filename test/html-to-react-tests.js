@@ -114,7 +114,7 @@ describe('Html2React', function() {
             var keys = _.map(children, function (child) {
               return child.key;
             });
-            assert.deepStrictEqual(keys, ['1', '2', ]);
+            assert.deepStrictEqual(keys, ['0', '1', ]);
         })
     });
 
