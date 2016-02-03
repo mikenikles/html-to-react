@@ -194,6 +194,56 @@ describe('Html2React with custom processing instructions', function() {
             var reactHtml = React.renderToStaticMarkup(reactComponent);
             assert.equal(reactHtml, htmlExpected);
         });
+
+        it('should not generate children when there are none', function () {
+            var htmlInput    = '<img src="foo.png"></img>';
+            var htmlExpected = '<img src="foo.png">';
+
+            var isValidNode = function() {
+                return true;
+            };
+
+            var processingInstructions = [{
+              shouldProcessNode: function(node) { return true; },
+              processNode: processNodeDefinitions.processDefaultNode
+            }];
+            var reactComponent = parser.parseWithInstructions(htmlInput, isValidNode, processingInstructions);
+            var reactHtml = React.renderToStaticMarkup(reactComponent);
+            assert.equal(reactHtml, htmlExpected);
+        });
+
+        it('should generate children when there are some', function () {
+            var htmlInput    = '<div>foo</div>';
+
+            var isValidNode = function() {
+                return true;
+            };
+
+            var processingInstructions = [{
+              shouldProcessNode: function(node) { return true; },
+              processNode: processNodeDefinitions.processDefaultNode
+            }];
+            var reactComponent = parser.parseWithInstructions(htmlInput, isValidNode, processingInstructions);
+            assert.notEqual(reactComponent._store.props.children.length, 0);
+        });
+
+        it('should generate correct casing for react attributes', function () {
+            var htmlInput    = '<div class="foo" cellspacing="1" cellpadding="1" colspan="1">ok</div>';
+            var htmlExpected = htmlInput;
+
+            var isValidNode = function() {
+                return true;
+            };
+
+            var processingInstructions = [{
+              shouldProcessNode: function(node) { return true; },
+              processNode: processNodeDefinitions.processDefaultNode
+            }];
+            var reactComponent = parser.parseWithInstructions(htmlInput, isValidNode, processingInstructions);
+            [ 'className', 'cellSpacing', 'cellPadding', 'colSpan' ].forEach(function (key) {
+              assert.notStrictEqual(reactComponent._store.props[key], undefined, 'react component does not have prop: ' + key);
+            });
+        });
     });
 });
 
