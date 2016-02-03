@@ -109,7 +109,7 @@ describe('Html2React', function() {
             var reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
 
             assert.equal(reactHtml, htmlInput);
-        })
+        });
     });
 
     describe('parse invalid HTML', function() {
