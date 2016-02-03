@@ -108,6 +108,15 @@ describe('Html2React', function() {
             var reactComponent = parser.parse(htmlInput);
             assert.strictEqual((reactComponent.props.children || []).length, 0);
         });
+
+        it('should parse src elements with all attributes but without warnings', function() {
+            var htmlInput = '<p><img src="www.google.ca/logo.png"/></p>';
+
+            var reactComponent = parser.parse(htmlInput);
+            var reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
+
+            assert.equal(reactHtml, htmlInput);
+        });
     });
 
     describe('parse invalid HTML', function() {
