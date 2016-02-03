@@ -11,9 +11,9 @@ describe('Html2React', function() {
     var parser = new Parser(React);
 
     before(function() {
-      console.error = function(message) {
-        throw new Error(message);
-      };
+        console.error = function(message) {
+            throw new Error(message);
+        };
     })
 
     describe('parse valid HTML', function() {
@@ -101,6 +101,15 @@ describe('Html2React', function() {
 
             assert.equal(reactHtml, htmlExpected);
         });
+
+        it('should decode character entities in text nodes', function () {
+            var htmlInput = '<div>1 &lt; 2</div>';
+
+            var reactComponent = parser.parse(htmlInput);
+            var reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
+
+            assert.equal(reactHtml, htmlInput);
+        })
     });
 
     describe('parse invalid HTML', function() {
