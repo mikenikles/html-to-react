@@ -112,7 +112,14 @@ describe('Html2React', function() {
             assert.equal(reactHtml, htmlExpected);
         });
 
-        it('should parse src elements with all attributes but without warnings', function() {
+        it('should not generate children for br tags', function() {
+            var htmlInput = '<br/>';
+
+            var reactComponent = parser.parse(htmlInput);
+            assert.strictEqual((reactComponent.props.children || []).length, 0);
+         });
+
+        it('should parse void elements with all attributes and no warnings', function() {
             var htmlInput = '<p><img src="www.google.ca/logo.png"/></p>';
 
             var reactComponent = parser.parse(htmlInput);
