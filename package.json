@@ -4,7 +4,7 @@
   "description": "A lightweight library that converts raw HTML to a React DOM structure.",
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/mocha/bin/mocha",
+    "test": "./node_modules/mocha/bin/mocha --require blanket --reporter mocha-lcov-reporter | ./node_modules/coveralls/bin/coveralls.js",
     "test-locally": "./node_modules/mocha/bin/mocha",
     "test-html-coverage": "rm coverage.html; ./node_modules/mocha/bin/mocha --require blanket -R html-cov > coverage.html; open coverage.html"
   },
