@@ -36,7 +36,7 @@
   },
   "dependencies": {
     "htmlparser2": "^3.8.3",
-    "lodash": "^3.9.3"
+    "lodash": "^4.3.0"
   },
   "devDependencies": {
     "blanket": "1.1.7",
