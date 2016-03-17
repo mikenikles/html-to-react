@@ -36,7 +36,9 @@
   },
   "dependencies": {
     "htmlparser2": "^3.8.3",
-    "lodash": "^3.9.3"
+    "lodash.foreach": "^4.1.0",
+    "lodash.compact": "^3.0.1",
+    "lodash.camelcase": "^4.1.0"
   },
   "devDependencies": {
     "blanket": "1.1.7",
