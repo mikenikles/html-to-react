@@ -101,10 +101,6 @@ describe('Html2React', function() {
 
             assert.equal(reactHtml, htmlExpected);
         });
-
-        if('should fail', function() {
-            asert.equal(false, true);
-        })
     });
 
     describe('parse invalid HTML', function() {
