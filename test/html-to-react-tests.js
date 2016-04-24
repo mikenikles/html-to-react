@@ -1,6 +1,6 @@
 'use strict';
 
-var assert = require("assert");
+var assert = require('assert');
 var React = require('react');
 var ReactDOMServer = require('react-dom/server')
 
@@ -154,8 +154,8 @@ describe('Html2React', function() {
                     shouldProcessNode: function(node) {
                         return node.name && node.name !== 'p';
                     },
-                    processNode: processNodeDefinitions.processDefaultNode
-                }];
+                    processNode: processNodeDefinitions.processDefaultNode,
+                },];
                 var reactComponent = parser.parseWithInstructions(htmlInput, isValidNode, processingInstructions);
 
                 // With only 1 <p> element, nothing is rendered
@@ -174,8 +174,8 @@ describe('Html2React', function() {
                     shouldProcessNode: function(node) {
                         return node.type === 'text' || node.name !== 'p';
                     },
-                    processNode: processNodeDefinitions.processDefaultNode
-                }];
+                    processNode: processNodeDefinitions.processDefaultNode,
+                },];
                 var reactComponent = parser.parseWithInstructions(htmlInput, isValidNode, processingInstructions);
                 var reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
                 assert.equal(reactHtml, htmlExpected);
@@ -197,14 +197,14 @@ describe('Html2React', function() {
                         },
                         processNode: function(node, children) {
                             return node.data.toUpperCase();
-                        }
+                        },
                     }, {
                         // Anything else
                         shouldProcessNode: function(node) {
                             return true;
                         },
-                        processNode: processNodeDefinitions.processDefaultNode
-                    }];
+                        processNode: processNodeDefinitions.processDefaultNode,
+                    },];
                 var reactComponent = parser.parseWithInstructions(htmlInput, isValidNode, processingInstructions);
                 var reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
                 assert.equal(reactHtml, htmlExpected);
