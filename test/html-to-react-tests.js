@@ -102,6 +102,25 @@ describe('Html2React', function() {
             assert.equal(reactHtml, htmlExpected);
         });
 
+        it('should parse br elements without warnings', function() {
+            var htmlInput = '<div><p>Line one<br>Line two<br/>Line three</p></div>';
+            var htmlExpected = '<div><p>Line one<br/>Line two<br/>Line three</p></div>';
+
+            var reactComponent = parser.parse(htmlInput);
+            var reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
+
+            assert.equal(reactHtml, htmlExpected);
+        });
+
+        it('should parse src elements with all attributes but without warnings', function() {
+            var htmlInput = '<p><img src="www.google.ca/logo.png"/></p>';
+
+            var reactComponent = parser.parse(htmlInput);
+            var reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
+
+            assert.equal(reactHtml, htmlInput);
+        });
+
         it('should decode character entities in text nodes', function () {
             var htmlInput = '<div>1 &lt; 2</div>';
 
