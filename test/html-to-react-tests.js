@@ -107,12 +107,12 @@ describe('Html2React', function() {
 
             var reactComponent = parser.parse(htmlInput);
 
-            var children = _.filter(_.flatten(reactComponent.props.children), function (c) {
-              return _.has(c, 'key');
-            });
-            var keys = _.map(children, function (child) {
+            var children = R.filter(function (c) {
+              return R.has('key', c);
+            }, R.flatten(reactComponent.props.children));
+            var keys = R.map(function (child) {
               return child.key;
-            });
+          }, children);
             assert.deepStrictEqual(keys, ['0', '1', ]);
         })
 
