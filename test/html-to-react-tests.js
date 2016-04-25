@@ -10,12 +10,6 @@ var ProcessNodeDefinitions = require('../index').ProcessNodeDefinitions;
 describe('Html2React', function() {
     var parser = new Parser(React);
 
-    before(function() {
-      console.error = function(message) {
-        throw new Error(message);
-      };
-    })
-
     describe('parse valid HTML', function() {
         it('should return a valid HTML string', function() {
             var htmlInput = '<p>Does this work?</p>';
