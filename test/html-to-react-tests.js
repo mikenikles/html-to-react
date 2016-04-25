@@ -121,6 +121,16 @@ describe('Html2React', function() {
 
             assert.equal(reactHtml, htmlInput);
         });
+
+        // Covers issue #9
+        it('should parse textarea elements', function() {
+            var htmlInput = '<textarea></textarea>';
+
+            var reactComponent = parser.parse(htmlInput);
+            var reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
+
+            assert.equal(reactHtml, htmlInput);
+        });
     });
 
     describe('parse invalid HTML', function() {
