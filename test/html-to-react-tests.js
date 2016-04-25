@@ -10,12 +10,6 @@ var ProcessNodeDefinitions = require('../index').ProcessNodeDefinitions;
 describe('Html2React', function() {
     var parser = new Parser(React);
 
-    before(function() {
-        console.error = function(message) {
-            throw new Error(message);
-        };
-    })
-
     describe('parse valid HTML', function() {
         it('should return a valid HTML string', function() {
             var htmlInput = '<p>Does this work?</p>';
@@ -100,6 +94,42 @@ describe('Html2React', function() {
             var reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
 
             assert.equal(reactHtml, htmlExpected);
+        });
+
+        it('should parse br elements without warnings', function() {
+            var htmlInput = '<div><p>Line one<br>Line two<br/>Line three</p></div>';
+            var htmlExpected = '<div><p>Line one<br/>Line two<br/>Line three</p></div>';
+
+            var reactComponent = parser.parse(htmlInput);
+            var reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
+
+            assert.equal(reactHtml, htmlExpected);
+        });
+
+        it('should not generate children for br tags', function() {
+            var htmlInput = '<br/>';
+
+            var reactComponent = parser.parse(htmlInput);
+            assert.strictEqual((reactComponent.props.children || []).length, 0);
+         });
+
+        it('should parse void elements with all attributes and no warnings', function() {
+            var htmlInput = '<p><img src="www.google.ca/logo.png"/></p>';
+
+            var reactComponent = parser.parse(htmlInput);
+            var reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
+
+            assert.equal(reactHtml, htmlInput);
+        });
+
+        // Covers issue #9
+        it('should parse textarea elements', function() {
+            var htmlInput = '<textarea></textarea>';
+
+            var reactComponent = parser.parse(htmlInput);
+            var reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
+
+            assert.equal(reactHtml, htmlInput);
         });
 
         it('should generate keys for sequence items', function () {
