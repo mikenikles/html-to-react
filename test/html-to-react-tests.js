@@ -95,6 +95,32 @@ describe('Html2React', function() {
 
             assert.equal(reactHtml, htmlExpected);
         });
+
+        it('should parse br elements without warnings', function() {
+            var htmlInput = '<div><p>Line one<br>Line two<br/>Line three</p></div>';
+            var htmlExpected = '<div><p>Line one<br/>Line two<br/>Line three</p></div>';
+
+            var reactComponent = parser.parse(htmlInput);
+            var reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
+
+            assert.equal(reactHtml, htmlExpected);
+        });
+
+        it('should not generate children for br tags', function() {
+            var htmlInput = '<br/>';
+
+            var reactComponent = parser.parse(htmlInput);
+            assert.strictEqual((reactComponent.props.children || []).length, 0);
+         });
+
+        it('should parse void elements with all attributes and no warnings', function() {
+            var htmlInput = '<p><img src="www.google.ca/logo.png"/></p>';
+
+            var reactComponent = parser.parse(htmlInput);
+            var reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
+
+            assert.equal(reactHtml, htmlInput);
+        });
     });
 
     describe('parse invalid HTML', function() {
