@@ -1,6 +1,6 @@
 'use strict';
 
-var assert = require("assert");
+var assert = require('assert');
 var React = require('react');
 var ReactDOMServer = require('react-dom/server')
 
@@ -125,6 +125,15 @@ describe('Html2React', function() {
         // Covers issue #9
         it('should parse textarea elements', function() {
             var htmlInput = '<textarea></textarea>';
+
+            var reactComponent = parser.parse(htmlInput);
+            var reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
+
+            assert.equal(reactHtml, htmlInput);
+        });
+
+        it('should decode character entities in text nodes', function () {
+            var htmlInput = '<div>1 &lt; 2</div>';
 
             var reactComponent = parser.parse(htmlInput);
             var reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
