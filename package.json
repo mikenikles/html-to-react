@@ -40,9 +40,9 @@
   },
   "devDependencies": {
     "blanket": "1.1.7",
-    "coveralls": "^2.11.2",
+    "coveralls": "2.11.9",
     "mocha": "^2.2.5",
-    "mocha-lcov-reporter": "0.0.2",
+    "mocha-lcov-reporter": "1.2.0",
     "react": "^0.14.7",
     "react-dom": "^0.14.7"
   }
