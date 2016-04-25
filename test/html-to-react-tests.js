@@ -95,6 +95,47 @@ describe('Html2React', function() {
 
             assert.equal(reactHtml, htmlExpected);
         });
+
+        it('should not insert spans into tables even if there is white space', function() {
+            var htmlInput = '<table> <tbody> <tr>\n<td>x</td> <td>3</td> </tr> </tbody> </table>';
+            var htmlExpected = '<table><tbody><tr><td>x</td><td>3</td></tr></tbody></table>';
+
+            var reactComponent = parser.parse(htmlInput);
+            var reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
+
+            assert.equal(reactHtml, htmlExpected);
+        });
+
+        it('should preserve leading white space in a div', function() {
+            var htmlInput = '<div> hi</div>';
+
+            var reactComponent = parser.parse(htmlInput);
+            var reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
+
+            assert.equal(reactHtml, htmlInput);
+        });
+
+        // Should it strip out contents of a div containing only white space?
+        it('should strip out contents of a div containing only white space', function() {
+            var htmlInput = '<div>  </div>';
+            var htmlExpected = '<div></div>';
+
+            var reactComponent = parser.parse(htmlInput);
+            var reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
+
+            assert.equal(reactHtml, htmlExpected);
+        });
+
+        // Should it strip out white space that is a sibling to an element?
+        it('should strip out white space that is a sibling to an element', function() {
+            var htmlInput = '<div> <span>hi</span>bye</div>';
+            var htmlExpected = '<div><span>hi</span>bye</div>';
+
+            var reactComponent = parser.parse(htmlInput);
+            var reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
+
+            assert.equal(reactHtml, htmlExpected);
+        });
     });
 
     describe('parse invalid HTML', function() {
