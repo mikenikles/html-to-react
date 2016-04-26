@@ -254,6 +254,18 @@ describe('Html2React', function() {
                 var reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
                 assert.equal(reactHtml, htmlExpected);
             });
+
+            it('should return false in case of invalid node', function() {
+                var htmlInput = '<p></p>';
+                var processingInstructions = [{
+                    shouldProcessNode: function(node) { return true; },
+                    processNode: processNodeDefinitions.processDefaultNode,
+                }, ];
+                var reactComponent = parser.parseWithInstructions(htmlInput,
+                    function () { return false }, processingInstructions);
+
+                assert.equal(reactComponent, false);
+            });
         });
     });
 });
