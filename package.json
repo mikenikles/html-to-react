@@ -4,9 +4,8 @@
   "description": "A lightweight library that converts raw HTML to a React DOM structure.",
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/mocha/bin/mocha --require blanket --reporter mocha-lcov-reporter | ./node_modules/coveralls/bin/coveralls.js",
-    "test-locally": "./node_modules/mocha/bin/mocha",
-    "test-html-coverage": "rm coverage.html; ./node_modules/mocha/bin/mocha --require blanket -R html-cov > coverage.html; open coverage.html"
+    "test": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage",
+    "test-html-coverage": "istanbul cover ./node_modules/mocha/bin/_mocha; open coverage/lcov-report/index.html"
   },
   "repository": {
     "type": "git",
@@ -35,16 +34,17 @@
     }
   },
   "dependencies": {
+    "ent": "^2.2.0",
     "htmlparser2": "^3.8.3",
     "lodash.foreach": "^4.1.0",
     "lodash.compact": "^3.0.1",
     "lodash.camelcase": "^4.1.0"
   },
   "devDependencies": {
-    "blanket": "1.1.7",
-    "coveralls": "^2.11.2",
-    "mocha": "^2.2.5",
-    "mocha-lcov-reporter": "0.0.2",
+    "coveralls": "2.11.9",
+    "istanbul": "0.4.3",
+    "mocha": "2.4.5",
+    "mocha-lcov-reporter": "1.2.0",
     "react": "^0.14.7",
     "react-dom": "^0.14.7"
   }
