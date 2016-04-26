@@ -38,8 +38,8 @@
     "htmlparser2": "^3.8.3",
     "lodash.camelcase": "^4.1.0",
     "lodash.compact": "^3.0.1",
-    "lodash.contains": "^2.4.3",
-    "lodash.foreach": "^4.1.0"
+    "lodash.foreach": "^4.1.0",
+    "lodash.includes": "^4.1.2"
   },
   "devDependencies": {
     "coveralls": "2.11.9",
