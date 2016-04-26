@@ -36,9 +36,10 @@
   "dependencies": {
     "ent": "^2.2.0",
     "htmlparser2": "^3.8.3",
-    "lodash.foreach": "^4.1.0",
+    "lodash.camelcase": "^4.1.0",
     "lodash.compact": "^3.0.1",
-    "lodash.camelcase": "^4.1.0"
+    "lodash.contains": "^2.4.3",
+    "lodash.foreach": "^4.1.0"
   },
   "devDependencies": {
     "coveralls": "2.11.9",
