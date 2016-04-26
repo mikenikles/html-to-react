@@ -133,6 +133,15 @@ describe('Html2React', function() {
             assert.equal(reactHtml, htmlInput);
         });
 
+        it('should decode character entities in text nodes', function () {
+            var htmlInput = '<div>1 &lt; 2</div>';
+
+            var reactComponent = parser.parse(htmlInput);
+            var reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
+
+            assert.equal(reactHtml, htmlInput);
+        });
+
         it('should generate keys for sequence items', function () {
             var htmlInput = '<ul><li>Item 1</li><li>Item 2</li></ul>';
 
@@ -145,7 +154,7 @@ describe('Html2React', function() {
               return child.key;
             });
             assert.deepStrictEqual(keys, ['0', '1', ]);
-        })
+        });
     });
 
     describe('parse invalid HTML', function() {
@@ -244,18 +253,6 @@ describe('Html2React', function() {
                 var reactComponent = parser.parseWithInstructions(htmlInput, isValidNode, processingInstructions);
                 var reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
                 assert.equal(reactHtml, htmlExpected);
-            });
-
-            it('should return false in case of invalid node', function() {
-                var htmlInput = '<p></p>';
-                var processingInstructions = [{
-                    shouldProcessNode: function(node) { return true; },
-                    processNode: processNodeDefinitions.processDefaultNode,
-                }, ];
-                var reactComponent = parser.parseWithInstructions(htmlInput,
-                    function () { return false }, processingInstructions);
-
-                assert.equal(reactComponent, false);
             });
         });
     });
