@@ -3,6 +3,7 @@
 var assert = require('assert');
 var React = require('react');
 var ReactDOMServer = require('react-dom/server')
+var R = require('ramda');
 
 var Parser = require('../index').Parser;
 var ProcessNodeDefinitions = require('../index').ProcessNodeDefinitions;
@@ -144,7 +145,7 @@ describe('Html2React', function() {
               return child.key;
           }, children);
             assert.deepStrictEqual(keys, ['0', '1', ]);
-        })
+        });
 
         it('should parse br elements without warnings', function() {
             var htmlInput = '<div><p>Line one<br>Line two<br/>Line three</p></div>';
