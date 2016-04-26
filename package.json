@@ -36,7 +36,7 @@
   "dependencies": {
     "ent": "^2.2.0",
     "htmlparser2": "^3.8.3",
-    "lodash": "^3.9.3"
+    "lodash": "^4.3.0"
   },
   "devDependencies": {
     "coveralls": "2.11.9",
