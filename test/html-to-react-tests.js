@@ -3,6 +3,7 @@
 var assert = require('assert');
 var React = require('react');
 var ReactDOMServer = require('react-dom/server')
+var _ = require('lodash');
 
 var Parser = require('../index').Parser;
 var ProcessNodeDefinitions = require('../index').ProcessNodeDefinitions;
@@ -238,6 +239,32 @@ describe('Html2React', function() {
                 var reactComponent = parser.parseWithInstructions(htmlInput, isValidNode, processingInstructions);
                 var reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
                 assert.equal(reactHtml, htmlExpected);
+            });
+
+            it('should generate keys for sequence items', function () {
+                var htmlInput = '<ul><li>Item 1</li><li>Item 2</li><</ul>';
+
+                var reactComponent = parser.parse(htmlInput);
+
+                var children = _.filter(_.flatten(reactComponent.props.children), function (c) {
+                  return _.has(c, 'key');
+                });
+                var keys = _.map(children, function (child) {
+                  return child.key;
+                });
+                assert.deepStrictEqual(keys, ['0', '1', ]);
+            });
+
+            it('should return false in case of invalid node', function() {
+                var htmlInput = '<p></p>';
+                var processingInstructions = [{
+                    shouldProcessNode: function(node) { return true; },
+                    processNode: processNodeDefinitions.processDefaultNode,
+                }, ];
+                var reactComponent = parser.parseWithInstructions(htmlInput,
+                    function () { return false }, processingInstructions);
+
+                assert.equal(reactComponent, false);
             });
         });
     });
