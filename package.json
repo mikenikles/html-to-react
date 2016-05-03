@@ -38,6 +38,7 @@
     "htmlparser2": "^3.8.3",
     "lodash.camelcase": "^4.1.0",
     "lodash.compact": "^3.0.1",
+    "lodash.concat": "^4.3.0",
     "lodash.find": "^4.3.0",
     "lodash.foreach": "^4.2.0",
     "lodash.includes": "^4.1.2",
