@@ -9,6 +9,5 @@ module.exports = {
     Parser: parser,
     ProcessingInstructions: processingInstructions,
     IsValidNodeDefinitions: isValidNodeDefinitions,
-    ProcessNodeDefinitions: processNodeDefinitions
+    ProcessNodeDefinitions: processNodeDefinitions,
 };
-
