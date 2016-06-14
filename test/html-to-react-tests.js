@@ -141,6 +141,16 @@ describe('Html2React', function() {
 
             assert.equal(reactHtml, htmlInput);
         });
+
+        it('should fill in the key name with boolean attribute', function() {
+            var htmlInput = '<input type="checkbox" disabled required/>';
+            var htmlExpected = '<input type="checkbox" disabled="" required=""/>'
+
+            var reactComponent = parser.parse(htmlInput);
+            var reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
+
+            assert.equal(reactHtml, htmlExpected);
+        });
     });
 
     describe('parse invalid HTML', function() {
