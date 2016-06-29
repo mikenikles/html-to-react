@@ -91,6 +91,83 @@ var reactHtml = React.renderToStaticMarkup(reactComponent);
 assert.equal(reactHtml, htmlExpected);
 ```
 
+### Replace the children of an element
+
+There may be a situation where you want to replace the children of an element with a React component. This is
+beneficial if you want to:
+- a) preserve the containing element
+- b) not rely on any child node to insert your React component
+
+#### Example
+
+Below is a simple template that could get loaded via ajax into your application
+
+##### Before
+```
+<div class="row">
+    <div class="col-sm-6">
+        <div data-container="wysiwyg">
+            <h1>Sample Heading</h1>
+            <p>Sample Text</p>
+        </div>
+    </div>
+</div>
+```
+
+##### After
+
+You may want to extract the inner html from the `data-container` attribute, store it and then pass it as a
+prop to your injected `RichTextEditor`.
+
+```
+<div class="row">
+    <div class="col-sm-6">
+        <div data-container="wysiwyg">
+            <RichTextEditor html={"<h1>Sample heading</h1><p>Sample Text</p>"} />
+        </div>
+    </div>
+</div>
+```
+
+#### Setup
+
+In your instructions object, you must specify `replaceChildren: true`.
+
+```javascript
+var React = require('react');
+var HtmlToReact = new require('html-to-react');
+
+var htmlInput = '<div><div data-test="foo"><p>Text</p><p>Text</p></div></div>';
+var htmlExpected = '<div><div data-test="foo"><h1>Heading</h1></div></div>';
+
+var isValidNode = function() {
+    return true;
+};
+
+// Order matters. Instructions are processed in the order they're defined
+var processingInstructions = [{
+    // This is REQUIRED, it tells the parser that we want to insert our React component as a child
+    replaceChildren: true,
+    shouldProcessNode: function(node) {
+        return node.attribs && node.attribs['data-test'] === 'foo';
+    },
+    processNode: function(node, children, index) {
+        return React.createElement('h1', { key: index }, 'Heading');
+    }
+},
+{
+    // Anything else
+    shouldProcessNode: function(node) {
+        return true;
+    },
+    processNode: processNodeDefinitions.processDefaultNode
+}];
+
+var reactComponent = parser.parseWithInstructions(htmlInput, isValidNode, processingInstructions);
+var reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
+assert.equal(reactHtml, htmlExpected);
+```
+
 ## Tests & Coverage
 
 `$ npm run test-locally`
