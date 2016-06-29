@@ -212,6 +212,36 @@ describe('Html2React', function() {
                 assert.equal(reactHtml, htmlExpected);
             });
 
+            it('should replace the children of an element', function() {
+                var htmlInput = '<div><div data-test="foo"><p>Text</p><p>Text</p></div></div>';
+                var htmlExpected = '<div><div data-test="foo"><h1>Heading</h1></div></div>';
+
+                var isValidNode = function() {
+                    return true;
+                };
+
+                var processingInstructions = [{
+                    replaceChildren: true,
+                    shouldProcessNode: function(node) {
+                        return node.attribs && node.attribs['data-test'] === 'foo';
+                    },
+                    processNode: function(node, children, index) {
+                        return React.createElement('h1', { key: index }, 'Heading');
+                    }
+                },
+                {
+                    // Anything else
+                    shouldProcessNode: function(node) {
+                        return true;
+                    },
+                    processNode: processNodeDefinitions.processDefaultNode
+                }];
+
+                var reactComponent = parser.parseWithInstructions(htmlInput, isValidNode, processingInstructions);
+                var reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
+                assert.equal(reactHtml, htmlExpected);
+            });
+
             it('should return capitalized content for all <h1> elements', function() {
                 var htmlInput = '<div><h1>Title</h1><p>Paragraph</p><h1>Another title</h1></div>';
                 var htmlExpected = '<div><h1>TITLE</h1><p>Paragraph</p><h1>ANOTHER TITLE</h1></div>';
