@@ -3,7 +3,7 @@
 var assert = require('assert');
 var React = require('react');
 var ReactDOMServer = require('react-dom/server')
-var _ = require('lodash');
+var R = require('ramda');
 
 var Parser = require('../index').Parser;
 var ProcessNodeDefinitions = require('../index').ProcessNodeDefinitions;
@@ -142,6 +142,39 @@ describe('Html2React', function() {
             assert.equal(reactHtml, htmlInput);
         });
 
+        it('should generate keys for sequence items', function () {
+            var htmlInput = '<ul><li>Item 1</li><li>Item 2</li><</ul>';
+
+            var reactComponent = parser.parse(htmlInput);
+
+            var children = R.filter(function (c) {
+              return R.has('key', c);
+            }, R.flatten(reactComponent.props.children));
+            var keys = R.map(function (child) {
+              return child.key;
+          }, children);
+            assert.deepStrictEqual(keys, ['0', '1', ]);
+        });
+
+        it('should parse br elements without warnings', function() {
+            var htmlInput = '<div><p>Line one<br>Line two<br/>Line three</p></div>';
+            var htmlExpected = '<div><p>Line one<br/>Line two<br/>Line three</p></div>';
+
+            var reactComponent = parser.parse(htmlInput);
+            var reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
+
+            assert.equal(reactHtml, htmlExpected);
+        });
+
+        it('should parse src elements with all attributes but without warnings', function() {
+            var htmlInput = '<p><img src="www.google.ca/logo.png"/></p>';
+
+            var reactComponent = parser.parse(htmlInput);
+            var reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
+
+            assert.equal(reactHtml, htmlInput);
+        });
+
         it('should decode character entities in text nodes', function () {
             var htmlInput = '<div>1 &lt; 2</div>';
 
@@ -194,8 +227,8 @@ describe('Html2React', function() {
                     shouldProcessNode: function(node) {
                         return node.name && node.name !== 'p';
                     },
-                    processNode: processNodeDefinitions.processDefaultNode
-                }];
+                    processNode: processNodeDefinitions.processDefaultNode,
+                },];
                 var reactComponent = parser.parseWithInstructions(htmlInput, isValidNode, processingInstructions);
 
                 // With only 1 <p> element, nothing is rendered
@@ -214,8 +247,8 @@ describe('Html2React', function() {
                     shouldProcessNode: function(node) {
                         return node.type === 'text' || node.name !== 'p';
                     },
-                    processNode: processNodeDefinitions.processDefaultNode
-                }];
+                    processNode: processNodeDefinitions.processDefaultNode,
+                },];
                 var reactComponent = parser.parseWithInstructions(htmlInput, isValidNode, processingInstructions);
                 var reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
                 assert.equal(reactHtml, htmlExpected);
@@ -237,31 +270,17 @@ describe('Html2React', function() {
                         },
                         processNode: function(node, children) {
                             return node.data.toUpperCase();
-                        }
+                        },
                     }, {
                         // Anything else
                         shouldProcessNode: function(node) {
                             return true;
                         },
-                        processNode: processNodeDefinitions.processDefaultNode
-                    }];
+                        processNode: processNodeDefinitions.processDefaultNode,
+                    },];
                 var reactComponent = parser.parseWithInstructions(htmlInput, isValidNode, processingInstructions);
                 var reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
                 assert.equal(reactHtml, htmlExpected);
-            });
-
-            it('should generate keys for sequence items', function () {
-                var htmlInput = '<ul><li>Item 1</li><li>Item 2</li><</ul>';
-
-                var reactComponent = parser.parse(htmlInput);
-
-                var children = _.filter(_.flatten(reactComponent.props.children), function (c) {
-                  return _.has(c, 'key');
-                });
-                var keys = _.map(children, function (child) {
-                  return child.key;
-                });
-                assert.deepStrictEqual(keys, ['0', '1', ]);
             });
 
             it('should return false in case of invalid node', function() {
