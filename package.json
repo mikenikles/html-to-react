@@ -1,6 +1,6 @@
 {
   "name": "html-to-react",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A lightweight library that converts raw HTML to a React DOM structure.",
   "main": "index.js",
   "scripts": {
@@ -36,13 +36,13 @@
   "dependencies": {
     "ent": "^2.2.0",
     "htmlparser2": "^3.8.3",
-    "ramda": "^0.21.0",
+    "ramda": "^0.22.0",
     "underscore.string.fp": "^1.0.4"
   },
   "devDependencies": {
-    "coveralls": "2.11.9",
-    "istanbul": "0.4.3",
-    "mocha": "2.4.5",
+    "coveralls": "^2.11.12",
+    "istanbul": "^0.4.4",
+    "mocha": "^3.0",
     "mocha-lcov-reporter": "1.2.0",
     "react": "^15.0",
     "react-dom": "^15.0"
