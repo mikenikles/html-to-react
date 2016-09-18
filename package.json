@@ -16,7 +16,7 @@
     "react-component",
     "html"
   ],
-  "author": "Mike Nikles",
+  "author": "Arve Knudsen, Mike Nikles",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/mikenikles/html-to-react/issues"
