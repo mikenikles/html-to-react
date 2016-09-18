@@ -2,7 +2,7 @@
 
 var assert = require('assert');
 var React = require('react');
-var ReactDOMServer = require('react-dom/server')
+var ReactDOMServer = require('react-dom/server');
 var R = require('ramda');
 
 var Parser = require('../index').Parser;
@@ -121,7 +121,7 @@ describe('Html2React', function() {
 
             var reactComponent = parser.parse(htmlInput);
             assert.strictEqual((reactComponent.props.children || []).length, 0);
-         });
+        });
 
         it('should parse void elements with all attributes and no warnings', function() {
             var htmlInput = '<p><img src="www.google.ca/logo.png"/></p>';
@@ -148,11 +148,11 @@ describe('Html2React', function() {
             var reactComponent = parser.parse(htmlInput);
 
             var children = R.filter(function (c) {
-              return R.has('key', c);
+                return R.has('key', c);
             }, R.flatten(reactComponent.props.children));
             var keys = R.map(function (child) {
-              return child.key;
-          }, children);
+                return child.key;
+            }, children);
             assert.deepStrictEqual(keys, ['0', '1', ]);
         });
 
@@ -194,7 +194,7 @@ describe('Html2React', function() {
 
         it('should fill in the key name with boolean attribute', function() {
             var htmlInput = '<input type="checkbox" disabled required/>';
-            var htmlExpected = '<input type="checkbox" disabled="" required=""/>'
+            var htmlExpected = '<input type="checkbox" disabled="" required=""/>';
 
             var reactComponent = parser.parse(htmlInput);
             var reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
@@ -212,7 +212,8 @@ describe('Html2React', function() {
             }, Error);
         });
 
-        it('should throw an error with a specific message when parsing multiple root elements', function() {
+        it('should throw an error with a specific message when parsing multiple root elements',
+                function() {
             var htmlInput = '<div></div><div></div><div></div>';
 
             assert.throws(function() {
@@ -247,13 +248,15 @@ describe('Html2React', function() {
                     },
                     processNode: processNodeDefinitions.processDefaultNode,
                 },];
-                var reactComponent = parser.parseWithInstructions(htmlInput, isValidNode, processingInstructions);
+                var reactComponent = parser.parseWithInstructions(htmlInput, isValidNode,
+                    processingInstructions);
 
                 // With only 1 <p> element, nothing is rendered
                 assert.equal(reactComponent, false);
             });
 
-            it('should return a single <h1> element within a div of <h1> and <p> as siblings', function() {
+            it('should return a single <h1> element within a div of <h1> and <p> as siblings',
+                    function() {
                 var htmlInput = '<div><h1>Title</h1><p>Paragraph</p></div>';
                 var htmlExpected = '<div><h1>Title</h1></div>';
 
@@ -267,14 +270,17 @@ describe('Html2React', function() {
                     },
                     processNode: processNodeDefinitions.processDefaultNode,
                 },];
-                var reactComponent = parser.parseWithInstructions(htmlInput, isValidNode, processingInstructions);
+                var reactComponent = parser.parseWithInstructions(htmlInput, isValidNode,
+                    processingInstructions);
                 var reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
                 assert.equal(reactHtml, htmlExpected);
             });
 
             it('should return capitalized content for all <h1> elements', function() {
-                var htmlInput = '<div><h1>Title</h1><p>Paragraph</p><h1>Another title</h1></div>';
-                var htmlExpected = '<div><h1>TITLE</h1><p>Paragraph</p><h1>ANOTHER TITLE</h1></div>';
+                var htmlInput = '<div><h1>Title</h1><p>Paragraph</p>' +
+                    '<h1>Another title</h1></div>';
+                var htmlExpected = '<div><h1>TITLE</h1><p>Paragraph</p>' +
+                    '<h1>ANOTHER TITLE</h1></div>';
 
                 var isValidNode = function() {
                     return true;
@@ -284,7 +290,8 @@ describe('Html2React', function() {
                     {
                         // Custom <h1> processing
                         shouldProcessNode: function(node) {
-                            return node.parent && node.parent.name && node.parent.name === 'h1';
+                            return node.parent && node.parent.name &&
+                                node.parent.name === 'h1';
                         },
                         processNode: function(node, children) {
                             return node.data.toUpperCase();
@@ -295,8 +302,9 @@ describe('Html2React', function() {
                             return true;
                         },
                         processNode: processNodeDefinitions.processDefaultNode,
-                    },];
-                var reactComponent = parser.parseWithInstructions(htmlInput, isValidNode, processingInstructions);
+                },];
+                var reactComponent = parser.parseWithInstructions(htmlInput, isValidNode,
+                    processingInstructions);
                 var reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
                 assert.equal(reactHtml, htmlExpected);
             });
@@ -308,7 +316,7 @@ describe('Html2React', function() {
                     processNode: processNodeDefinitions.processDefaultNode,
                 }, ];
                 var reactComponent = parser.parseWithInstructions(htmlInput,
-                    function () { return false }, processingInstructions);
+                    function () { return false; }, processingInstructions);
 
                 assert.equal(reactComponent, false);
             });
