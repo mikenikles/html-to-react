@@ -263,23 +263,6 @@ describe('Html2React', function() {
                 assert.deepStrictEqual(keys, ['0', '1', ]);
             });
 
-            it('should not generate children when there are none', function () {
-                var htmlInput    = '<img src="foo.png"></img>';
-                var htmlExpected = '<img src="foo.png"/>';
-
-                var isValidNode = function() {
-                    return true;
-                };
-
-                var processingInstructions = [{
-                  shouldProcessNode: function(node) { return true; },
-                  processNode: processNodeDefinitions.processDefaultNode
-                }];
-                var reactComponent = parser.parseWithInstructions(htmlInput, isValidNode, processingInstructions);
-                var reactHtml = React.renderToStaticMarkup(reactComponent);
-                assert.equal(reactHtml, htmlExpected);
-            });
-
             it('should return false in case of invalid node', function() {
                 var htmlInput = '<p></p>';
                 var processingInstructions = [{
