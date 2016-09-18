@@ -1,0 +1,20 @@
+---
+env:
+  browser: true
+  es6: true
+  commonjs: true
+globals:
+rules:
+  strict:
+    - 2
+    - "global"
+  comma-dangle:
+    - 2
+    - "always"
+  quotes:
+    - 2
+    - "single"
+    -
+      allowTemplateLiterals: true
+  new-cap: 0
+  camelcase: 0
