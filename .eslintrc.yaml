@@ -1,10 +1,10 @@
 ---
 env:
   browser: true
-  es6: true
   commonjs: true
 globals:
 rules:
+  semi: 2
   strict:
     - 2
     - "global"
