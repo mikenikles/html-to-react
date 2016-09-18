@@ -141,6 +141,14 @@ describe('Html2React', function() {
 
             assert.equal(reactHtml, htmlInput);
         });
+
+        it('should not generate children for childless elements', function () {
+            var htmlInput = '<div></div>';
+
+            var reactComponent = parser.parse(htmlInput);
+
+            assert.strictEqual((reactComponent.props.children || []).length, 0);
+        });
     });
 
     describe('parse invalid HTML', function() {
@@ -253,6 +261,23 @@ describe('Html2React', function() {
                   return child.key;
                 });
                 assert.deepStrictEqual(keys, ['0', '1', ]);
+            });
+
+            it('should not generate children when there are none', function () {
+                var htmlInput    = '<img src="foo.png"></img>';
+                var htmlExpected = '<img src="foo.png"/>';
+
+                var isValidNode = function() {
+                    return true;
+                };
+
+                var processingInstructions = [{
+                  shouldProcessNode: function(node) { return true; },
+                  processNode: processNodeDefinitions.processDefaultNode
+                }];
+                var reactComponent = parser.parseWithInstructions(htmlInput, isValidNode, processingInstructions);
+                var reactHtml = React.renderToStaticMarkup(reactComponent);
+                assert.equal(reactHtml, htmlExpected);
             });
 
             it('should return false in case of invalid node', function() {
