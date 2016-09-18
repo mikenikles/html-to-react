@@ -183,6 +183,14 @@ describe('Html2React', function() {
 
             assert.equal(reactHtml, htmlInput);
         });
+
+        it('should not generate children for childless elements', function () {
+            var htmlInput = '<div></div>';
+
+            var reactComponent = parser.parse(htmlInput);
+
+            assert.strictEqual((reactComponent.props.children || []).length, 0);
+        });
     });
 
     describe('parse invalid HTML', function() {
