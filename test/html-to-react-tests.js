@@ -76,6 +76,15 @@ describe('Html2React', function() {
             assert.equal(reactHtml, htmlInput);
         });
 
+        it('should return a valid HTML string with a react camelCase attribute', function() {
+            var htmlInput = '<div contenteditable="true"></div>';
+
+            var reactComponent = parser.parse(htmlInput);
+            var reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
+
+            assert.equal(reactHtml, htmlInput);
+        });
+
         // FIXME: See lib/process-node-definitions.js -> processDefaultNode()
         it.skip('should return a valid HTML string with comments', function() {
             var htmlInput = '<div><!-- This is a comment --></div>';
@@ -203,8 +212,8 @@ describe('Html2React', function() {
                     shouldProcessNode: function(node) {
                         return node.name && node.name !== 'p';
                     },
-                    processNode: processNodeDefinitions.processDefaultNode
-                }];
+                    processNode: processNodeDefinitions.processDefaultNode,
+                },];
                 var reactComponent = parser.parseWithInstructions(htmlInput, isValidNode, processingInstructions);
 
                 // With only 1 <p> element, nothing is rendered
@@ -223,8 +232,8 @@ describe('Html2React', function() {
                     shouldProcessNode: function(node) {
                         return node.type === 'text' || node.name !== 'p';
                     },
-                    processNode: processNodeDefinitions.processDefaultNode
-                }];
+                    processNode: processNodeDefinitions.processDefaultNode,
+                },];
                 var reactComponent = parser.parseWithInstructions(htmlInput, isValidNode, processingInstructions);
                 var reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
                 assert.equal(reactHtml, htmlExpected);
@@ -246,14 +255,14 @@ describe('Html2React', function() {
                         },
                         processNode: function(node, children) {
                             return node.data.toUpperCase();
-                        }
+                        },
                     }, {
                         // Anything else
                         shouldProcessNode: function(node) {
                             return true;
                         },
-                        processNode: processNodeDefinitions.processDefaultNode
-                    }];
+                        processNode: processNodeDefinitions.processDefaultNode,
+                    },];
                 var reactComponent = parser.parseWithInstructions(htmlInput, isValidNode, processingInstructions);
                 var reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
                 assert.equal(reactHtml, htmlExpected);
