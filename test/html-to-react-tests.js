@@ -302,7 +302,8 @@ describe('Html2React', function() {
                             return true;
                         },
                         processNode: processNodeDefinitions.processDefaultNode,
-                },];
+                    },
+                ];
                 var reactComponent = parser.parseWithInstructions(htmlInput, isValidNode,
                     processingInstructions);
                 var reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
