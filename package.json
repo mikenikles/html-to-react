@@ -20,7 +20,7 @@
   "author": "Arve Knudsen, Mike Nikles",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/mikenikles/html-to-react/issues"
+    "url": "https://github.com/aknuds1/html-to-react/issues"
   },
   "homepage": "https://github.com/aknuds1/html-to-react",
   "config": {
@@ -44,10 +44,10 @@
     "react": "^15.0"
   },
   "devDependencies": {
-    "coveralls": "^2.11.12",
-    "istanbul": "^0.4.4",
+    "coveralls": "^2.11",
+    "istanbul": "^0.4",
     "mocha": "^3.0",
-    "mocha-lcov-reporter": "1.2.0",
+    "mocha-lcov-reporter": "^1.2.0",
     "react": "^15.0",
     "react-dom": "^15.0"
   }
