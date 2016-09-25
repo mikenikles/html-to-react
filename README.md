@@ -98,6 +98,8 @@ assert.equal(reactHtml, htmlExpected);
 
 ## Tests & Coverage
 
-`$ npm run test`
-`$ npm run test-coverage`
-`$ npm run test-html-coverage`
+Test locally: `$ npm run test`
+
+Test with coverage: `$ npm run test-coverage`
+
+Test with coverage and open HTML report `$ npm run test-html-coverage`
