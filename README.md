@@ -97,6 +97,6 @@ assert.equal(reactHtml, htmlExpected);
 
 ## Tests & Coverage
 
-`$ npm run test-locally`
+`$ npm run test` to run the tests (and report to Coveralls when run on CI server)
 
-`$ npm run test-html-coverage`
+`$ npm run test-html-coverage` to run the tests and generate html code coverage report
