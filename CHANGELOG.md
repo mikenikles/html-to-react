@@ -1,5 +1,25 @@
 # Change Log
 
+## [v1.2.0](https://github.com/aknuds1/html-to-react/tree/v1.2.0)
+
+[Full Changelog](https://github.com/aknuds1/html-to-react/compare/v1.1.2...v1.2.0)
+
+**Merged pull requests:**
+
+- Replace element children [\#2]https://github.com/aknuds1/html-to-react/pull/3) ([hirefrederick](HireFrederick))
+
+## [v1.1.2](https://github.com/aknuds1/html-to-react/tree/v1.1.2)
+
+[Full Changelog](https://github.com/aknuds1/html-to-react/compare/v1.1.1...v1.1.2)
+
+## [v1.1.1](https://github.com/aknuds1/html-to-react/tree/v1.1.1)
+
+[Full Changelog](https://github.com/aknuds1/html-to-react/compare/v1.1.0...v1.1.1)
+
+## [v1.1.0](https://github.com/aknuds1/html-to-react/tree/v1.1.0)
+
+[Full Changelog](https://github.com/aknuds1/html-to-react/compare/v1.0.0...v1.1.0)
+
 ## [v1.0.0](https://github.com/mikenikles/html-to-react/tree/v1.0.0)
 
 [Full Changelog](https://github.com/mikenikles/html-to-react/compare/v0.1.0...v1.0.0)
