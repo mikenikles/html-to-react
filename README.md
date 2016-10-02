@@ -3,6 +3,7 @@
 [![npm version](https://badge.fury.io/js/html-to-react.svg)](http://badge.fury.io/js/html-to-react)
 [![Dependency Status](https://david-dm.org/aknuds1/html-to-react.svg)](https://david-dm.org/aknuds1/html-to-react)
 [![Coverage Status](https://coveralls.io/repos/aknuds1/html-to-react/badge.svg?branch=master)](https://coveralls.io/r/aknuds1/html-to-react?branch=master)
+[![npm](https://img.shields.io/npm/dm/html-to-react.svg?maxAge=2592000)](https://www.npmjs.com/package/html-to-react)
 
 A lightweight library that converts raw HTML to a React DOM structure.
 
