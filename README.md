@@ -47,10 +47,10 @@ The following example parses each node and its attributes and returns a tree of 
 
 ```javascript
 var React = require('react');
-var HtmlToReact = new require('html-to-react');
+var HtmlToReactParser = require('html-to-react').Parser;
 
 var htmlInput = '<div><h1>Title</h1><p>A paragraph</p></div>';
-var htmlToReactParser = new HtmlToReact.Parser(React);
+var htmlToReactParser = new HtmlToReactParser();
 var reactComponent = htmlToReactParser.parse(htmlInput);
 var reactHtml = React.renderToStaticMarkup(reactComponent);
 
@@ -64,7 +64,7 @@ If certain DOM nodes require specific processing, for example if you want to cap
 
 ```javascript
 var React = require('react');
-var HtmlToReact = new require('html-to-react');
+var HtmlToReactParser = require('html-to-react').Parser;
 
 var htmlInput = '<div><h1>Title</h1><p>Paragraph</p><h1>Another title</h1></div>';
 var htmlExpected = '<div><h1>TITLE</h1><p>Paragraph</p><h1>ANOTHER TITLE</h1></div>';
@@ -91,7 +91,7 @@ var processingInstructions = [
         },
         processNode: processNodeDefinitions.processDefaultNode
     }];
-var htmlToReactParser = new HtmlToReact.Parser(React);
+var htmlToReactParser = new HtmlToReactParser();
 var reactComponent = htmlToReactParser.parseWithInstructions(htmlInput, isValidNode,
   processingInstructions);
 var reactHtml = React.renderToStaticMarkup(reactComponent);
@@ -142,8 +142,9 @@ In your instructions object, you must specify `replaceChildren: true`.
 
 ```javascript
 var React = require('react');
-var HtmlToReact = new require('html-to-react');
+var HtmlToReactParser = require('html-to-react').Parser;
 
+var htmlToReactParser = new HtmlToReactParser();
 var htmlInput = '<div><div data-test="foo"><p>Text</p><p>Text</p></div></div>';
 var htmlExpected = '<div><div data-test="foo"><h1>Heading</h1></div></div>';
 
