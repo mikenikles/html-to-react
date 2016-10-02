@@ -5,11 +5,11 @@ var React = require('react');
 var ReactDOMServer = require('react-dom/server');
 var R = require('ramda');
 
-var Parser = require('../index').Parser;
-var ProcessNodeDefinitions = require('../index').ProcessNodeDefinitions;
+var Parser = require('..').Parser;
+var ProcessNodeDefinitions = require('..').ProcessNodeDefinitions;
 
 describe('Html2React', function () {
-    var parser = new Parser(React);
+    var parser = new Parser();
 
     describe('parse valid HTML', function () {
         it('should return a valid HTML string', function () {
@@ -233,7 +233,7 @@ describe('Html2React', function () {
     });
 
     describe('with custom processing instructions', function () {
-        var parser = new Parser(React);
+        var parser = new Parser();
         var processNodeDefinitions = new ProcessNodeDefinitions(React);
 
         describe('parse valid HTML', function () {
