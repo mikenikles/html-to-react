@@ -362,7 +362,7 @@ describe('Html2React', function () {
                 var reactComponent = parser.parseWithInstructions(htmlInput,
                     function (node) {
                         // skip whitespace text nodes to clean up children
-                        if(node.type === 'text') {
+                        if (node.type === 'text') {
                             return node.data.trim() !== '';
                         }
                         return true;
