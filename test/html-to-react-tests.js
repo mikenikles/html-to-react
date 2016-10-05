@@ -370,6 +370,19 @@ describe('Html2React', function () {
 
                 assert.equal(reactComponent.props.children.length, 2);
             });
+
+            it('should not affect unhandled whitespace', function () {
+                var htmlInput = '<div> <p></p> <p></p> </div>';
+
+                var processingInstructions = [{
+                    shouldProcessNode: function (node) { return true; },
+                    processNode: processNodeDefinitions.processDefaultNode,
+                }, ];
+                var reactComponent = parser.parseWithInstructions(htmlInput,
+                    function () { return true; }, processingInstructions);
+
+                assert.equal(reactComponent.props.children.length, 5);
+            });
         });
     });
 });
