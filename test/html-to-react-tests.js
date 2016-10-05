@@ -252,7 +252,7 @@ describe('Html2React', function () {
                     processingInstructions);
 
                 // With only 1 <p> element, nothing is rendered
-                assert.equal(reactComponent, false);
+                assert.equal(reactComponent, undefined);
             });
 
             it('should return a single <h1> element within a div of <h1> and <p> as siblings',
@@ -340,7 +340,7 @@ describe('Html2React', function () {
                 assert.equal(reactHtml, htmlExpected);
             });
 
-            it('should return false in case of invalid node', function () {
+            it('should return undefined in case of invalid node', function () {
                 var htmlInput = '<p></p>';
                 var processingInstructions = [{
                     shouldProcessNode: function (node) { return true; },
@@ -349,7 +349,7 @@ describe('Html2React', function () {
                 var reactComponent = parser.parseWithInstructions(htmlInput,
                     function () { return false; }, processingInstructions);
 
-                assert.equal(reactComponent, false);
+                assert.equal(reactComponent, undefined);
             });
         });
     });
