@@ -374,12 +374,7 @@ describe('Html2React', function () {
             it('should not affect unhandled whitespace', function () {
                 var htmlInput = '<div> <p></p> <p></p> </div>';
 
-                var processingInstructions = [{
-                    shouldProcessNode: function (node) { return true; },
-                    processNode: processNodeDefinitions.processDefaultNode,
-                }, ];
-                var reactComponent = parser.parseWithInstructions(htmlInput,
-                    function () { return true; }, processingInstructions);
+                var reactComponent = parser.parse(htmlInput);
 
                 assert.equal(reactComponent.props.children.length, 5);
             });
