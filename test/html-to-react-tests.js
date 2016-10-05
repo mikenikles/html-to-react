@@ -351,6 +351,25 @@ describe('Html2React', function () {
 
                 assert.equal(reactComponent, undefined);
             });
+
+            it('should generate only valid children', function () {
+                var htmlInput = '<div> <p></p> <p></p> </div>';
+
+                var processingInstructions = [{
+                    shouldProcessNode: function (node) { return true; },
+                    processNode: processNodeDefinitions.processDefaultNode,
+                }, ];
+                var reactComponent = parser.parseWithInstructions(htmlInput,
+                    function (node) {
+                        // skip whitespace text nodes to clean up children
+                        if(node.type === 'text') {
+                            return node.data.trim() !== '';
+                        }
+                        return true;
+                    }, processingInstructions);
+
+                assert.equal(reactComponent.props.children.length, 2);
+            });
         });
     });
 });
