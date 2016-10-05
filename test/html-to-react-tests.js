@@ -85,6 +85,14 @@ describe('Html2React', function () {
             assert.equal(reactHtml, htmlInput);
         });
 
+        it('should handle dashed attributes', function () {
+            var input = '<form accept-charset="en"><svg viewBox="0 0 10 10"><text text-anchor="left"></text><circle stroke="black" stroke-width="42"></circle></svg></form>';
+            var reactComponent = parser.parse(input);
+            var reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
+
+            assert.equal(reactHtml, input);
+        });
+
         // FIXME: See lib/process-node-definitions.js -> processDefaultNode()
         it.skip('should return a valid HTML string with comments', function () {
             var htmlInput = '<div><!-- This is a comment --></div>';
