@@ -18,3 +18,7 @@ rules:
       allowTemplateLiterals: true
   new-cap: 0
   camelcase: 0
+  keyword-spacing:
+    - error
+    -
+      after: true

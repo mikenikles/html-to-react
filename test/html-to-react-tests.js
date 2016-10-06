@@ -354,6 +354,33 @@ describe('Html2React', function () {
 
                 assert.equal(reactComponent, false);
             });
+
+            it('should generate only valid children', function () {
+                var htmlInput = '<div> <p></p> <p></p> </div>';
+
+                var processingInstructions = [{
+                    shouldProcessNode: function (node) { return true; },
+                    processNode: processNodeDefinitions.processDefaultNode,
+                }, ];
+                var reactComponent = parser.parseWithInstructions(htmlInput,
+                    function (node) {
+                        // skip whitespace text nodes to clean up children
+                        if (node.type === 'text') {
+                            return node.data.trim() !== '';
+                        }
+                        return true;
+                    }, processingInstructions);
+
+                assert.equal(reactComponent.props.children.length, 2);
+            });
+
+            it('should not affect unhandled whitespace', function () {
+                var htmlInput = '<div> <p></p> <p></p> </div>';
+
+                var reactComponent = parser.parse(htmlInput);
+
+                assert.equal(reactComponent.props.children.length, 5);
+            });
         });
     });
 });
