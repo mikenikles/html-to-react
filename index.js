@@ -6,8 +6,8 @@ var isValidNodeDefinitions = require('./lib/is-valid-node-definitions');
 var processNodeDefinitions = require('./lib/process-node-definitions');
 
 module.exports = {
-    Parser: parser,
-    ProcessingInstructions: processingInstructions,
-    IsValidNodeDefinitions: isValidNodeDefinitions,
-    ProcessNodeDefinitions: processNodeDefinitions,
+  Parser: parser,
+  ProcessingInstructions: processingInstructions,
+  IsValidNodeDefinitions: isValidNodeDefinitions,
+  ProcessNodeDefinitions: processNodeDefinitions,
 };
