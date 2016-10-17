@@ -1,5 +1,9 @@
 # Change Log
 
+## [v1.2.1](https://github.com/aknuds1/html-to-react/tree/v1.2.1)
+
+[Full Changelog](https://github.com/aknuds1/html-to-react/compare/v1.2.0...v1.2.1)
+
 ## [v1.2.0](https://github.com/aknuds1/html-to-react/tree/v1.2.0)
 
 [Full Changelog](https://github.com/aknuds1/html-to-react/compare/v1.1.2...v1.2.0)
