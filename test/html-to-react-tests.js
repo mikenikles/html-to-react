@@ -390,4 +390,14 @@ describe('Html2React', function () {
       });
     });
   });
+
+  describe('parse SVG', function () {
+    it('should have correct attributes', function () {
+      var svgInput = '<svg><image xlink:href="http://i.imgur.com/w7GCRPb.png" /></svg>';
+      var reactComponent = parser.parse(svgInput);
+      var reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
+
+      assert(/<image xlink:href="http:\/\/i.imgur.com\/w7GCRPb.png"/.test(reactHtml), reactHtml + ' has expected attributes');
+    });
+  });
 });
