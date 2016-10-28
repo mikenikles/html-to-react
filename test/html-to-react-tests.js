@@ -397,7 +397,8 @@ describe('Html2React', function () {
       var reactComponent = parser.parse(svgInput);
       var reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
 
-      assert(/<image xlink:href="http:\/\/i.imgur.com\/w7GCRPb.png"/.test(reactHtml), reactHtml + ' has expected attributes');
+      assert(/<image xlink:href="http:\/\/i.imgur.com\/w7GCRPb.png"/.test(reactHtml), reactHtml +
+        ' has expected attributes');
     });
   });
 });
