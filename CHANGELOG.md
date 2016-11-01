@@ -1,5 +1,13 @@
 # Change Log
 
+## [v1.2.2](https://github.com/aknuds1/html-to-react/tree/v1.2.2)
+
+[Full Changelog](https://github.com/aknuds1/html-to-react/compare/v1.2.1...v1.2.2)
+
+**Merged pull requests:**
+
+- handle xmlns attributes (e.g. xlink:href) [\#9](https://github.com/aknuds1/html-to-react/pull/9) ([gfx](https://github.com/gfx))
+
 ## [v1.2.1](https://github.com/aknuds1/html-to-react/tree/v1.2.1)
 
 [Full Changelog](https://github.com/aknuds1/html-to-react/compare/v1.2.0...v1.2.1)
@@ -10,7 +18,7 @@
 
 **Merged pull requests:**
 
-- Replace element children [\#2]https://github.com/aknuds1/html-to-react/pull/3) ([hirefrederick](HireFrederick))
+- Replace element children [\#2](https://github.com/aknuds1/html-to-react/pull/3) ([hirefrederick](https://github.com/hirefrederick))
 
 ## [v1.1.2](https://github.com/aknuds1/html-to-react/tree/v1.1.2)
 
