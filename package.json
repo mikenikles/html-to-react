@@ -37,7 +37,7 @@
   "dependencies": {
     "ent": "^2.2.0",
     "htmlparser2": "^3.8.3",
-    "ramda": "^0.22.0",
+    "ramda": "^0.23.0",
     "underscore.string.fp": "^1.0.4"
   },
   "peerDependencies": {
