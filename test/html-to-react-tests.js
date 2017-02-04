@@ -210,7 +210,7 @@ describe('Html2React', function () {
       assert.equal(reactHtml, htmlExpected);
     });
 
-    it('should decode ampersands in attributes so react do not encode the ampersand', function () {
+    it('should decode attribute values to avoid React re-encoding them', function () {
       var htmlInput = '<p><a href="http://domain.com/search?query=1&amp;lang=en">A link</a></p>';
       
       var reactComponent = parser.parse(htmlInput);
