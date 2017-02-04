@@ -1,5 +1,13 @@
 # Change Log
 
+## [v1.2.3](https://github.com/aknuds1/html-to-react/tree/v1.2.3)
+
+[Full Changelog](https://github.com/aknuds1/html-to-react/compare/v1.2.2...v1.2.3)
+
+**Merged pull requests:**
+
+- Occurrence of ampersand in attributes are decoded to `&` to avoid ano… [\#15](https://github.com/aknuds1/html-to-react/pull/15) ([gerhardsletten](https://github.com/gerhardsletten))
+
 ## [v1.2.2](https://github.com/aknuds1/html-to-react/tree/v1.2.2)
 
 [Full Changelog](https://github.com/aknuds1/html-to-react/compare/v1.2.1...v1.2.2)
