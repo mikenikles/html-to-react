@@ -43,16 +43,16 @@ React tree with one single parent.
 
 ### Simple
 
-The following example parses each node and its attributes and returns a tree of React components.
+The following example parses each node and its attributes and returns a tree of React elements.
 
 ```javascript
-var React = require('react');
+var ReactDOMServer = require('react-dom/server');
 var HtmlToReactParser = require('html-to-react').Parser;
 
 var htmlInput = '<div><h1>Title</h1><p>A paragraph</p></div>';
 var htmlToReactParser = new HtmlToReactParser();
-var reactComponent = htmlToReactParser.parse(htmlInput);
-var reactHtml = React.renderToStaticMarkup(reactComponent);
+var reactElement = htmlToReactParser.parse(htmlInput);
+var reactHtml = ReactDOMServer.renderToStaticMarkup(reactElement);
 
 assert.equal(reactHtml, htmlInput); // true
 ```
@@ -63,7 +63,7 @@ If certain DOM nodes require specific processing, for example if you want to cap
 `<h1>` tag, the following example demonstrates this:
 
 ```javascript
-var React = require('react');
+var ReactDOMServer = require('react-dom/server');
 var HtmlToReactParser = require('html-to-react').Parser;
 
 var htmlInput = '<div><h1>Title</h1><p>Paragraph</p><h1>Another title</h1></div>';
@@ -94,7 +94,7 @@ var processingInstructions = [
 var htmlToReactParser = new HtmlToReactParser();
 var reactComponent = htmlToReactParser.parseWithInstructions(htmlInput, isValidNode,
   processingInstructions);
-var reactHtml = React.renderToStaticMarkup(reactComponent);
+var reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
 assert.equal(reactHtml, htmlExpected);
 ```
 
