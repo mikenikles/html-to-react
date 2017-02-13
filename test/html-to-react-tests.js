@@ -212,7 +212,7 @@ describe('Html2React', function () {
 
     it('should decode attribute values to avoid React re-encoding them', function () {
       var htmlInput = '<p><a href="http://domain.com/search?query=1&amp;lang=en">A link</a></p>';
-      
+
       var reactComponent = parser.parse(htmlInput);
       var reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
 
@@ -221,23 +221,6 @@ describe('Html2React', function () {
   });
 
   describe('parse invalid HTML', function () {
-    it('should throw an error when trying parsing multiple root elements', function () {
-      var htmlInput = '<div></div><div></div>';
-
-      assert.throws(function () {
-        parser.parse(htmlInput);
-      }, Error);
-    });
-
-    it('should throw an error with a specific message when parsing multiple root elements',
-    function () {
-      var htmlInput = '<div></div><div></div><div></div>';
-
-      assert.throws(function () {
-        parser.parse(htmlInput);
-      }, /contains 3 root elements/);
-    });
-
     it('should fix missing closing tags', function () {
       var htmlInput = '<div><p></div>';
       var htmlExpected = '<div><p></p></div>';
@@ -408,6 +391,17 @@ describe('Html2React', function () {
 
       assert(/<image xlink:href="http:\/\/i.imgur.com\/w7GCRPb.png"/.test(reactHtml), reactHtml +
         ' has expected attributes');
+    });
+  });
+
+  describe('parse multiple elements', function() {
+    it('should throw an error when trying parsing multiple root elements', function () {
+      var htmlInput = '<div></div><div></div>';
+      var components = parser.parse(htmlInput);
+      var output = components.map(function (component) {
+        return ReactDOMServer.renderToStaticMarkup(component);
+      }).join('');
+      assert.equal(htmlInput, output);
     });
   });
 });
