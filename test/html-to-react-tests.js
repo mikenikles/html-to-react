@@ -395,13 +395,22 @@ describe('Html2React', function () {
   });
 
   describe('parse multiple elements', function() {
-    it('should throw an error when trying parsing multiple root elements', function () {
+    it('should parse multiple root elements', function () {
       var htmlInput = '<div></div><div></div>';
       var components = parser.parse(htmlInput);
       var output = components.map(function (component) {
         return ReactDOMServer.renderToStaticMarkup(component);
       }).join('');
       assert.equal(htmlInput, output);
+    });
+
+    it('should be able to parse and render multiple children elements', function() {
+      var htmlInput = '<li>first</li><li>second</li><li>third</li>';
+      var components = parser.parse(htmlInput);
+      var output = ReactDOMServer.renderToStaticMarkup(
+        React.createElement('ul', null, components)
+      );
+      assert.equal('<ul>' + htmlInput + '</ul>', output);
     });
   });
 });
