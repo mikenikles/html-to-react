@@ -1,5 +1,13 @@
 # Change Log
 
+## [v1.2.4](https://github.com/aknuds1/html-to-react/tree/v1.2.4)
+
+[Full Changelog](https://github.com/aknuds1/html-to-react/compare/v1.2.3...v1.2.4)
+
+**Merged pull requests:**
+
+- parsing multiple root elements [\#17](https://github.com/aknuds1/html-to-react/pull/17) ([oroce](https://github.com/oroce))
+
 ## [v1.2.3](https://github.com/aknuds1/html-to-react/tree/v1.2.3)
 
 [Full Changelog](https://github.com/aknuds1/html-to-react/compare/v1.2.2...v1.2.3)
