@@ -30,7 +30,8 @@ describe('Html2React', function () {
     });
 
     it('should return a valid HTML string with inline styles', function () {
-      var htmlInput = '<div style="background-color: red;color: white;"></div>';
+      var htmlInput = '<div style="background-color: red;color: white;' +
+        'font-family: &quot;Open Sans&quot;;"></div>';
 
       var reactComponent = parser.parse(htmlInput);
       var reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
@@ -394,7 +395,7 @@ describe('Html2React', function () {
     });
   });
 
-  describe('parsing multiple elements', function() {
+  describe('parsing multiple elements', function () {
     it('should result in a list of React elements', function () {
       var htmlInput = '<div></div><div></div>';
       var elements = parser.parse(htmlInput);

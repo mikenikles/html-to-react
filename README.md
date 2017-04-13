@@ -69,7 +69,7 @@ var HtmlToReactParser = require('html-to-react').Parser;
 var htmlInput = '<div><h1>Title</h1><p>Paragraph</p><h1>Another title</h1></div>';
 var htmlExpected = '<div><h1>TITLE</h1><p>Paragraph</p><h1>ANOTHER TITLE</h1></div>';
 
-var isValidNode = function() {
+var isValidNode = function () {
     return true;
 };
 
@@ -78,15 +78,15 @@ var processNodeDefinitions = new HtmlToReact.ProcessNodeDefinitions(React);
 var processingInstructions = [
     {
         // Custom <h1> processing
-        shouldProcessNode: function(node) {
+        shouldProcessNode: function (node) {
             return node.parent && node.parent.name && node.parent.name === 'h1';
         },
-        processNode: function(node, children) {
+        processNode: function (node, children) {
             return node.data.toUpperCase();
         }
     }, {
         // Anything else
-        shouldProcessNode: function(node) {
+        shouldProcessNode: function (node) {
             return true;
         },
         processNode: processNodeDefinitions.processDefaultNode
@@ -148,7 +148,7 @@ var htmlToReactParser = new HtmlToReactParser();
 var htmlInput = '<div><div data-test="foo"><p>Text</p><p>Text</p></div></div>';
 var htmlExpected = '<div><div data-test="foo"><h1>Heading</h1></div></div>';
 
-var isValidNode = function() {
+var isValidNode = function () {
     return true;
 };
 
