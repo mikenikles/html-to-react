@@ -1,6 +1,6 @@
 {
   "name": "html-to-react",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "description": "A lightweight library that converts raw HTML to a React DOM structure.",
   "main": "index.js",
   "scripts": {
