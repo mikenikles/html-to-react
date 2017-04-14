@@ -1,5 +1,11 @@
 # Change Log
 
+## [v1.2.7](https://github.com/aknuds1/html-to-react/tree/v1.2.7)
+
+- Depend directly on domhandler, for compatibility with older Node.js
+
+[Full Changelog](https://github.com/aknuds1/html-to-react/compare/v1.2.6...v1.2.7)
+
 ## [v1.2.6](https://github.com/aknuds1/html-to-react/tree/v1.2.6)
 
 - Make library smaller
