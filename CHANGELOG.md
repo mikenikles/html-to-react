@@ -1,5 +1,19 @@
 # Change Log
 
+## [v1.2.6](https://github.com/aknuds1/html-to-react/tree/v1.2.6)
+
+- Make library smaller
+
+[Full Changelog](https://github.com/aknuds1/html-to-react/compare/v1.2.5...v1.2.6)
+
+## [v1.2.5](https://github.com/aknuds1/html-to-react/tree/v1.2.5)
+
+[Full Changelog](https://github.com/aknuds1/html-to-react/compare/v1.2.4...v1.2.5)
+
+**Merged pull requests:**
+
+- Test of inline style with characters entities. [\#21](https://github.com/aknuds1/html-to-react/pull/21) ([Gycianka](https://github.com/Gycianka))
+
 ## [v1.2.4](https://github.com/aknuds1/html-to-react/tree/v1.2.4)
 
 [Full Changelog](https://github.com/aknuds1/html-to-react/compare/v1.2.3...v1.2.4)
