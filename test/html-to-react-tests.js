@@ -3,6 +3,7 @@ var assert = require('assert');
 var React = require('react');
 var ReactDOMServer = require('react-dom/server');
 var R = require('ramda');
+var escapeStringRegexp = require('escape-string-regexp');
 
 var Parser = require('..').Parser;
 var ProcessNodeDefinitions = require('..').ProcessNodeDefinitions;
@@ -386,12 +387,19 @@ describe('Html2React', function () {
 
   describe('parse SVG', function () {
     it('should have correct attributes', function () {
-      var svgInput = '<svg><image xlink:href="http://i.imgur.com/w7GCRPb.png" /></svg>';
-      var reactComponent = parser.parse(svgInput);
-      var reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
+      var input2RegExp = {
+        '<svg><image xlink:href="http://i.imgur.com/w7GCRPb.png"/></svg>':
+          /<svg><image xlink:href="http:\/\/i\.imgur\.com\/w7GCRPb\.png"/,
+        '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"></svg>':
+          /<svg xmlns="http:\/\/www\.w3\.org\/2000\/svg" xmlns:xlink="http:\/\/www\.w3\.org\/1999\/xlink"><\/svg>/,
+      };
+      R.forEach(function (inputAndRegExp) {
+        var input = inputAndRegExp[0], regExp = inputAndRegExp[1];
+        var reactComponent = parser.parse(input);
+        var reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
 
-      assert(/<image xlink:href="http:\/\/i.imgur.com\/w7GCRPb.png"/.test(reactHtml), reactHtml +
-        ' has expected attributes');
+        assert(regExp.test(reactHtml), reactHtml + ' has expected attributes');        
+      }, R.toPairs(input2RegExp));
     });
   });
 
