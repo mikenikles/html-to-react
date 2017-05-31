@@ -1,4 +1,6 @@
 # html-to-react
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/aknuds1/html-to-react.svg)](https://greenkeeper.io/)
 [![Build Status](https://travis-ci.org/aknuds1/html-to-react.svg?branch=master)](https://travis-ci.org/aknuds1/html-to-react)
 [![npm version](https://badge.fury.io/js/html-to-react.svg)](http://badge.fury.io/js/html-to-react)
 [![Dependency Status](https://david-dm.org/aknuds1/html-to-react.svg)](https://david-dm.org/aknuds1/html-to-react)
