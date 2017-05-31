@@ -48,7 +48,7 @@
     "coveralls": "^2.11",
     "eslint": "^3.7.0",
     "istanbul": "^0.4",
-    "mocha": "^3.0",
+    "mocha": "^3.4.2",
     "mocha-lcov-reporter": "^1.2.0",
     "react": "^15.0",
     "react-dom": "^15.0"
