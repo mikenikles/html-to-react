@@ -77,6 +77,15 @@ describe('Html2React', function () {
       assert.equal(reactHtml, htmlInput);
     });
 
+    it('should return a valid HTML string with a for attribute', function () {
+      var htmlInput = '<label for="input"></label>';
+
+      var reactComponent = parser.parse(htmlInput);
+      var reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
+
+      assert.equal(reactHtml, htmlInput);
+    });
+
     it('should return a valid HTML string with a react camelCase attribute', function () {
       var htmlInput = '<div contenteditable="true"></div>';
 
@@ -398,7 +407,7 @@ describe('Html2React', function () {
         var reactComponent = parser.parse(input);
         var reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
 
-        assert(regExp.test(reactHtml), reactHtml + ' has expected attributes');        
+        assert(regExp.test(reactHtml), reactHtml + ' has expected attributes');
       }, R.toPairs(input2RegExp));
     });
   });
