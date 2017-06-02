@@ -1,5 +1,21 @@
 # Change Log
 
+## [v1.2.9](https://github.com/aknuds1/html-to-react/tree/v1.2.9)
+
+- Handle `for` attribute
+
+[Full Changelog](https://github.com/aknuds1/html-to-react/compare/v1.2.8...v1.2.9)
+
+## [v1.2.8](https://github.com/aknuds1/html-to-react/tree/v1.2.8)
+
+- Handle xmlns:xlink
+
+[Full Changelog](https://github.com/aknuds1/html-to-react/compare/v1.2.7...v1.2.8)
+
+**Merged pull requests:**
+
+- Converting for to htmlFor [\#30](https://github.com/aknuds1/html-to-react/pull/30) ([nathanfriemel](https://github.com/nathanfriemel))
+
 ## [v1.2.7](https://github.com/aknuds1/html-to-react/tree/v1.2.7)
 
 - Depend directly on domhandler, for compatibility with older Node.js
