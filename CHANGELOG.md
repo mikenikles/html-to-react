@@ -1,5 +1,15 @@
 # Change Log
 
+## [v1.2.11](https://github.com/aknuds1/html-to-react/tree/v1.2.11)
+
+- Handle base64 inlined images
+
+[Full Changelog](https://github.com/aknuds1/html-to-react/compare/v1.2.10...v1.2.11)
+
+**Merged pull requests:**
+
+- Fix for base64 inlined images [\#31](https://github.com/aknuds1/html-to-react/pull/32) ([aleemb](https://github.com/aleemb))
+
 ## [v1.2.10](https://github.com/aknuds1/html-to-react/tree/v1.2.10)
 
 - Handle background-image styles
