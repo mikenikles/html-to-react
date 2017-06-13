@@ -1,5 +1,15 @@
 # Change Log
 
+## [v1.2.10](https://github.com/aknuds1/html-to-react/tree/v1.2.10)
+
+- Handle background-image styles
+
+[Full Changelog](https://github.com/aknuds1/html-to-react/compare/v1.2.9...v1.2.10)
+
+**Merged pull requests:**
+
+- Handle background-image styles [\#31](https://github.com/aknuds1/html-to-react/pull/31) ([brett-nuske-alliancesoftware](https://github.com/brett-nuske-alliancesoftware))
+
 ## [v1.2.9](https://github.com/aknuds1/html-to-react/tree/v1.2.9)
 
 - Handle `for` attribute
