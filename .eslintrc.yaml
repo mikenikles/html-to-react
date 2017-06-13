@@ -22,3 +22,6 @@ rules:
     - error
     -
       after: true
+  max-len:
+    - error
+    - 100

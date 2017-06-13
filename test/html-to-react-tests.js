@@ -31,7 +31,8 @@ describe('Html2React', function () {
     });
 
     it('should return a valid HTML string with inline styles', function () {
-      var htmlInput = '<div style="background-image: url(&quot;http://lorempixel.com/400/200/&quot;);background-color: red;color: white;' +
+      var htmlInput = '<div style="background-image: url(' +
+        '&quot;http://lorempixel.com/400/200/&quot;);background-color: red;color: white;' +
         'font-family: &quot;Open Sans&quot;;"></div>';
 
       var reactComponent = parser.parse(htmlInput);
@@ -400,6 +401,7 @@ describe('Html2React', function () {
         '<svg><image xlink:href="http://i.imgur.com/w7GCRPb.png"/></svg>':
           /<svg><image xlink:href="http:\/\/i\.imgur\.com\/w7GCRPb\.png"/,
         '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"></svg>':
+          // eslint-disable-next-line max-len
           /<svg xmlns="http:\/\/www\.w3\.org\/2000\/svg" xmlns:xlink="http:\/\/www\.w3\.org\/1999\/xlink"><\/svg>/,
       };
       R.forEach(function (inputAndRegExp) {
