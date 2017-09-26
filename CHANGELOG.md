@@ -1,5 +1,15 @@
 # Change Log
 
+## [v1.2.12](https://github.com/aknuds1/html-to-react/tree/v1.2.12)
+
+- Trim inline style props values
+
+[Full Changelog](https://github.com/aknuds1/html-to-react/compare/v1.2.11...v1.2.12)
+
+**Merged pull requests:**
+
+- Trim inline style props values [\#47](https://github.com/aknuds1/html-to-react/pull/47) ([gycianka](https://github.com/gycianka))
+
 ## [v1.2.11](https://github.com/aknuds1/html-to-react/tree/v1.2.11)
 
 - Handle base64 inlined images
@@ -8,7 +18,7 @@
 
 **Merged pull requests:**
 
-- Fix for base64 inlined images [\#31](https://github.com/aknuds1/html-to-react/pull/32) ([aleemb](https://github.com/aleemb))
+- Fix for base64 inlined images [\#33](https://github.com/aknuds1/html-to-react/pull/33) ([aleemb](https://github.com/aleemb))
 
 ## [v1.2.10](https://github.com/aknuds1/html-to-react/tree/v1.2.10)
 
