@@ -33,7 +33,7 @@ describe('Html2React', function () {
     it('should return a valid HTML string with inline styles', function () {
       var htmlInput = '<div style="background-image:url(' +
         '&quot;http://lorempixel.com/400/200/&quot;);background-color:red;color:white;' +
-        'font-family:&quot;Open Sans&quot;;"></div>';
+        'font-family:&quot;Open Sans&quot;"></div>';
 
       var reactComponent = parser.parse(htmlInput);
       var reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
@@ -44,7 +44,7 @@ describe('Html2React', function () {
     it('should return a valid HTML string with inline image in style', function () {
       var htmlInput = '<div style="background:url(' +
         'data:image/png;base64,iVBORw0KGgoAAA);color:white;' +
-        'font-family:&quot;Open Sans&quot;;"></div>';
+        'font-family:&quot;Open Sans&quot;"></div>';
 
       var reactComponent = parser.parse(htmlInput);
       var reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
