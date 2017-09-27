@@ -1,5 +1,11 @@
 # Change Log
 
+## [v1.3.0](https://github.com/aknuds1/html-to-react/tree/v1.3.0)
+
+- Upgrade to React 16
+
+[Full Changelog](https://github.com/aknuds1/html-to-react/compare/v1.2.12...v1.3.0)
+
 ## [v1.2.12](https://github.com/aknuds1/html-to-react/tree/v1.2.12)
 
 - Trim inline style props values
