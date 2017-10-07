@@ -261,6 +261,16 @@ describe('Html2React', function () {
 
       assert.equal(reactHtml, htmlExpected);
     });
+    
+    it('should handle invalid style tag', function () {
+      var htmlInput = '<div style="color:black;href="></div>';
+      var htmlExpected = '<div style="color:black"></div>';
+
+      var reactComponent = parser.parse(htmlInput);
+      var reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
+
+      assert.equal(reactHtml, htmlExpected);
+    });
   });
 
   describe('with custom processing instructions', function () {
