@@ -1,5 +1,15 @@
 # Change Log
 
+## [v1.3.1](https://github.com/aknuds1/html-to-react/tree/v1.3.1)
+
+- Handle invalid inline styles
+
+[Full Changelog](https://github.com/aknuds1/html-to-react/compare/v1.3.0...v1.3.1)
+
+**Merged pull requests:**
+
+- Handle invalid inline styles [\#52](https://github.com/aknuds1/html-to-react/pull/52) ([nickpalmer](https://github.com/nickpalmer))
+
 ## [v1.3.0](https://github.com/aknuds1/html-to-react/tree/v1.3.0)
 
 - Upgrade to React 16
