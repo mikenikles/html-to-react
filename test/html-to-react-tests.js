@@ -261,7 +261,7 @@ describe('Html2React', function () {
 
       assert.equal(reactHtml, htmlExpected);
     });
-    
+
     it('should handle invalid style tag', function () {
       var htmlInput = '<div style="color:black;href="></div>';
       var htmlExpected = '<div style="color:black"></div>';
