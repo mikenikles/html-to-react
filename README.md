@@ -66,6 +66,7 @@ If certain DOM nodes require specific processing, for example if you want to cap
 
 ```javascript
 var ReactDOMServer = require('react-dom/server');
+var HtmlToReact = require('html-to-react');
 var HtmlToReactParser = require('html-to-react').Parser;
 
 var htmlInput = '<div><h1>Title</h1><p>Paragraph</p><h1>Another title</h1></div>';
@@ -144,6 +145,7 @@ In your instructions object, you must specify `replaceChildren: true`.
 
 ```javascript
 var React = require('react');
+var HtmlToReact = require('html-to-react');
 var HtmlToReactParser = require('html-to-react').Parser;
 
 var htmlToReactParser = new HtmlToReactParser();
@@ -153,6 +155,8 @@ var htmlExpected = '<div><div data-test="foo"><h1>Heading</h1></div></div>';
 var isValidNode = function () {
     return true;
 };
+
+var processNodeDefinitions = new HtmlToReact.ProcessNodeDefinitions(React);
 
 // Order matters. Instructions are processed in
 // the order they're defined
