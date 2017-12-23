@@ -249,6 +249,16 @@ describe('Html2React', function () {
 
       assert.equal(reactComponent.props.style.textAlign, 'center');
     });
+
+    it('should handle doctype directives', function () {
+      var htmlInput = '<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" ' +
+      '"http://www.w3.org/TR/REC-html40/loose.dtd"><html><body><div></div></body></html>';
+
+      var reactComponent = parser.parse(htmlInput);
+      var reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
+
+      assert.equal(reactHtml, '<html><body><div></div></body></html>');
+    });
   });
 
   describe('parse invalid HTML', function () {
