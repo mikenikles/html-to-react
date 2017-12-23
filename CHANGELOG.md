@@ -1,5 +1,11 @@
 # Change Log
 
+## [v1.3.2](https://github.com/aknuds1/html-to-react/tree/v1.3.2)
+
+- Handle directives in HTML
+
+[Full Changelog](https://github.com/aknuds1/html-to-react/compare/v1.3.1...v1.3.2)
+
 ## [v1.3.1](https://github.com/aknuds1/html-to-react/tree/v1.3.1)
 
 - Handle invalid inline styles
