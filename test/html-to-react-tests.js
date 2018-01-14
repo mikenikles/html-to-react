@@ -259,6 +259,15 @@ describe('Html2React', function () {
 
       assert.equal(reactHtml, '<html><body><div></div></body></html>');
     });
+
+    it('should handle free text nodes', function () {
+      var htmlInput = 'text<div></div>text';
+
+      var reactComponent = parser.parse(htmlInput);
+      var reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
+
+      assert.equal(reactHtml, 'text<div></div>text');
+    });
   });
 
   describe('parse invalid HTML', function () {
