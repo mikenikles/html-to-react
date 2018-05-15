@@ -15,16 +15,16 @@ React for the parts I did have control over. The template basically contains som
 
 ```
 <div class="row">
-    <div class="col-sm-6">
-        <div data-report-id="report-1">
-          <!-- A React component for report-1 -->
-        </div>
+  <div class="col-sm-6">
+    <div data-report-id="report-1">
+      <!-- A React component for report-1 -->
     </div>
-    <div class="col-sm-6">
-        <div data-report-id="report-2">
-          <!-- A React component for report-2 -->
-        </div>
+  </div>
+  <div class="col-sm-6">
+    <div data-report-id="report-2">
+      <!-- A React component for report-2 -->
     </div>
+  </div>
 </div>
 ```
 
@@ -115,12 +115,12 @@ Below is a simple template that could get loaded via ajax into your application
 ##### Before
 ```
 <div class="row">
-    <div class="col-sm-6">
-        <div data-container="wysiwyg">
-            <h1>Sample Heading</h1>
-            <p>Sample Text</p>
-        </div>
+  <div class="col-sm-6">
+    <div data-container="wysiwyg">
+      <h1>Sample Heading</h1>
+      <p>Sample Text</p>
     </div>
+  </div>
 </div>
 ```
 
@@ -131,11 +131,11 @@ it as a prop to your injected `RichTextEditor`.
 
 ```
 <div class="row">
-    <div class="col-sm-6">
-        <div data-container="wysiwyg">
-            <RichTextEditor html={"<h1>Sample heading</h1><p>Sample Text</p>"} />
-        </div>
+  <div class="col-sm-6">
+    <div data-container="wysiwyg">
+      <RichTextEditor html={"<h1>Sample heading</h1><p>Sample Text</p>"} />
     </div>
+  </div>
 </div>
 ```
 
