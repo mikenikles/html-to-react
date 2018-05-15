@@ -35,7 +35,7 @@
     }
   },
   "dependencies": {
-    "domhandler": "^2.3.0",
+    "domhandler": "^2.4.2",
     "escape-string-regexp": "^1.0.5",
     "htmlparser2": "^3.8.3",
     "ramda": "^0.25.0",
@@ -45,12 +45,12 @@
     "react": "^16.0"
   },
   "devDependencies": {
-    "coveralls": "^3.0",
-    "eslint": "^4.18.2",
+    "coveralls": "^3.0.1",
+    "eslint": "^4.19.1",
     "istanbul": "^0.4",
-    "mocha": "^5.0.0",
+    "mocha": "^5.1.1",
     "mocha-lcov-reporter": "^1.2.0",
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0"
+    "react": "^16.3.2",
+    "react-dom": "^16.3.2"
   }
 }
