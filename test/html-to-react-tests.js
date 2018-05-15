@@ -336,7 +336,7 @@ describe('Html2React', function () {
         assert.equal(reactHtml, htmlExpected);
       });
 
-      it('should replace the children of an element', function () {
+      it('should replace the children of an element if configured so', function () {
         var htmlInput = '<div><div data-test="foo"><p>Text</p><p>Text</p></div></div>';
         var htmlExpected = '<div><div data-test="foo"><h1>Heading</h1></div></div>';
 
