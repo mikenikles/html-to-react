@@ -182,7 +182,7 @@ var processingInstructions = [
     },
 ];
 
-var reactComponent = parser.parseWithInstructions(
+var reactComponent = htmlToReactParser.parseWithInstructions(
   htmlInput, isValidNode, processingInstructions);
 var reactHtml = ReactDOMServer.renderToStaticMarkup(
   reactComponent);
