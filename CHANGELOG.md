@@ -1,5 +1,9 @@
 # Change Log
 
+## [v1.3.4](https://github.com/aknuds1/html-to-react/tree/v1.3.4)
+
+- Use lodash.camelcase instead of underscore.string.fp [\#76](https://github.com/aknuds1/html-to-react/pull/76) ([codepunkt](https://github.com/codepunkt))
+
 ## [v1.3.3](https://github.com/aknuds1/html-to-react/tree/v1.3.3)
 
 - Handle free-standing text nodes in HTML
