@@ -37,7 +37,7 @@
   "dependencies": {
     "domhandler": "^2.4.2",
     "escape-string-regexp": "^1.0.5",
-    "htmlparser2": "^3.10.0",
+    "htmlparser2": "^3.10.1",
     "lodash.camelcase": "^4.3.0",
     "ramda": "^0.26"
   },
@@ -50,7 +50,7 @@
     "istanbul": "^0.4",
     "mocha": "^5.2.0",
     "mocha-lcov-reporter": "^1.2.0",
-    "react": "^16.8.0",
-    "react-dom": "^16.8.0"
+    "react": "^16.8.2",
+    "react-dom": "^16.8.2"
   }
 }
