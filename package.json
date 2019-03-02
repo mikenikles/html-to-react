@@ -45,12 +45,12 @@
     "react": "^16.0"
   },
   "devDependencies": {
-    "coveralls": "^3.0.2",
-    "eslint": "^5.13.0",
+    "coveralls": "^3.0.3",
+    "eslint": "^5.15.0",
     "istanbul": "^0.4",
-    "mocha": "^5.2.0",
+    "mocha": "^6.0",
     "mocha-lcov-reporter": "^1.2.0",
-    "react": "^16.8.2",
-    "react-dom": "^16.8.2"
+    "react": "^16.8.3",
+    "react-dom": "^16.8.3"
   }
 }
