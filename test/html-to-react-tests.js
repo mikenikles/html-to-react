@@ -3,7 +3,6 @@ var assert = require('assert');
 var React = require('react');
 var ReactDOMServer = require('react-dom/server');
 var R = require('ramda');
-var escapeStringRegexp = require('escape-string-regexp');
 
 var Parser = require('..').Parser;
 var ProcessNodeDefinitions = require('..').ProcessNodeDefinitions;
