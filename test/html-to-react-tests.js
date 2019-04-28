@@ -1,269 +1,269 @@
 'use strict';
-var assert = require('assert');
-var React = require('react');
-var ReactDOMServer = require('react-dom/server');
-var R = require('ramda');
+const assert = require('assert');
+const React = require('react');
+const ReactDOMServer = require('react-dom/server');
+const R = require('ramda');
 
-var Parser = require('..').Parser;
-var ProcessNodeDefinitions = require('..').ProcessNodeDefinitions;
+const Parser = require('..').Parser;
+const ProcessNodeDefinitions = require('..').ProcessNodeDefinitions;
 
 describe('Html2React', function () {
-  var parser = new Parser();
+  const parser = new Parser();
 
   describe('parse valid HTML', function () {
     it('should return a valid HTML string', function () {
-      var htmlInput = '<p>Does this work?</p>';
+      const htmlInput = '<p>Does this work?</p>';
 
-      var reactComponent = parser.parse(htmlInput);
-      var reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
+      const reactComponent = parser.parse(htmlInput);
+      const reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
 
       assert.equal(reactHtml, htmlInput);
     });
 
     it('should return a valid HTML string with nested elements', function () {
-      var htmlInput = '<div><h1>Heading</h1></div>';
+      const htmlInput = '<div><h1>Heading</h1></div>';
 
-      var reactComponent = parser.parse(htmlInput);
-      var reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
+      const reactComponent = parser.parse(htmlInput);
+      const reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
 
       assert.equal(reactHtml, htmlInput);
     });
 
     it('should return a valid HTML string with inline styles', function () {
-      var htmlInput = '<div style="background-image:url(' +
+      const htmlInput = '<div style="background-image:url(' +
         '&quot;http://lorempixel.com/400/200/&quot;);background-color:red;color:white;' +
         'font-family:&quot;Open Sans&quot;"></div>';
 
-      var reactComponent = parser.parse(htmlInput);
-      var reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
+      const reactComponent = parser.parse(htmlInput);
+      const reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
 
       assert.equal(reactHtml, htmlInput);
     });
 
     it('should return a valid HTML string with inline image in style', function () {
-      var htmlInput = '<div style="background:url(' +
+      const htmlInput = '<div style="background:url(' +
         'data:image/png;base64,iVBORw0KGgoAAA);color:white;' +
         'font-family:&quot;Open Sans&quot;"></div>';
 
-      var reactComponent = parser.parse(htmlInput);
-      var reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
+      const reactComponent = parser.parse(htmlInput);
+      const reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
 
       assert.equal(reactHtml, htmlInput);
     });
 
     it('should return a valid HTML string with empty inline styles', function () {
-      var htmlInput = '<div style=""></div>';
-      var htmlExpected = '<div></div>';
+      const htmlInput = '<div style=""></div>';
+      const htmlExpected = '<div></div>';
 
-      var reactComponent = parser.parse(htmlInput);
-      var reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
+      const reactComponent = parser.parse(htmlInput);
+      const reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
 
       assert.equal(reactHtml, htmlExpected);
     });
 
     it('should return a valid HTML string with data attributes', function () {
-      var htmlInput = '<div data-test-attribute="data attribute value"></div>';
+      const htmlInput = '<div data-test-attribute="data attribute value"></div>';
 
-      var reactComponent = parser.parse(htmlInput);
-      var reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
+      const reactComponent = parser.parse(htmlInput);
+      const reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
 
       assert.equal(reactHtml, htmlInput);
     });
 
     it('should return a valid HTML string with aria attributes', function () {
-      var htmlInput = '<div aria-labelledby="label1"></div>';
+      const htmlInput = '<div aria-labelledby="label1"></div>';
 
-      var reactComponent = parser.parse(htmlInput);
-      var reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
+      const reactComponent = parser.parse(htmlInput);
+      const reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
 
       assert.equal(reactHtml, htmlInput);
     });
 
     it('should return a valid HTML string with a class attribute', function () {
-      var htmlInput = '<div class="class-one"></div>';
+      const htmlInput = '<div class="class-one"></div>';
 
-      var reactComponent = parser.parse(htmlInput);
-      var reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
+      const reactComponent = parser.parse(htmlInput);
+      const reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
 
       assert.equal(reactHtml, htmlInput);
     });
 
     it('should return a valid HTML string with a for attribute', function () {
-      var htmlInput = '<label for="input"></label>';
+      const htmlInput = '<label for="input"></label>';
 
-      var reactComponent = parser.parse(htmlInput);
-      var reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
+      const reactComponent = parser.parse(htmlInput);
+      const reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
 
       assert.equal(reactHtml, htmlInput);
     });
 
     it('should return a valid HTML string with a react camelCase attribute', function () {
-      var htmlInput = '<div contenteditable="true"></div>';
+      const htmlInput = '<div contenteditable="true"></div>';
 
-      var reactComponent = parser.parse(htmlInput);
-      var reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
+      const reactComponent = parser.parse(htmlInput);
+      const reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
 
       assert.equal(reactHtml, htmlInput);
     });
 
     it('should handle dashed attributes', function () {
-      var input = '<form accept-charset="en"><svg viewBox="0 0 10 10"><text text-anchor="left">' +
+      const input = '<form accept-charset="en"><svg viewBox="0 0 10 10"><text text-anchor="left">' +
         '</text><circle stroke="black" stroke-width="42"></circle></svg></form>';
-      var reactComponent = parser.parse(input);
-      var reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
+      const reactComponent = parser.parse(input);
+      const reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
 
       assert.equal(reactHtml, input);
     });
 
     // FIXME: See lib/process-node-definitions.js -> processDefaultNode()
     it.skip('should return a valid HTML string with comments', function () {
-      var htmlInput = '<div><!-- This is a comment --></div>';
+      const htmlInput = '<div><!-- This is a comment --></div>';
 
-      var reactComponent = parser.parse(htmlInput);
-      var reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
+      const reactComponent = parser.parse(htmlInput);
+      const reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
 
       assert.equal(reactHtml, htmlInput);
     });
 
     // FIXME: If / when React implements HTML comments, this test can be removed
     it('should return a valid HTML string without comments', function () {
-      var htmlInput = '<div><!-- This is a comment --></div>';
-      var htmlExpected = '<div></div>';
+      const htmlInput = '<div><!-- This is a comment --></div>';
+      const htmlExpected = '<div></div>';
 
-      var reactComponent = parser.parse(htmlInput);
-      var reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
+      const reactComponent = parser.parse(htmlInput);
+      const reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
 
       assert.equal(reactHtml, htmlExpected);
     });
 
     it('should parse br elements without warnings', function () {
-      var htmlInput = '<div><p>Line one<br>Line two<br/>Line three</p></div>';
-      var htmlExpected = '<div><p>Line one<br/>Line two<br/>Line three</p></div>';
+      const htmlInput = '<div><p>Line one<br>Line two<br/>Line three</p></div>';
+      const htmlExpected = '<div><p>Line one<br/>Line two<br/>Line three</p></div>';
 
-      var reactComponent = parser.parse(htmlInput);
-      var reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
+      const reactComponent = parser.parse(htmlInput);
+      const reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
 
       assert.equal(reactHtml, htmlExpected);
     });
 
     it('should not generate children for br tags', function () {
-      var htmlInput = '<br/>';
+      const htmlInput = '<br/>';
 
-      var reactComponent = parser.parse(htmlInput);
+      const reactComponent = parser.parse(htmlInput);
       assert.strictEqual((reactComponent.props.children || []).length, 0);
     });
 
     it('should parse void elements with all attributes and no warnings', function () {
-      var htmlInput = '<p><img src="www.google.ca/logo.png"/></p>';
+      const htmlInput = '<p><img src="www.google.ca/logo.png"/></p>';
 
-      var reactComponent = parser.parse(htmlInput);
-      var reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
+      const reactComponent = parser.parse(htmlInput);
+      const reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
 
       assert.equal(reactHtml, htmlInput);
     });
 
     // Covers issue #9
     it('should parse textarea elements', function () {
-      var htmlInput = '<textarea></textarea>';
+      const htmlInput = '<textarea></textarea>';
 
-      var reactComponent = parser.parse(htmlInput);
-      var reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
+      const reactComponent = parser.parse(htmlInput);
+      const reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
 
       assert.equal(reactHtml, htmlInput);
     });
 
     it('should generate keys for sequence items', function () {
-      var htmlInput = '<ul><li>Item 1</li><li>Item 2</li><</ul>';
+      const htmlInput = '<ul><li>Item 1</li><li>Item 2</li><</ul>';
 
-      var reactComponent = parser.parse(htmlInput);
+      const reactComponent = parser.parse(htmlInput);
 
-      var children = R.filter(function (c) {
+      const children = R.filter(function (c) {
         return R.has('key', c);
       }, R.flatten(reactComponent.props.children));
-      var keys = R.map(function (child) {
+      const keys = R.map(function (child) {
         return child.key;
       }, children);
       assert.deepStrictEqual(keys, ['0', '1', ]);
     });
 
     it('should parse br elements without warnings', function () {
-      var htmlInput = '<div><p>Line one<br>Line two<br/>Line three</p></div>';
-      var htmlExpected = '<div><p>Line one<br/>Line two<br/>Line three</p></div>';
+      const htmlInput = '<div><p>Line one<br>Line two<br/>Line three</p></div>';
+      const htmlExpected = '<div><p>Line one<br/>Line two<br/>Line three</p></div>';
 
-      var reactComponent = parser.parse(htmlInput);
-      var reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
+      const reactComponent = parser.parse(htmlInput);
+      const reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
 
       assert.equal(reactHtml, htmlExpected);
     });
 
     it('should parse src elements with all attributes but without warnings', function () {
-      var htmlInput = '<p><img src="www.google.ca/logo.png"/></p>';
+      const htmlInput = '<p><img src="www.google.ca/logo.png"/></p>';
 
-      var reactComponent = parser.parse(htmlInput);
-      var reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
+      const reactComponent = parser.parse(htmlInput);
+      const reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
 
       assert.equal(reactHtml, htmlInput);
     });
 
     it('should decode character entities in text nodes', function () {
-      var htmlInput = '<div>1 &lt; 2</div>';
+      const htmlInput = '<div>1 &lt; 2</div>';
 
-      var reactComponent = parser.parse(htmlInput);
-      var reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
+      const reactComponent = parser.parse(htmlInput);
+      const reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
 
       assert.equal(reactHtml, htmlInput);
     });
 
     it('should not generate children for childless elements', function () {
-      var htmlInput = '<div></div>';
+      const htmlInput = '<div></div>';
 
-      var reactComponent = parser.parse(htmlInput);
+      const reactComponent = parser.parse(htmlInput);
 
       assert.strictEqual((reactComponent.props.children || []).length, 0);
     });
 
     it('should fill in the key name with boolean attribute', function () {
-      var htmlInput = '<input type="checkbox" disabled required/>';
-      var htmlExpected = '<input type="checkbox" disabled="" required=""/>';
+      const htmlInput = '<input type="checkbox" disabled required/>';
+      const htmlExpected = '<input type="checkbox" disabled="" required=""/>';
 
-      var reactComponent = parser.parse(htmlInput);
-      var reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
+      const reactComponent = parser.parse(htmlInput);
+      const reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
 
       assert.equal(reactHtml, htmlExpected);
     });
 
     it('should decode attribute values to avoid React re-encoding them', function () {
-      var htmlInput = '<p><a href="http://domain.com/search?query=1&amp;lang=en">A link</a></p>';
+      const htmlInput = '<p><a href="http://domain.com/search?query=1&amp;lang=en">A link</a></p>';
 
-      var reactComponent = parser.parse(htmlInput);
-      var reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
+      const reactComponent = parser.parse(htmlInput);
+      const reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
 
       assert.equal(reactHtml, htmlInput);
     });
 
     it('should handle spaces in inline styles', function () {
-      var htmlInput = '<p style="text-align: center"></p>';
+      const htmlInput = '<p style="text-align: center"></p>';
 
-      var reactComponent = parser.parse(htmlInput);
+      const reactComponent = parser.parse(htmlInput);
 
       assert.equal(reactComponent.props.style.textAlign, 'center');
     });
 
     it('should handle doctype directives', function () {
-      var htmlInput = '<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" ' +
+      const htmlInput = '<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" ' +
       '"http://www.w3.org/TR/REC-html40/loose.dtd"><html><body><div></div></body></html>';
 
-      var reactComponent = parser.parse(htmlInput);
-      var reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
+      const reactComponent = parser.parse(htmlInput);
+      const reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
 
       assert.equal(reactHtml, '<html><body><div></div></body></html>');
     });
 
     it('should handle free text nodes', function () {
-      var htmlInput = 'text<div></div>text';
+      const htmlInput = 'text<div></div>text';
 
-      var reactComponent = parser.parse(htmlInput);
-      var reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
+      const reactComponent = parser.parse(htmlInput);
+      const reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
 
       assert.equal(reactHtml, 'text<div></div>text');
     });
@@ -271,43 +271,43 @@ describe('Html2React', function () {
 
   describe('parse invalid HTML', function () {
     it('should fix missing closing tags', function () {
-      var htmlInput = '<div><p></div>';
-      var htmlExpected = '<div><p></p></div>';
+      const htmlInput = '<div><p></div>';
+      const htmlExpected = '<div><p></p></div>';
 
-      var reactComponent = parser.parse(htmlInput);
-      var reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
+      const reactComponent = parser.parse(htmlInput);
+      const reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
 
       assert.equal(reactHtml, htmlExpected);
     });
 
     it('should handle invalid style tag', function () {
-      var htmlInput = '<div style="color:black;href="></div>';
-      var htmlExpected = '<div style="color:black"></div>';
+      const htmlInput = '<div style="color:black;href="></div>';
+      const htmlExpected = '<div style="color:black"></div>';
 
-      var reactComponent = parser.parse(htmlInput);
-      var reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
+      const reactComponent = parser.parse(htmlInput);
+      const reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
 
       assert.equal(reactHtml, htmlExpected);
     });
   });
 
   describe('with custom processing instructions', function () {
-    var parser = new Parser();
-    var processNodeDefinitions = new ProcessNodeDefinitions(React);
+    const parser = new Parser();
+    const processNodeDefinitions = new ProcessNodeDefinitions(React);
 
     describe('parse valid HTML', function () {
       it('should return nothing with only a single <p> element', function () {
-        var htmlInput = '<p>Does this work?</p>';
-        var isValidNode = function () {
+        const htmlInput = '<p>Does this work?</p>';
+        const isValidNode = function () {
           return true;
         };
-        var processingInstructions = [{
+        const processingInstructions = [{
           shouldProcessNode: function (node) {
             return node.name && node.name !== 'p';
           },
           processNode: processNodeDefinitions.processDefaultNode,
         },];
-        var reactComponent = parser.parseWithInstructions(htmlInput, isValidNode,
+        const reactComponent = parser.parseWithInstructions(htmlInput, isValidNode,
           processingInstructions);
 
           // With only 1 <p> element, nothing is rendered
@@ -316,34 +316,34 @@ describe('Html2React', function () {
 
       it('should return a single <h1> element within a div of <h1> and <p> as siblings',
           function () {
-        var htmlInput = '<div><h1>Title</h1><p>Paragraph</p></div>';
-        var htmlExpected = '<div><h1>Title</h1></div>';
+        const htmlInput = '<div><h1>Title</h1><p>Paragraph</p></div>';
+        const htmlExpected = '<div><h1>Title</h1></div>';
 
-        var isValidNode = function () {
+        const isValidNode = function () {
           return true;
         };
 
-        var processingInstructions = [{
+        const processingInstructions = [{
           shouldProcessNode: function (node) {
             return node.type === 'text' || node.name !== 'p';
           },
           processNode: processNodeDefinitions.processDefaultNode,
         },];
-        var reactComponent = parser.parseWithInstructions(htmlInput, isValidNode,
+        const reactComponent = parser.parseWithInstructions(htmlInput, isValidNode,
           processingInstructions);
-        var reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
+        const reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
         assert.equal(reactHtml, htmlExpected);
       });
 
       it('should replace the children of an element if configured so', function () {
-        var htmlInput = '<div><div data-test="foo"><p>Text</p><p>Text</p></div></div>';
-        var htmlExpected = '<div><div data-test="foo"><h1>Heading</h1></div></div>';
+        const htmlInput = '<div><div data-test="foo"><p>Text</p><p>Text</p></div></div>';
+        const htmlExpected = '<div><div data-test="foo"><h1>Heading</h1></div></div>';
 
-        var isValidNode = function () {
+        const isValidNode = function () {
           return true;
         };
 
-        var processingInstructions = [
+        const processingInstructions = [
           {
             replaceChildren: true,
             shouldProcessNode: function (node) {
@@ -362,23 +362,23 @@ describe('Html2React', function () {
           },
         ];
 
-        var reactComponent = parser.parseWithInstructions(htmlInput, isValidNode,
+        const reactComponent = parser.parseWithInstructions(htmlInput, isValidNode,
           processingInstructions);
-        var reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
+        const reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
         assert.equal(reactHtml, htmlExpected);
       });
 
       it('should return capitalized content for all <h1> elements', function () {
-        var htmlInput = '<div><h1>Title</h1><p>Paragraph</p>' +
+        const htmlInput = '<div><h1>Title</h1><p>Paragraph</p>' +
         '<h1>Another title</h1></div>';
-        var htmlExpected = '<div><h1>TITLE</h1><p>Paragraph</p>' +
+        const htmlExpected = '<div><h1>TITLE</h1><p>Paragraph</p>' +
         '<h1>ANOTHER TITLE</h1></div>';
 
-        var isValidNode = function () {
+        const isValidNode = function () {
           return true;
         };
 
-        var processingInstructions = [
+        const processingInstructions = [
           {
             // Custom <h1> processing
             shouldProcessNode: function (node) {
@@ -396,32 +396,32 @@ describe('Html2React', function () {
             processNode: processNodeDefinitions.processDefaultNode,
           },
         ];
-        var reactComponent = parser.parseWithInstructions(htmlInput, isValidNode,
+        const reactComponent = parser.parseWithInstructions(htmlInput, isValidNode,
           processingInstructions);
-        var reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
+        const reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
         assert.equal(reactHtml, htmlExpected);
       });
 
       it('should return false in case of invalid node', function () {
-        var htmlInput = '<p></p>';
-        var processingInstructions = [{
+        const htmlInput = '<p></p>';
+        const processingInstructions = [{
           shouldProcessNode: function (node) { return true; },
           processNode: processNodeDefinitions.processDefaultNode,
         }, ];
-        var reactComponent = parser.parseWithInstructions(htmlInput,
+        const reactComponent = parser.parseWithInstructions(htmlInput,
           function () { return false; }, processingInstructions);
 
         assert.equal(reactComponent, false);
       });
 
       it('should generate only valid children', function () {
-        var htmlInput = '<div> <p></p> <p></p> </div>';
+        const htmlInput = '<div> <p></p> <p></p> </div>';
 
-        var processingInstructions = [{
+        const processingInstructions = [{
           shouldProcessNode: function (node) { return true; },
           processNode: processNodeDefinitions.processDefaultNode,
         }, ];
-        var reactComponent = parser.parseWithInstructions(htmlInput, function (node) {
+        const reactComponent = parser.parseWithInstructions(htmlInput, function (node) {
           // skip whitespace text nodes to clean up children
           if (node.type === 'text') {
             return node.data.trim() !== '';
@@ -433,9 +433,9 @@ describe('Html2React', function () {
       });
 
       it('should not affect unhandled whitespace', function () {
-        var htmlInput = '<div> <p></p> <p></p> </div>';
+        const htmlInput = '<div> <p></p> <p></p> </div>';
 
-        var reactComponent = parser.parse(htmlInput);
+        const reactComponent = parser.parse(htmlInput);
 
         assert.equal(reactComponent.props.children.length, 5);
       });
@@ -444,7 +444,7 @@ describe('Html2React', function () {
 
   describe('parse SVG', function () {
     it('should have correct attributes', function () {
-      var input2RegExp = {
+      const input2RegExp = {
         '<svg><image xlink:href="http://i.imgur.com/w7GCRPb.png"/></svg>':
           /<svg><image xlink:href="http:\/\/i\.imgur\.com\/w7GCRPb\.png"/,
         '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"></svg>':
@@ -452,9 +452,9 @@ describe('Html2React', function () {
           /<svg xmlns="http:\/\/www\.w3\.org\/2000\/svg" xmlns:xlink="http:\/\/www\.w3\.org\/1999\/xlink"><\/svg>/,
       };
       R.forEach(function (inputAndRegExp) {
-        var input = inputAndRegExp[0], regExp = inputAndRegExp[1];
-        var reactComponent = parser.parse(input);
-        var reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
+        const input = inputAndRegExp[0], regExp = inputAndRegExp[1];
+        const reactComponent = parser.parse(input);
+        const reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
 
         assert(regExp.test(reactHtml), reactHtml + ' has expected attributes');
       }, R.toPairs(input2RegExp));
@@ -463,9 +463,9 @@ describe('Html2React', function () {
 
   describe('parsing multiple elements', function () {
     it('should result in a list of React elements', function () {
-      var htmlInput = '<div></div><div></div>';
-      var elements = parser.parse(htmlInput);
-      var output = elements.map(ReactDOMServer.renderToStaticMarkup).join('');
+      const htmlInput = '<div></div><div></div>';
+      const elements = parser.parse(htmlInput);
+      const output = elements.map(ReactDOMServer.renderToStaticMarkup).join('');
       assert.equal(htmlInput, output);
     });
   });
