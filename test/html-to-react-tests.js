@@ -439,6 +439,44 @@ describe('Html2React', function () {
 
         assert.equal(reactComponent.props.children.length, 5);
       });
+
+      it('should preprocess a node and also process a node afterwards', function () {
+        var htmlInput = '<div class="preprocess">' +
+          '<p class="preprocess">Class should be added</p></div>';
+        var htmlExpected = '<div class="preprocessed" data-custom="test">' +
+          '<p class="preprocessed">Class should be added</p></div>';
+
+        var isValidNode = function () {
+          return true;
+        };
+        var preprocessingInstructions = [{
+          shouldPreprocessNode: function (node) {
+            return node.attribs && node.attribs.class === 'preprocess';
+          },
+          preprocessNode: function (node, children, index) {
+            node.attribs.class = 'preprocessed';
+          },
+        },];
+        var processingInstructions = [{
+          shouldProcessNode: function (node) {
+            return node.name && node.name === 'div';
+          },
+          processNode: function(node, children, index) {
+            node.attribs['data-custom'] = 'test';
+            return processNodeDefinitions.processDefaultNode(node, children, index);
+          },
+        },{
+          shouldProcessNode: function (node) {
+            return true;
+          },
+          processNode: processNodeDefinitions.processDefaultNode,
+        },];
+        var reactComponent = parser.parseWithInstructions(htmlInput, isValidNode,
+          processingInstructions, preprocessingInstructions);
+
+        var reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
+        assert.equal(reactHtml, htmlExpected);
+      });
     });
   });
 
