@@ -200,24 +200,10 @@ and then render them separately
 
 #### Example
 
-Below is a simple template that could get loaded via ajax into your application
+Below is a simple template in which you may want to replace ids of a div but also update the component.
+Replacing ids can be shared.
 
 ##### Before
-```
-<div class="row">
-  <div class="outer">
-    <p>Sample For First</p>
-  </div>
-  <div class="outer">
-    <p>Sample For Second</p>
-  </div>
-</div>
-```
-
-##### After
-
-You may want to replace ids of a div but also update the component. Replacing ids can be shared.
-
 ```
 <div class="row">
   <div id="first" data-process="shared">
@@ -226,6 +212,17 @@ You may want to replace ids of a div but also update the component. Replacing id
   <div id="second" data-process="shared">
     <p>Sample For Second</p>
   </div>
+</div>
+```
+
+##### After
+
+The ids are replaced during preprocessing and also the components are update via individual processors.
+
+```
+<div class="row">
+  <h1 id="preprocessed-first">First</h1>
+  <h2 id="preprocessed-second">Second</h2>
 </div>
 ```
 
