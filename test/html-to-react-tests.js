@@ -441,35 +441,54 @@ describe('Html2React', function () {
       });
 
       it('should preprocess a node and also process a node afterwards', function () {
-        var htmlInput = '<div class="preprocess">' +
-          '<p class="preprocess">Class should be added</p></div>';
-        var htmlExpected = '<div class="preprocessed" data-custom="test">' +
-          '<p class="preprocessed">Class should be added</p></div>';
+        var htmlInput = '<div class="row">' +
+          '<div id="first" data-process="shared">' +
+            '<p>Sample For First</p>' +
+          '</div>' +
+          '<div id="second" data-process="shared">' +
+            '<p>Sample For Second</p>' +
+          '</div>' +
+        '</div>';
+
+        var htmlExpected = '<div class="row">' +
+          '<h1 id="preprocessed-first">First</h1>' +
+          '<h2 id="preprocessed-second">Second</h2>' +
+        '</div>';
 
         var isValidNode = function () {
           return true;
         };
         var preprocessingInstructions = [{
           shouldPreprocessNode: function (node) {
-            return node.attribs && node.attribs.class === 'preprocess';
+            return node.attribs && node.attribs['data-process'] === 'shared';
           },
           preprocessNode: function (node, children, index) {
-            node.attribs.class = 'preprocessed';
+            node.attribs = {id: `preprocessed-${node.attribs.id}`,};
           },
         },];
         var processingInstructions = [{
           shouldProcessNode: function (node) {
-            return node.name && node.name === 'div';
+            return node.attribs && node.attribs.id === 'preprocessed-first';
           },
           processNode: function(node, children, index) {
-            node.attribs['data-custom'] = 'test';
-            return processNodeDefinitions.processDefaultNode(node, children, index);
+            return React.createElement('h1',
+              {key: index, id: node.attribs.id,}, 'First');
+          },
+        }, {
+          shouldProcessNode: function (node) {
+            return node.attribs && node.attribs.id === 'preprocessed-second';
+          },
+          processNode: function(node, children, index) {
+            return React.createElement('h2',
+              {key: index, id: node.attribs.id,}, 'Second');
           },
         },{
           shouldProcessNode: function (node) {
             return true;
           },
-          processNode: processNodeDefinitions.processDefaultNode,
+          processNode: function(node, children, index) {
+            return processNodeDefinitions.processDefaultNode(node, children, index);
+          },
         },];
         var reactComponent = parser.parseWithInstructions(htmlInput, isValidNode,
           processingInstructions, preprocessingInstructions);
