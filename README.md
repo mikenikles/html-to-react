@@ -191,6 +191,123 @@ var reactHtml = ReactDOMServer.renderToStaticMarkup(
 assert.equal(reactHtml, htmlExpected);
 ```
 
+### Preprocessing element based on a criteria before rendering
+
+There may be a situation where you want to preprocess an element before rendering
+it via a custom component.
+This is beneficial if you want to add attributes to all the matching elements
+and then render them separately
+
+#### Example
+
+Below is a simple template that could get loaded via ajax into your application
+
+##### Before
+```
+<div class="row">
+  <div class="outer">
+    <p>Sample For First</p>
+  </div>
+  <div class="outer">
+    <p>Sample For Second</p>
+  </div>
+</div>
+```
+
+##### After
+
+You may want to replace ids of a div but also update the component. Replacing ids can be shared.
+
+```
+<div class="row">
+  <div id="first" data-process="shared">
+    <p>Sample For First</p>
+  </div>
+  <div id="second" data-process="shared">
+    <p>Sample For Second</p>
+  </div>
+</div>
+```
+
+#### Setup
+
+In your instructions object, you must specify `replaceChildren: true`.
+
+```javascript
+var React = require('react');
+var HtmlToReact = require('html-to-react');
+var HtmlToReactParser = require('html-to-react').Parser;
+
+var htmlToReactParser = new HtmlToReactParser();
+var htmlInput = '<div class="row">' +
+  '<div id="first" data-process="shared">' +
+    '<p>Sample For First</p>' +
+  '</div>' +
+  '<div id="second" data-process="shared">' +
+    '<p>Sample For Second</p>' +
+  '</div>' +
+'</div>';
+
+var htmlExpected = '<div class="row">' +
+  '<h1 id="preprocessed-first">First</h1>' +
+  '<h2 id="preprocessed-second">Second</h2>' +
+'</div>';
+
+var isValidNode = function () {
+  return true;
+};
+
+var processNodeDefinitions = new HtmlToReact.ProcessNodeDefinitions(React);
+
+// Order matters. Instructions are processed in
+// the order they're defined
+var preprocessingInstructions = [
+  {
+    // This will allow you to update ids in a shared instruction set
+    shouldPreprocessNode: function (node) {
+      return node.attribs && node.attribs['data-process'] === 'shared';
+    },
+    preprocessNode: function (node, children, index) {
+      node.attribs = {id: `preprocessed-${node.attribs.id}`,};
+    },
+  }
+];
+var processingInstructions = [
+  {
+    shouldProcessNode: function (node) {
+      return node.attribs && node.attribs.id === 'preprocessed-first';
+    },
+    processNode: function(node, children, index) {
+      return React.createElement('h1',
+        {key: index, id: node.attribs.id,}, 'First');
+    },
+  },
+  {
+    shouldProcessNode: function (node) {
+      return node.attribs && node.attribs.id === 'preprocessed-second';
+    },
+    processNode: function(node, children, index) {
+      return React.createElement('h2',
+        {key: index, id: node.attribs.id,}, 'Second');
+    },
+  },
+  {
+    shouldProcessNode: function (node) {
+      return true;
+    },
+    processNode: function(node, children, index) {
+      return processNodeDefinitions.processDefaultNode(node, children, index);
+    },
+  },
+];
+
+var reactComponent = parser.parseWithInstructions(htmlInput, isValidNode,
+  processingInstructions, preprocessingInstructions);
+var reactHtml = ReactDOMServer.renderToStaticMarkup(
+  reactComponent);
+assert.equal(reactHtml, htmlExpected);
+```
+
 ## Tests & Coverage
 
 Test locally: `$ npm test`
