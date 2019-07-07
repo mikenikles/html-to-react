@@ -439,58 +439,58 @@ describe('Html2React', function () {
 
         assert.equal(reactComponent.props.children.length, 5);
       });
+    });
 
-      it('should preprocess a node and also process a node afterwards', function () {
-        var htmlInput = '<div>' +
-          '<div id="first" data-process="shared"><p>Sample For First</p></div>' +
-          '<div id="second" data-process="shared"><p>Sample For Second</p></div>' +
-          '</div>';
-        var htmlExpected = '<div><h1 id="preprocessed-first">First</h1>' +
-          '<h2 id="preprocessed-second">Second</h2></div>';
+    it('should support preprocessing instructions', function () {
+      var htmlInput = '<div>' +
+        '<div id="first" data-process="shared"><p>Sample For First</p></div>' +
+        '<div id="second" data-process="shared"><p>Sample For Second</p></div>' +
+        '</div>';
+      var htmlExpected = '<div><h1 id="preprocessed-first">First</h1>' +
+        '<h2 id="preprocessed-second">Second</h2></div>';
 
-        var isValidNode = function () {
-          return true;
-        };
-        var preprocessingInstructions = [
-          {
-            shouldPreprocessNode: function (node) {
-              return (node.attribs || {})['data-process'] === 'shared';
-            },
-            preprocessNode: function (node) {
-              node.attribs = {id: `preprocessed-${node.attribs.id}`,};
-            },
+      var isValidNode = function () {
+        return true;
+      };
+      var preprocessingInstructions = [
+        {
+          shouldPreprocessNode: function (node) {
+            return (node.attribs || {})['data-process'] === 'shared';
           },
-        ];
-        var processingInstructions = [
-          {
-            shouldProcessNode: function (node) {
-              return (node.attribs || {}).id === 'preprocessed-first';
-            },
-            processNode: function (node, children, index) {
-              return React.createElement('h1', {key: index, id: node.attribs.id,}, 'First');
-            },
+          preprocessNode: function (node) {
+            node.attribs = {id: `preprocessed-${node.attribs.id}`,};
           },
-          {
-            shouldProcessNode: function (node) {
-              return (node.attribs || {}).id === 'preprocessed-second';
-            },
-            processNode: function (node, children, index) {
-              return React.createElement('h2', {key: index, id: node.attribs.id,}, 'Second');
-            },
+        },
+      ];
+      var processingInstructions = [
+        {
+          shouldProcessNode: function (node) {
+            return (node.attribs || {}).id === 'preprocessed-first';
           },
-          {
-            shouldProcessNode: function () {
-              return true;
-            },
-            processNode: processNodeDefinitions.processDefaultNode,
+          processNode: function (node, children, index) {
+            return React.createElement('h1', {key: index, id: node.attribs.id,}, 'First');
           },
-        ];
-        var reactComponent = parser.parseWithInstructions(htmlInput, isValidNode,
-          processingInstructions, preprocessingInstructions);
+        },
+        {
+          shouldProcessNode: function (node) {
+            return (node.attribs || {}).id === 'preprocessed-second';
+          },
+          processNode: function (node, children, index) {
+            return React.createElement('h2', {key: index, id: node.attribs.id,}, 'Second');
+          },
+        },
+        {
+          shouldProcessNode: function () {
+            return true;
+          },
+          processNode: processNodeDefinitions.processDefaultNode,
+        },
+      ];
+      var reactComponent = parser.parseWithInstructions(htmlInput, isValidNode,
+        processingInstructions, preprocessingInstructions);
 
-        var reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
-        assert.strictEqual(reactHtml, htmlExpected);
-      });
+      var reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
+      assert.strictEqual(reactHtml, htmlExpected);
     });
   });
 
