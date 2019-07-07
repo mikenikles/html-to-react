@@ -347,7 +347,7 @@ describe('Html2React', function () {
           {
             replaceChildren: true,
             shouldProcessNode: function (node) {
-              return node.attribs && node.attribs['data-test'] === 'foo';
+              return (node.attribs || {})['data-test'] === 'foo';
             },
             processNode: function (node, children, index) {
               return React.createElement('h1', {key: index,}, 'Heading');
@@ -441,60 +441,55 @@ describe('Html2React', function () {
       });
 
       it('should preprocess a node and also process a node afterwards', function () {
-        var htmlInput = '<div class="row">' +
-          '<div id="first" data-process="shared">' +
-            '<p>Sample For First</p>' +
-          '</div>' +
-          '<div id="second" data-process="shared">' +
-            '<p>Sample For Second</p>' +
-          '</div>' +
-        '</div>';
-
-        var htmlExpected = '<div class="row">' +
-          '<h1 id="preprocessed-first">First</h1>' +
-          '<h2 id="preprocessed-second">Second</h2>' +
-        '</div>';
+        var htmlInput = '<div>' +
+          '<div id="first" data-process="shared"><p>Sample For First</p></div>' +
+          '<div id="second" data-process="shared"><p>Sample For Second</p></div>' +
+          '</div>';
+        var htmlExpected = '<div><h1 id="preprocessed-first">First</h1>' +
+          '<h2 id="preprocessed-second">Second</h2></div>';
 
         var isValidNode = function () {
           return true;
         };
-        var preprocessingInstructions = [{
-          shouldPreprocessNode: function (node) {
-            return node.attribs && node.attribs['data-process'] === 'shared';
+        var preprocessingInstructions = [
+          {
+            shouldPreprocessNode: function (node) {
+              return (node.attribs || {})['data-process'] === 'shared';
+            },
+            preprocessNode: function (node) {
+              node.attribs = {id: `preprocessed-${node.attribs.id}`,};
+            },
           },
-          preprocessNode: function (node) {
-            node.attribs = {id: `preprocessed-${node.attribs.id}`,};
+        ];
+        var processingInstructions = [
+          {
+            shouldProcessNode: function (node) {
+              return (node.attribs || {}).id === 'preprocessed-first';
+            },
+            processNode: function (node, children, index) {
+              return React.createElement('h1', {key: index, id: node.attribs.id,}, 'First');
+            },
           },
-        },];
-        var processingInstructions = [{
-          shouldProcessNode: function (node) {
-            return node.attribs && node.attribs.id === 'preprocessed-first';
+          {
+            shouldProcessNode: function (node) {
+              return (node.attribs || {}).id === 'preprocessed-second';
+            },
+            processNode: function (node, children, index) {
+              return React.createElement('h2', {key: index, id: node.attribs.id,}, 'Second');
+            },
           },
-          processNode: function(node, children, index) {
-            return React.createElement('h1',
-              {key: index, id: node.attribs.id,}, 'First');
+          {
+            shouldProcessNode: function () {
+              return true;
+            },
+            processNode: processNodeDefinitions.processDefaultNode,
           },
-        }, {
-          shouldProcessNode: function (node) {
-            return node.attribs && node.attribs.id === 'preprocessed-second';
-          },
-          processNode: function(node, children, index) {
-            return React.createElement('h2',
-              {key: index, id: node.attribs.id,}, 'Second');
-          },
-        },{
-          shouldProcessNode: function (node) {
-            return true;
-          },
-          processNode: function(node, children, index) {
-            return processNodeDefinitions.processDefaultNode(node, children, index);
-          },
-        },];
+        ];
         var reactComponent = parser.parseWithInstructions(htmlInput, isValidNode,
           processingInstructions, preprocessingInstructions);
 
         var reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
-        assert.equal(reactHtml, htmlExpected);
+        assert.strictEqual(reactHtml, htmlExpected);
       });
     });
   });
