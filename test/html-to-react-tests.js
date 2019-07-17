@@ -462,7 +462,7 @@ describe('Html2React', function () {
           shouldPreprocessNode: function (node) {
             return node.attribs && node.attribs['data-process'] === 'shared';
           },
-          preprocessNode: function (node, children, index) {
+          preprocessNode: function (node) {
             node.attribs = {id: `preprocessed-${node.attribs.id}`,};
           },
         },];

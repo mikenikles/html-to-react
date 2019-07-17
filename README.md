@@ -228,8 +228,6 @@ The ids are replaced during preprocessing and also the components are update via
 
 #### Setup
 
-In your instructions object, you must specify `replaceChildren: true`.
-
 ```javascript
 var React = require('react');
 var HtmlToReact = require('html-to-react');
@@ -264,7 +262,7 @@ var preprocessingInstructions = [
     shouldPreprocessNode: function (node) {
       return node.attribs && node.attribs['data-process'] === 'shared';
     },
-    preprocessNode: function (node, children, index) {
+    preprocessNode: function (node) {
       node.attribs = {id: `preprocessed-${node.attribs.id}`,};
     },
   }
