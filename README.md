@@ -191,19 +191,19 @@ var reactHtml = ReactDOMServer.renderToStaticMarkup(
 assert.equal(reactHtml, htmlExpected);
 ```
 
-### Preprocessing element based on a criteria before rendering
+### With Preprocessing Instructions
 
-There may be a situation where you want to preprocess an element before rendering
-it via a custom component.
-This is beneficial if you want to add attributes to all the matching elements
-and then render them separately
+There may be situations where you want to preprocess nodes before rendering them, analogously
+to the custom processing instructions functionality. The rationale for supporting preprocessing
+hooks is generally that you might want to apply more general processing to nodes, before
+applying custom processing hooks to filtered sets of nodes. You could accomplish the same by
+calling common functions from your custom processing hooks, but the preprocessing hooks
+API makes it more convenient.
 
 #### Example
 
-Below is a simple template in which you may want to replace ids of a div but also update the component.
-Replacing ids can be shared.
+Below is a simple template in which you may want to replace div IDs, via a preprocessing hook:
 
-##### Before
 ```
 <div class="row">
   <div id="first" data-process="shared">
@@ -215,9 +215,7 @@ Replacing ids can be shared.
 </div>
 ```
 
-##### After
-
-The ids are replaced during preprocessing and also the components are update via individual processors.
+We want to process the above HTML into the following:
 
 ```
 <div class="row">
@@ -226,7 +224,8 @@ The ids are replaced during preprocessing and also the components are update via
 </div>
 ```
 
-#### Setup
+We can accomplish that with the following script, using a combination of preprocessing and
+custom processing instructions:
 
 ```javascript
 var React = require('react');
@@ -252,13 +251,8 @@ var isValidNode = function () {
   return true;
 };
 
-var processNodeDefinitions = new HtmlToReact.ProcessNodeDefinitions(React);
-
-// Order matters. Instructions are processed in
-// the order they're defined
 var preprocessingInstructions = [
   {
-    // This will allow you to update ids in a shared instruction set
     shouldPreprocessNode: function (node) {
       return node.attribs && node.attribs['data-process'] === 'shared';
     },
@@ -267,39 +261,35 @@ var preprocessingInstructions = [
     },
   }
 ];
+var processNodeDefinitions = new HtmlToReact.ProcessNodeDefinitions(React);
 var processingInstructions = [
   {
     shouldProcessNode: function (node) {
       return node.attribs && node.attribs.id === 'preprocessed-first';
     },
     processNode: function(node, children, index) {
-      return React.createElement('h1',
-        {key: index, id: node.attribs.id,}, 'First');
+      return React.createElement('h1', {key: index, id: node.attribs.id,}, 'First');
     },
   },
   {
     shouldProcessNode: function (node) {
       return node.attribs && node.attribs.id === 'preprocessed-second';
     },
-    processNode: function(node, children, index) {
-      return React.createElement('h2',
-        {key: index, id: node.attribs.id,}, 'Second');
+    processNode: function (node, children, index) {
+      return React.createElement('h2', {key: index, id: node.attribs.id,}, 'Second');
     },
   },
   {
     shouldProcessNode: function (node) {
       return true;
     },
-    processNode: function(node, children, index) {
-      return processNodeDefinitions.processDefaultNode(node, children, index);
-    },
+    processNode: processNodeDefinitions.processDefaultNode,
   },
 ];
 
-var reactComponent = parser.parseWithInstructions(htmlInput, isValidNode,
-  processingInstructions, preprocessingInstructions);
-var reactHtml = ReactDOMServer.renderToStaticMarkup(
-  reactComponent);
+var reactComponent = parser.parseWithInstructions(htmlInput, isValidNode, processingInstructions,
+  preprocessingInstructions);
+var reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
 assert.equal(reactHtml, htmlExpected);
 ```
 
