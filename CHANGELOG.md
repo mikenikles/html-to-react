@@ -1,5 +1,9 @@
 # Change Log
 
+## [v1.4.0](https://github.com/aknuds1/html-to-react/tree/v1.4.0)
+
+- Allow nodes to be preprocessed [\#90](https://github.com/aknuds1/html-to-react/pull/90) ([manixate](https://github.com/manixate))
+
 ## [v1.3.4](https://github.com/aknuds1/html-to-react/tree/v1.3.4)
 
 - Use lodash.camelcase instead of underscore.string.fp [\#76](https://github.com/aknuds1/html-to-react/pull/76) ([codepunkt](https://github.com/codepunkt))
