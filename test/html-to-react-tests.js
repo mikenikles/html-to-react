@@ -452,13 +452,27 @@ describe('Html2React', function () {
       var isValidNode = function () {
         return true;
       };
+      // We have two preprocessing instructions; the first sets the attribute data-preprocessed,
+      // and the second one changes the ID of nodes that have the data-preprocessed attribute
+      // (i.e., it will only affect nodes touched by the previous preprocessor).
       var preprocessingInstructions = [
         {
           shouldPreprocessNode: function (node) {
             return (node.attribs || {})['data-process'] === 'shared';
           },
           preprocessNode: function (node) {
-            node.attribs = {id: `preprocessed-${node.attribs.id}`,};
+            if (node.attribs == null) {
+              node.attribs = {};
+            }
+            node.attribs['data-preprocessed'] = 'true';
+          },
+        },
+        {
+          shouldPreprocessNode: function (node) {
+            return (node.attribs || {})['data-preprocessed'] === 'true';
+          },
+          preprocessNode: function (node) {
+            node.attribs.id = `preprocessed-${node.attribs.id}`;
           },
         },
       ];
@@ -468,7 +482,10 @@ describe('Html2React', function () {
             return (node.attribs || {}).id === 'preprocessed-first';
           },
           processNode: function (node, children, index) {
-            return React.createElement('h1', {key: index, id: node.attribs.id,}, 'First');
+            return React.createElement('h1', {
+              key: index,
+              id: node.attribs.id,
+            }, 'First');
           },
         },
         {
@@ -476,7 +493,10 @@ describe('Html2React', function () {
             return (node.attribs || {}).id === 'preprocessed-second';
           },
           processNode: function (node, children, index) {
-            return React.createElement('h2', {key: index, id: node.attribs.id,}, 'Second');
+            return React.createElement('h2', {
+              key: index,
+              id: node.attribs.id,
+            }, 'Second');
           },
         },
         {
