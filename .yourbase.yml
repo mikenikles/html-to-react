@@ -7,7 +7,7 @@ build_targets:
       - NODE_ENV=development
     commands:
       - npm install eslint --save-dev
-      - npm run test-coverage
+      - ./scripts/build-under-yourbase
 ci:
   builds:
     - name: default
