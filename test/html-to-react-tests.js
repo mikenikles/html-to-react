@@ -267,6 +267,14 @@ describe('Html2React', function () {
 
       assert.equal(reactHtml, 'text<div></div>text');
     });
+
+    it('should handle onclick attributes', function () {
+      const htmlInput = '<button onclick="alert(\'hello!\')">Hello</button>';
+
+      const reactElem = parser.parse(htmlInput);
+
+      assert.strictEqual(reactElem.props.onClick, 'alert(\'hello!\')');
+    });
   });
 
   describe('parse invalid HTML', function () {
