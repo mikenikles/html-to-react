@@ -12,7 +12,12 @@ rules:
     - "global"
   comma-dangle:
     - 2
-    - "always"
+    -
+      arrays: "always"
+      objects: "always"
+      imports: "always"
+      exports: "always"
+      functions: "never"
   quotes:
     - 2
     - "single"
