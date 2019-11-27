@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "./node_modules/.bin/eslint . && ./node_modules/mocha/bin/mocha",
-    "test-coverage": "./node_modules/.bin/eslint . && istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage",
-    "test-html-coverage": "./node_modules/.bin/eslint . && istanbul cover ./node_modules/mocha/bin/_mocha; open coverage/lcov-report/index.html"
+    "test-coverage": "eslint . && nyc --reporter=text-lcov npm test | coveralls",
+    "test-html-coverage": "eslint . && nyc --reporter=html npm test; open coverage/index.html"
   },
   "repository": {
     "type": "git",
@@ -46,7 +46,7 @@
   "devDependencies": {
     "coveralls": "^3.0.9",
     "eslint": "^6.7.1",
-    "istanbul": "^0.4",
+    "nyc": "^14.1",
     "mocha": "^6.2.2",
     "mocha-lcov-reporter": "^1.2.0",
     "react": "^16.12.0",
