@@ -275,6 +275,14 @@ describe('Html2React', function () {
 
       assert.strictEqual(reactElem.props.onClick, 'alert(\'hello!\')');
     });
+
+    it('should handle inputs with empty value attribute', function () {
+      const htmlInput = '<input value="">';
+
+      const reactElem = parser.parse(htmlInput);
+
+      assert.strictEqual(reactElem.props.value, '');
+    });
   });
 
   describe('parse invalid HTML', function () {
