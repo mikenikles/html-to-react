@@ -1,4 +1,8 @@
 # Change Log
+## [v1.4.3](https://github.com/aknuds1/html-to-react/tree/v1.4.3)
+
+- Handle non-boolean empty element attributes
+
 ## [v1.4.2](https://github.com/aknuds1/html-to-react/tree/v1.4.2)
 
 - Support onclick attribute of HTML elements
