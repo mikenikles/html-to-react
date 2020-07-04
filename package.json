@@ -45,7 +45,7 @@
   },
   "devDependencies": {
     "coveralls": "^3.1.0",
-    "eslint": "^7.3.0",
+    "eslint": "^7.4.0",
     "mocha": "^8.0",
     "mocha-lcov-reporter": "^1.2.0",
     "nyc": "^15.1.0",
@@ -53,6 +53,6 @@
     "react-dom": "^16.13.1"
   },
   "volta": {
-    "node": "14.4.0"
+    "node": "14.5.0"
   }
 }
