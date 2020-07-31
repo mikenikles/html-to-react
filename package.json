@@ -38,7 +38,7 @@
     "domhandler": "^3.0",
     "htmlparser2": "^4.1.0",
     "lodash.camelcase": "^4.3.0",
-    "ramda": "^0.27"
+    "ramda": "^0.27.1"
   },
   "peerDependencies": {
     "react": "^16.0"
@@ -46,7 +46,7 @@
   "devDependencies": {
     "coveralls": "^3.1.0",
     "eslint": "^7.5.0",
-    "mocha": "^8.0",
+    "mocha": "^8.1.0",
     "mocha-lcov-reporter": "^1.2.0",
     "nyc": "^15.1.0",
     "react": "^16.13.1",
