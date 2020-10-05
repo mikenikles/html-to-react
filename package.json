@@ -35,8 +35,8 @@
     }
   },
   "dependencies": {
-    "domhandler": "^3.2.0",
-    "htmlparser2": "^4.1.0",
+    "domhandler": "^3.3.0",
+    "htmlparser2": "^5.0",
     "lodash.camelcase": "^4.3.0",
     "ramda": "^0.27.1"
   },
@@ -45,7 +45,7 @@
   },
   "devDependencies": {
     "coveralls": "^3.1.0",
-    "eslint": "^7.9.0",
+    "eslint": "^7.10.0",
     "mocha": "^8.1.3",
     "mocha-lcov-reporter": "^1.2.0",
     "nyc": "^15.1.0",
@@ -53,6 +53,6 @@
     "react-dom": "^16.13.1"
   },
   "volta": {
-    "node": "14.12.0"
+    "node": "14.13.0"
   }
 }
