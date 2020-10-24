@@ -1,6 +1,6 @@
 {
   "name": "html-to-react",
-  "version": "1.4.4",
+  "version": "1.4.5",
   "description": "A lightweight library that converts raw HTML to a React DOM structure.",
   "main": "index.js",
   "scripts": {
@@ -53,6 +53,6 @@
     "react-dom": "^17.0.1"
   },
   "volta": {
-    "node": "14.14.0"
+    "node": "15.0.1"
   }
 }
