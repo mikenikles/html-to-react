@@ -35,8 +35,8 @@
     }
   },
   "dependencies": {
-    "domhandler": "^3.3.0",
-    "htmlparser2": "^5.0",
+    "domhandler": "^4.0",
+    "htmlparser2": "^6.0",
     "lodash.camelcase": "^4.3.0",
     "ramda": "^0.27.1"
   },
@@ -53,6 +53,6 @@
     "react-dom": "^17.0.1"
   },
   "volta": {
-    "node": "15.0.1"
+    "node": "15.6.0"
   }
 }
