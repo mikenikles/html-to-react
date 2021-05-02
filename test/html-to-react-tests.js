@@ -458,20 +458,20 @@ describe('Html2React', function () {
     });
 
     it('should support preprocessing instructions', function () {
-      var htmlInput = '<div>' +
+      const htmlInput = '<div>' +
         '<div id="first" data-process="shared"><p>Sample For First</p></div>' +
         '<div id="second" data-process="shared"><p>Sample For Second</p></div>' +
         '</div>';
-      var htmlExpected = '<div><h1 id="preprocessed-first">First</h1>' +
+      const htmlExpected = '<div><h1 id="preprocessed-first">First</h1>' +
         '<h2 id="preprocessed-second">Second</h2></div>';
 
-      var isValidNode = function () {
+      const isValidNode = function () {
         return true;
       };
       // We have two preprocessing instructions; the first sets the attribute data-preprocessed,
       // and the second one changes the ID of nodes that have the data-preprocessed attribute
       // (i.e., it will only affect nodes touched by the previous preprocessor).
-      var preprocessingInstructions = [
+      const preprocessingInstructions = [
         {
           shouldPreprocessNode: function (node) {
             return (node.attribs || {})['data-process'] === 'shared';
@@ -492,7 +492,7 @@ describe('Html2React', function () {
           },
         },
       ];
-      var processingInstructions = [
+      const processingInstructions = [
         {
           shouldProcessNode: function (node) {
             return (node.attribs || {}).id === 'preprocessed-first';
@@ -522,10 +522,10 @@ describe('Html2React', function () {
           processNode: processNodeDefinitions.processDefaultNode,
         },
       ];
-      var reactComponent = parser.parseWithInstructions(htmlInput, isValidNode,
+      const reactComponent = parser.parseWithInstructions(htmlInput, isValidNode,
         processingInstructions, preprocessingInstructions);
 
-      var reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
+      const reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
       assert.strictEqual(reactHtml, htmlExpected);
     });
   });

@@ -48,13 +48,13 @@ React tree with one single parent.
 The following example parses each node and its attributes and returns a tree of React elements.
 
 ```javascript
-var ReactDOMServer = require('react-dom/server');
-var HtmlToReactParser = require('html-to-react').Parser;
+const ReactDOMServer = require('react-dom/server');
+const HtmlToReactParser = require('html-to-react').Parser;
 
-var htmlInput = '<div><h1>Title</h1><p>A paragraph</p></div>';
-var htmlToReactParser = new HtmlToReactParser();
-var reactElement = htmlToReactParser.parse(htmlInput);
-var reactHtml = ReactDOMServer.renderToStaticMarkup(reactElement);
+const htmlInput = '<div><h1>Title</h1><p>A paragraph</p></div>';
+const htmlToReactParser = new HtmlToReactParser();
+const reactElement = htmlToReactParser.parse(htmlInput);
+const reactHtml = ReactDOMServer.renderToStaticMarkup(reactElement);
 
 assert.equal(reactHtml, htmlInput); // true
 ```
@@ -65,20 +65,20 @@ If certain DOM nodes require specific processing, for example if you want to cap
 `<h1>` tag, the following example demonstrates this:
 
 ```javascript
-var ReactDOMServer = require('react-dom/server');
-var HtmlToReact = require('html-to-react');
-var HtmlToReactParser = require('html-to-react').Parser;
+const ReactDOMServer = require('react-dom/server');
+const HtmlToReact = require('html-to-react');
+const HtmlToReactParser = require('html-to-react').Parser;
 
-var htmlInput = '<div><h1>Title</h1><p>Paragraph</p><h1>Another title</h1></div>';
-var htmlExpected = '<div><h1>TITLE</h1><p>Paragraph</p><h1>ANOTHER TITLE</h1></div>';
+const htmlInput = '<div><h1>Title</h1><p>Paragraph</p><h1>Another title</h1></div>';
+const htmlExpected = '<div><h1>TITLE</h1><p>Paragraph</p><h1>ANOTHER TITLE</h1></div>';
 
-var isValidNode = function () {
+const isValidNode = function () {
   return true;
 };
 
 // Order matters. Instructions are processed in the order they're defined
-var processNodeDefinitions = new HtmlToReact.ProcessNodeDefinitions(React);
-var processingInstructions = [
+const processNodeDefinitions = new HtmlToReact.ProcessNodeDefinitions(React);
+const processingInstructions = [
   {
     // Custom <h1> processing
     shouldProcessNode: function (node) {
@@ -96,10 +96,10 @@ var processingInstructions = [
     processNode: processNodeDefinitions.processDefaultNode
   }
 ];
-var htmlToReactParser = new HtmlToReactParser();
-var reactComponent = htmlToReactParser.parseWithInstructions(htmlInput, isValidNode,
+const htmlToReactParser = new HtmlToReactParser();
+const reactComponent = htmlToReactParser.parseWithInstructions(htmlInput, isValidNode,
   processingInstructions);
-var reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
+const reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
 assert.equal(reactHtml, htmlExpected);
 ```
 
@@ -146,23 +146,23 @@ it as a prop to your injected `RichTextEditor`.
 In your instructions object, you must specify `replaceChildren: true`.
 
 ```javascript
-var React = require('react');
-var HtmlToReact = require('html-to-react');
-var HtmlToReactParser = require('html-to-react').Parser;
+const React = require('react');
+const HtmlToReact = require('html-to-react');
+const HtmlToReactParser = require('html-to-react').Parser;
 
-var htmlToReactParser = new HtmlToReactParser();
-var htmlInput = '<div><div data-test="foo"><p>Text</p><p>Text</p></div></div>';
-var htmlExpected = '<div><div data-test="foo"><h1>Heading</h1></div></div>';
+const htmlToReactParser = new HtmlToReactParser();
+const htmlInput = '<div><div data-test="foo"><p>Text</p><p>Text</p></div></div>';
+const htmlExpected = '<div><div data-test="foo"><h1>Heading</h1></div></div>';
 
-var isValidNode = function () {
+const isValidNode = function () {
   return true;
 };
 
-var processNodeDefinitions = new HtmlToReact.ProcessNodeDefinitions(React);
+const processNodeDefinitions = new HtmlToReact.ProcessNodeDefinitions(React);
 
 // Order matters. Instructions are processed in
 // the order they're defined
-var processingInstructions = [
+const processingInstructions = [
   {
     // This is REQUIRED, it tells the parser
     // that we want to insert our React
@@ -184,9 +184,9 @@ var processingInstructions = [
   },
 ];
 
-var reactComponent = htmlToReactParser.parseWithInstructions(
+const reactComponent = htmlToReactParser.parseWithInstructions(
   htmlInput, isValidNode, processingInstructions);
-var reactHtml = ReactDOMServer.renderToStaticMarkup(
+const reactHtml = ReactDOMServer.renderToStaticMarkup(
   reactComponent);
 assert.equal(reactHtml, htmlExpected);
 ```
@@ -228,12 +228,12 @@ We can accomplish that with the following script, using a combination of preproc
 custom processing instructions:
 
 ```javascript
-var React = require('react');
-var HtmlToReact = require('html-to-react');
-var HtmlToReactParser = require('html-to-react').Parser;
+const React = require('react');
+const HtmlToReact = require('html-to-react');
+const HtmlToReactParser = require('html-to-react').Parser;
 
-var htmlToReactParser = new HtmlToReactParser();
-var htmlInput = '<div class="row">' +
+const htmlToReactParser = new HtmlToReactParser();
+const htmlInput = '<div class="row">' +
   '<div id="first" data-process="shared">' +
     '<p>Sample For First</p>' +
   '</div>' +
@@ -242,16 +242,16 @@ var htmlInput = '<div class="row">' +
   '</div>' +
 '</div>';
 
-var htmlExpected = '<div class="row">' +
+const htmlExpected = '<div class="row">' +
   '<h1 id="preprocessed-first">First</h1>' +
   '<h2 id="preprocessed-second">Second</h2>' +
 '</div>';
 
-var isValidNode = function () {
+const isValidNode = function () {
   return true;
 };
 
-var preprocessingInstructions = [
+const preprocessingInstructions = [
   {
     shouldPreprocessNode: function (node) {
       return node.attribs && node.attribs['data-process'] === 'shared';
@@ -261,8 +261,8 @@ var preprocessingInstructions = [
     },
   }
 ];
-var processNodeDefinitions = new HtmlToReact.ProcessNodeDefinitions(React);
-var processingInstructions = [
+const processNodeDefinitions = new HtmlToReact.ProcessNodeDefinitions(React);
+const processingInstructions = [
   {
     shouldProcessNode: function (node) {
       return node.attribs && node.attribs.id === 'preprocessed-first';
@@ -287,9 +287,9 @@ var processingInstructions = [
   },
 ];
 
-var reactComponent = parser.parseWithInstructions(htmlInput, isValidNode, processingInstructions,
+const reactComponent = parser.parseWithInstructions(htmlInput, isValidNode, processingInstructions,
   preprocessingInstructions);
-var reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
+const reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
 assert.equal(reactHtml, htmlExpected);
 ```
 
