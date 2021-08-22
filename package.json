@@ -36,7 +36,7 @@
   },
   "dependencies": {
     "domhandler": "^4.0",
-    "htmlparser2": "^6.0",
+    "htmlparser2": "^7.0",
     "lodash.camelcase": "^4.3.0",
     "ramda": "^0.27.1"
   },
