@@ -2,6 +2,8 @@
 
 ## Master/Unreleased
 
+- Make sure event handlers, f.ex. "onclick", are functions [#126](https://github.com/aknuds1/html-to-react/pull/126) ([aknuds1](https://github.com/aknuds1))
+
 ## [v1.4.6](https://github.com/aknuds1/html-to-react/tree/v1.4.6)
 
 - Handle boolean attributes differing from React's representation [\#132](https://github.com/aknuds1/html-to-react/pull/132) ([aknuds1](https://github.com/aknuds1))
