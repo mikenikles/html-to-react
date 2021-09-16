@@ -1,7 +1,18 @@
 # Change Log
 
 ## Master/Unreleased
+
+## [v1.4.6](https://github.com/aknuds1/html-to-react/tree/v1.4.6)
+
 - Handle boolean attributes differing from React's representation [\#132](https://github.com/aknuds1/html-to-react/pull/132) ([aknuds1](https://github.com/aknuds1))
+
+## [v1.4.5](https://github.com/aknuds1/html-to-react/tree/v1.4.5)
+
+- Add support for React 17 [\#120\(https://github.com/aknuds1/html-to-react/pull/120) ([rexxars](https://github.com/rexxars))
+
+## [v1.4.4](https://github.com/aknuds1/html-to-react/tree/v1.4.4)
+
+- Upgrade htmlparser2 to v5
 
 ## [v1.4.3](https://github.com/aknuds1/html-to-react/tree/v1.4.3)
 
