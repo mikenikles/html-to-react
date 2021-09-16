@@ -6,6 +6,7 @@ const R = require('ramda');
 
 const Parser = require('..').Parser;
 const ProcessNodeDefinitions = require('..').ProcessNodeDefinitions;
+const booleanAttrs = require('./boolattrs');
 
 describe('Html2React', () => {
   const parser = new Parser();
@@ -283,6 +284,16 @@ describe('Html2React', () => {
 
       assert.strictEqual(reactElem.props.value, '');
     });
+
+    it('should handle boolean attributes with implicit value', function () {
+      R.forEach((attr) => {
+        const htmlInput = `<input ${attr.toLowerCase()}>`;
+
+        const reactElem = parser.parse(htmlInput);
+
+        assert.strictEqual(reactElem.props[attr], attr);
+      }, booleanAttrs);
+    });
   });
 
   describe('parse invalid HTML', () => {
@@ -539,7 +550,7 @@ describe('Html2React', () => {
           // eslint-disable-next-line max-len
           /<svg xmlns="http:\/\/www\.w3\.org\/2000\/svg" xmlns:xlink="http:\/\/www\.w3\.org\/1999\/xlink"><\/svg>/,
       };
-      R.forEach(function (inputAndRegExp) {
+      R.forEach((inputAndRegExp) => {
         const input = inputAndRegExp[0], regExp = inputAndRegExp[1];
         const reactComponent = parser.parse(input);
         const reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
