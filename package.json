@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "./node_modules/.bin/eslint . && ./node_modules/mocha/bin/mocha",
-    "test-coverage": "eslint . && nyc npm test && nyc report --reporter=text-lcov | coveralls",
+    "test-coverage": "eslint . && nyc npm test && nyc report --reporter=text-lcov",
     "test-html-coverage": "eslint . && nyc --reporter=html npm test; open coverage/index.html"
   },
   "repository": {
