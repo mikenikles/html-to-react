@@ -2,6 +2,10 @@
 
 ## Master/Unreleased
 
+## [v1.4.8](https://github.com/aknuds1/html-to-react/tree/v1.4.8)
+
+- Bump Ramda to 0.28 [#138](https://github.com/aknuds1/html-to-react/pull/138) ([rajatdua](https://github.com/rajatdua))
+
 ## [v1.4.7](https://github.com/aknuds1/html-to-react/tree/v1.4.7)
 
 - Make sure event handlers, f.ex. "onclick", are functions [#126](https://github.com/aknuds1/html-to-react/pull/126) ([aknuds1](https://github.com/aknuds1))
