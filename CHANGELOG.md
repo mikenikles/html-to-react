@@ -1,6 +1,9 @@
 # Change Log
 
 ## Master/Unreleased
+## [v1.5.0](https://github.com/aknuds1/html-to-react/tree/v1.5.0)
+
+- Drop dependency on Ramda
 
 ## [v1.4.8](https://github.com/aknuds1/html-to-react/tree/v1.4.8)
 
