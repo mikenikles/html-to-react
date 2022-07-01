@@ -2,7 +2,6 @@
 const assert = require('assert');
 const React = require('react');
 const ReactDOMServer = require('react-dom/server');
-const R = require('ramda');
 
 const Parser = require('..').Parser;
 const ProcessNodeDefinitions = require('..').ProcessNodeDefinitions;
@@ -178,12 +177,12 @@ describe('Html2React', () => {
 
       const reactComponent = parser.parse(htmlInput);
 
-      const children = R.filter(function (c) {
-        return R.has('key', c);
-      }, R.flatten(reactComponent.props.children));
-      const keys = R.map(function (child) {
+      const children =  reactComponent.props.children.flat().filter((c) => {
+        return c.hasOwnProperty('key');
+      });
+      const keys = children.map((child) => {
         return child.key;
-      }, children);
+      });
       assert.deepStrictEqual(keys, ['0', '1', ]);
     });
 
@@ -287,13 +286,13 @@ describe('Html2React', () => {
     });
 
     it('should handle boolean attributes with implicit value', function () {
-      R.forEach((attr) => {
+      booleanAttrs.forEach((attr) => {
         const htmlInput = `<input ${attr.toLowerCase()}>`;
 
         const reactElem = parser.parse(htmlInput);
 
         assert.strictEqual(reactElem.props[attr], attr);
-      }, booleanAttrs);
+      });
     });
   });
 
@@ -551,13 +550,12 @@ describe('Html2React', () => {
           // eslint-disable-next-line max-len
           /<svg xmlns="http:\/\/www\.w3\.org\/2000\/svg" xmlns:xlink="http:\/\/www\.w3\.org\/1999\/xlink"><\/svg>/,
       };
-      R.forEach((inputAndRegExp) => {
-        const input = inputAndRegExp[0], regExp = inputAndRegExp[1];
+      Object.entries(input2RegExp).forEach(([input, regExp,]) => {
         const reactComponent = parser.parse(input);
         const reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
 
         assert(regExp.test(reactHtml), reactHtml + ' has expected attributes');
-      }, R.toPairs(input2RegExp));
+      });
     });
   });
 
