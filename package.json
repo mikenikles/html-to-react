@@ -37,7 +37,8 @@
   "dependencies": {
     "domhandler": "^5.0",
     "htmlparser2": "^8.0",
-    "lodash.camelcase": "^4.3.0"
+    "lodash.camelcase": "^4.3.0",
+    "react": "^18.0"
   },
   "devDependencies": {
     "coveralls": "^3.1.0",
@@ -45,7 +46,6 @@
     "mocha": "^10.0",
     "mocha-lcov-reporter": "^1.2.0",
     "nyc": "^15.1.0",
-    "react": "^18.0",
     "react-dom": "^18.0"
   },
   "volta": {
