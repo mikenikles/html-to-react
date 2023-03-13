@@ -61,6 +61,15 @@ describe('Html2React', () => {
       assert.equal(reactHtml, htmlExpected);
     });
 
+    it('should return a valid HTML string with custom properties in inline styles', () => {
+      const htmlInput = '<div style="color:var(--color-example);--color-example:black"></div>';
+
+      const reactComponent = parser.parse(htmlInput);
+      const reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
+
+      assert.equal(reactHtml, htmlInput);
+    });
+
     it('should return a valid HTML string with data attributes', () => {
       const htmlInput = '<div data-test-attribute="data attribute value"></div>';
 
