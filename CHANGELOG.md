@@ -1,6 +1,10 @@
 # Change Log
 
 ## Master/Unreleased
+## [v1.5.1](https://github.com/aknuds1/html-to-react/tree/v1.5.1)
+
+- Don't camelCase CSS custom properties [145](https://github.com/aknuds1/html-to-react/pull/145) ([tylersticka](https://github.com/tylersticka))
+
 ## [v1.5.0](https://github.com/aknuds1/html-to-react/tree/v1.5.0)
 
 - Drop dependency on Ramda
