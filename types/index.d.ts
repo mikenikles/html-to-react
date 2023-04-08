@@ -1,7 +1,7 @@
-import Parser from './lib/parser';
-import ProcessingInstructions from './lib/processing-instructions';
-import IsValidNodeDefinitions from './lib/is-valid-node-definitions';
-import ProcessNodeDefinitions from './lib/process-node-definitions';
+import Parser from './parser';
+import ProcessingInstructions from './processing-instructions';
+import IsValidNodeDefinitions from './is-valid-node-definitions';
+import ProcessNodeDefinitions from './process-node-definitions';
 
 export {
     Parser,
