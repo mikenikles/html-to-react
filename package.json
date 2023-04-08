@@ -3,6 +3,7 @@
   "version": "1.5.1",
   "description": "A lightweight library that converts raw HTML to a React DOM structure.",
   "main": "index.js",
+  "types": "types",
   "scripts": {
     "test": "./node_modules/.bin/eslint . && ./node_modules/.bin/mocha",
     "test-coverage": "eslint . && nyc npm test && nyc report --reporter=lcov",
