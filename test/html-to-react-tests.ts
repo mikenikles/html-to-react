@@ -7,7 +7,7 @@ import {ProcessNodeDefinitions} from '..';
 import {booleanAttrs} from './boolattrs';
 
 describe('Html2React', () => {
-  const parser = new Parser();
+  const parser = Parser();
 
   describe('parse valid HTML', () => {
     it('should return a valid HTML string', () => {
@@ -185,10 +185,10 @@ describe('Html2React', () => {
 
       const reactComponent = parser.parse(htmlInput);
 
-      const children =  reactComponent.props.children.flat().filter((c) => {
+      const children =  reactComponent.props.children.flat().filter((c: any) => {
         return c.hasOwnProperty('key');
       });
-      const keys = children.map((child) => {
+      const keys = children.map((child: any) => {
         return child.key;
       });
       deepStrictEqual(keys, ['0', '1', ]);
@@ -327,8 +327,8 @@ describe('Html2React', () => {
   });
 
   describe('with custom processing instructions', () => {
-    const parser = new Parser();
-    const processNodeDefinitions = new ProcessNodeDefinitions();
+    const parser = Parser();
+    const processNodeDefinitions = ProcessNodeDefinitions();
 
     describe('parse valid HTML', () => {
       it('should return nothing with only a single <p> element', () => {
@@ -337,7 +337,7 @@ describe('Html2React', () => {
           return true;
         };
         const processingInstructions = [{
-          shouldProcessNode: function (node) {
+          shouldProcessNode: (node: any) => {
             return node.name && node.name !== 'p';
           },
           processNode: processNodeDefinitions.processDefaultNode,
@@ -359,7 +359,7 @@ describe('Html2React', () => {
         };
 
         const processingInstructions = [{
-          shouldProcessNode: function (node) {
+          shouldProcessNode: (node: any) => {
             return node.type === 'text' || node.name !== 'p';
           },
           processNode: processNodeDefinitions.processDefaultNode,
@@ -381,16 +381,16 @@ describe('Html2React', () => {
         const processingInstructions = [
           {
             replaceChildren: true,
-            shouldProcessNode: function (node) {
+            shouldProcessNode: (node: any) => {
               return (node.attribs || {})['data-test'] === 'foo';
             },
-            processNode: function (node, children, index) {
+            processNode: (node: any, children: any, index: number) => {
               return React.createElement('h1', {key: index,}, 'Heading');
             },
           },
           {
             // Anything else
-            shouldProcessNode: function (node) {
+            shouldProcessNode: (node: any) => {
               return true;
             },
             processNode: processNodeDefinitions.processDefaultNode,
@@ -416,16 +416,16 @@ describe('Html2React', () => {
         const processingInstructions = [
           {
             // Custom <h1> processing
-            shouldProcessNode: function (node) {
+            shouldProcessNode: (node: any) => {
               return node.parent && node.parent.name &&
               node.parent.name === 'h1';
             },
-            processNode: function (node, children) {
+            processNode: (node: any, children: any) => {
               return node.data.toUpperCase();
             },
           }, {
             // Anything else
-            shouldProcessNode: function (node) {
+            shouldProcessNode: (node: any) => {
               return true;
             },
             processNode: processNodeDefinitions.processDefaultNode,
@@ -440,7 +440,7 @@ describe('Html2React', () => {
       it('should return false in case of invalid node', () => {
         const htmlInput = '<p></p>';
         const processingInstructions = [{
-          shouldProcessNode: function (node) { return true; },
+          shouldProcessNode: (node: any) => { return true; },
           processNode: processNodeDefinitions.processDefaultNode,
         }, ];
         const reactComponent = parser.parseWithInstructions(htmlInput,
@@ -453,10 +453,10 @@ describe('Html2React', () => {
         const htmlInput = '<div> <p></p> <p></p> </div>';
 
         const processingInstructions = [{
-          shouldProcessNode: function (node) { return true; },
+          shouldProcessNode: (node: any) => { return true; },
           processNode: processNodeDefinitions.processDefaultNode,
         }, ];
-        const reactComponent = parser.parseWithInstructions(htmlInput, function (node) {
+        const reactComponent = parser.parseWithInstructions(htmlInput, (node: any) => {
           // skip whitespace text nodes to clean up children
           if (node.type === 'text') {
             return node.data.trim() !== '';
@@ -492,10 +492,10 @@ describe('Html2React', () => {
       // (i.e., it will only affect nodes touched by the previous preprocessor).
       const preprocessingInstructions = [
         {
-          shouldPreprocessNode: function (node) {
+          shouldPreprocessNode: (node: any) => {
             return (node.attribs || {})['data-process'] === 'shared';
           },
-          preprocessNode: function (node) {
+          preprocessNode: (node: any) => {
             if (node.attribs == null) {
               node.attribs = {};
             }
@@ -503,20 +503,20 @@ describe('Html2React', () => {
           },
         },
         {
-          shouldPreprocessNode: function (node) {
+          shouldPreprocessNode: (node: any) => {
             return (node.attribs || {})['data-preprocessed'] === 'true';
           },
-          preprocessNode: function (node) {
+          preprocessNode: (node: any) => {
             node.attribs.id = `preprocessed-${node.attribs.id}`;
           },
         },
       ];
       const processingInstructions = [
         {
-          shouldProcessNode: function (node) {
+          shouldProcessNode: (node: any) => {
             return (node.attribs || {}).id === 'preprocessed-first';
           },
-          processNode: function (node, children, index) {
+          processNode: (node: any, children: any, index: number) => {
             return React.createElement('h1', {
               key: index,
               id: node.attribs.id,
@@ -524,10 +524,10 @@ describe('Html2React', () => {
           },
         },
         {
-          shouldProcessNode: function (node) {
+          shouldProcessNode: (node: any) => {
             return (node.attribs || {}).id === 'preprocessed-second';
           },
-          processNode: function (node, children, index) {
+          processNode: (node: any, children: any, index: number) => {
             return React.createElement('h2', {
               key: index,
               id: node.attribs.id,

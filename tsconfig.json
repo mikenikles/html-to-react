@@ -6,6 +6,7 @@
     "declaration": true,
     "emitDeclarationOnly": true,
     "outDir": "types",
-    "declarationMap": true
+    "declarationMap": true,
+    "strict": true
   }
 }
