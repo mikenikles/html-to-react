@@ -1,5 +1,3 @@
-'use strict';
-
 // Boolean HTML attributes, in the case React expects.
 const booleanAttrs = [
   'allowFullScreen',
@@ -29,4 +27,4 @@ const booleanAttrs = [
   'truespeed',
 ];
 
-module.exports = booleanAttrs;
+export {booleanAttrs};
