@@ -77,7 +77,7 @@ const isValidNode = function () {
 };
 
 // Order matters. Instructions are processed in the order they're defined
-const processNodeDefinitions = new HtmlToReact.ProcessNodeDefinitions(React);
+const processNodeDefinitions = new HtmlToReact.ProcessNodeDefinitions();
 const processingInstructions = [
   {
     // Custom <h1> processing
@@ -158,7 +158,7 @@ const isValidNode = function () {
   return true;
 };
 
-const processNodeDefinitions = new HtmlToReact.ProcessNodeDefinitions(React);
+const processNodeDefinitions = new HtmlToReact.ProcessNodeDefinitions();
 
 // Order matters. Instructions are processed in
 // the order they're defined
@@ -261,7 +261,7 @@ const preprocessingInstructions = [
     },
   }
 ];
-const processNodeDefinitions = new HtmlToReact.ProcessNodeDefinitions(React);
+const processNodeDefinitions = new HtmlToReact.ProcessNodeDefinitions();
 const processingInstructions = [
   {
     shouldProcessNode: function (node) {

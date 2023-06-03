@@ -329,7 +329,7 @@ describe('Html2React', () => {
 
   describe('with custom processing instructions', () => {
     const parser = new Parser();
-    const processNodeDefinitions = new ProcessNodeDefinitions(React);
+    const processNodeDefinitions = new ProcessNodeDefinitions();
 
     describe('parse valid HTML', () => {
       it('should return nothing with only a single <p> element', () => {
