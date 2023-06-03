@@ -1,14 +1,13 @@
-'use strict';
-const assert = require('assert');
-const React = require('react');
-const ReactDOMServer = require('react-dom/server');
+import {equal, strictEqual, deepStrictEqual, ok} from 'assert';
+import * as React from 'react';
+import * as ReactDOMServer from 'react-dom/server';
 
-const Parser = require('..').Parser;
-const ProcessNodeDefinitions = require('..').ProcessNodeDefinitions;
-const booleanAttrs = require('./boolattrs');
+import {Parser} from '..';
+import {ProcessNodeDefinitions} from '..';
+import {booleanAttrs} from './boolattrs';
 
 describe('Html2React', () => {
-  const parser = new Parser();
+  const parser = Parser();
 
   describe('parse valid HTML', () => {
     it('should return a valid HTML string', () => {
@@ -17,7 +16,7 @@ describe('Html2React', () => {
       const reactComponent = parser.parse(htmlInput);
       const reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
 
-      assert.equal(reactHtml, htmlInput);
+      equal(reactHtml, htmlInput);
     });
 
     it('should return a valid HTML string with nested elements', () => {
@@ -26,7 +25,7 @@ describe('Html2React', () => {
       const reactComponent = parser.parse(htmlInput);
       const reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
 
-      assert.equal(reactHtml, htmlInput);
+      equal(reactHtml, htmlInput);
     });
 
     it('should return a valid HTML string with inline styles', () => {
@@ -37,7 +36,7 @@ describe('Html2React', () => {
       const reactComponent = parser.parse(htmlInput);
       const reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
 
-      assert.equal(reactHtml, htmlInput);
+      equal(reactHtml, htmlInput);
     });
 
     it('should return a valid HTML string with inline image in style', () => {
@@ -48,7 +47,7 @@ describe('Html2React', () => {
       const reactComponent = parser.parse(htmlInput);
       const reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
 
-      assert.equal(reactHtml, htmlInput);
+      equal(reactHtml, htmlInput);
     });
 
     it('should return a valid HTML string with empty inline styles', () => {
@@ -58,7 +57,7 @@ describe('Html2React', () => {
       const reactComponent = parser.parse(htmlInput);
       const reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
 
-      assert.equal(reactHtml, htmlExpected);
+      equal(reactHtml, htmlExpected);
     });
 
     it('should return a valid HTML string with custom properties in inline styles', () => {
@@ -67,7 +66,7 @@ describe('Html2React', () => {
       const reactComponent = parser.parse(htmlInput);
       const reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
 
-      assert.equal(reactHtml, htmlInput);
+      equal(reactHtml, htmlInput);
     });
 
     it('should return a valid HTML string with data attributes', () => {
@@ -76,7 +75,7 @@ describe('Html2React', () => {
       const reactComponent = parser.parse(htmlInput);
       const reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
 
-      assert.equal(reactHtml, htmlInput);
+      equal(reactHtml, htmlInput);
     });
 
     it('should return a valid HTML string with aria attributes', () => {
@@ -85,7 +84,7 @@ describe('Html2React', () => {
       const reactComponent = parser.parse(htmlInput);
       const reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
 
-      assert.equal(reactHtml, htmlInput);
+      equal(reactHtml, htmlInput);
     });
 
     it('should return a valid HTML string with a class attribute', () => {
@@ -94,7 +93,7 @@ describe('Html2React', () => {
       const reactComponent = parser.parse(htmlInput);
       const reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
 
-      assert.equal(reactHtml, htmlInput);
+      equal(reactHtml, htmlInput);
     });
 
     it('should return a valid HTML string with a for attribute', () => {
@@ -103,7 +102,7 @@ describe('Html2React', () => {
       const reactComponent = parser.parse(htmlInput);
       const reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
 
-      assert.equal(reactHtml, htmlInput);
+      equal(reactHtml, htmlInput);
     });
 
     it('should return a valid HTML string with a react camelCase attribute', () => {
@@ -112,7 +111,7 @@ describe('Html2React', () => {
       const reactComponent = parser.parse(htmlInput);
       const reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
 
-      assert.equal(reactHtml, htmlInput);
+      equal(reactHtml, htmlInput);
     });
 
     it('should handle dashed attributes', () => {
@@ -121,7 +120,7 @@ describe('Html2React', () => {
       const reactComponent = parser.parse(input);
       const reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
 
-      assert.equal(reactHtml, input);
+      equal(reactHtml, input);
     });
 
     // FIXME: See lib/process-node-definitions.js -> processDefaultNode()
@@ -131,7 +130,7 @@ describe('Html2React', () => {
       const reactComponent = parser.parse(htmlInput);
       const reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
 
-      assert.equal(reactHtml, htmlInput);
+      equal(reactHtml, htmlInput);
     });
 
     // FIXME: If / when React implements HTML comments, this test can be removed
@@ -142,7 +141,7 @@ describe('Html2React', () => {
       const reactComponent = parser.parse(htmlInput);
       const reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
 
-      assert.equal(reactHtml, htmlExpected);
+      equal(reactHtml, htmlExpected);
     });
 
     it('should parse br elements without warnings', () => {
@@ -152,14 +151,14 @@ describe('Html2React', () => {
       const reactComponent = parser.parse(htmlInput);
       const reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
 
-      assert.equal(reactHtml, htmlExpected);
+      equal(reactHtml, htmlExpected);
     });
 
     it('should not generate children for br tags', () => {
       const htmlInput = '<br/>';
 
       const reactComponent = parser.parse(htmlInput);
-      assert.strictEqual((reactComponent.props.children || []).length, 0);
+      strictEqual((reactComponent.props.children || []).length, 0);
     });
 
     it('should parse void elements with all attributes and no warnings', () => {
@@ -168,7 +167,7 @@ describe('Html2React', () => {
       const reactComponent = parser.parse(htmlInput);
       const reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
 
-      assert.equal(reactHtml, htmlInput);
+      equal(reactHtml, htmlInput);
     });
 
     // Covers issue #9
@@ -178,7 +177,7 @@ describe('Html2React', () => {
       const reactComponent = parser.parse(htmlInput);
       const reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
 
-      assert.equal(reactHtml, htmlInput);
+      equal(reactHtml, htmlInput);
     });
 
     it('should generate keys for sequence items', () => {
@@ -186,13 +185,13 @@ describe('Html2React', () => {
 
       const reactComponent = parser.parse(htmlInput);
 
-      const children =  reactComponent.props.children.flat().filter((c) => {
+      const children =  reactComponent.props.children.flat().filter((c: any) => {
         return c.hasOwnProperty('key');
       });
-      const keys = children.map((child) => {
+      const keys = children.map((child: any) => {
         return child.key;
       });
-      assert.deepStrictEqual(keys, ['0', '1', ]);
+      deepStrictEqual(keys, ['0', '1', ]);
     });
 
     it('should parse br elements without warnings', () => {
@@ -202,7 +201,7 @@ describe('Html2React', () => {
       const reactComponent = parser.parse(htmlInput);
       const reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
 
-      assert.equal(reactHtml, htmlExpected);
+      equal(reactHtml, htmlExpected);
     });
 
     it('should parse src elements with all attributes but without warnings', () => {
@@ -211,7 +210,7 @@ describe('Html2React', () => {
       const reactComponent = parser.parse(htmlInput);
       const reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
 
-      assert.equal(reactHtml, htmlInput);
+      equal(reactHtml, htmlInput);
     });
 
     it('should decode character entities in text nodes', () => {
@@ -220,7 +219,7 @@ describe('Html2React', () => {
       const reactComponent = parser.parse(htmlInput);
       const reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
 
-      assert.equal(reactHtml, htmlInput);
+      equal(reactHtml, htmlInput);
     });
 
     it('should not generate children for childless elements', () => {
@@ -228,7 +227,7 @@ describe('Html2React', () => {
 
       const reactComponent = parser.parse(htmlInput);
 
-      assert.strictEqual((reactComponent.props.children || []).length, 0);
+      strictEqual((reactComponent.props.children || []).length, 0);
     });
 
     it('should fill in the key name with boolean attribute', () => {
@@ -238,7 +237,7 @@ describe('Html2React', () => {
       const reactComponent = parser.parse(htmlInput);
       const reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
 
-      assert.equal(reactHtml, htmlExpected);
+      equal(reactHtml, htmlExpected);
     });
 
     it('should decode attribute values to avoid React re-encoding them', () => {
@@ -247,7 +246,7 @@ describe('Html2React', () => {
       const reactComponent = parser.parse(htmlInput);
       const reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
 
-      assert.equal(reactHtml, htmlInput);
+      equal(reactHtml, htmlInput);
     });
 
     it('should handle spaces in inline styles', () => {
@@ -255,7 +254,7 @@ describe('Html2React', () => {
 
       const reactComponent = parser.parse(htmlInput);
 
-      assert.equal(reactComponent.props.style.textAlign, 'center');
+      equal(reactComponent.props.style.textAlign, 'center');
     });
 
     it('should handle doctype directives', () => {
@@ -265,7 +264,7 @@ describe('Html2React', () => {
       const reactComponent = parser.parse(htmlInput);
       const reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
 
-      assert.equal(reactHtml, '<html><body><div></div></body></html>');
+      equal(reactHtml, '<html><body><div></div></body></html>');
     });
 
     it('should handle free text nodes', () => {
@@ -274,7 +273,7 @@ describe('Html2React', () => {
       const reactComponent = parser.parse(htmlInput);
       const reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
 
-      assert.equal(reactHtml, 'text<div></div>text');
+      equal(reactHtml, 'text<div></div>text');
     });
 
     it('should handle onclick attributes', function () {
@@ -282,8 +281,8 @@ describe('Html2React', () => {
 
       const reactElem = parser.parse(htmlInput);
 
-      assert.strictEqual(typeof reactElem.props.onClick, 'function');
-      assert.strictEqual(String(reactElem.props.onClick), String(Function(`alert('hello!')`)));
+      strictEqual(typeof reactElem.props.onClick, 'function');
+      strictEqual(String(reactElem.props.onClick), String(Function(`alert('hello!')`)));
     });
 
     it('should handle inputs with empty value attribute', function () {
@@ -291,7 +290,7 @@ describe('Html2React', () => {
 
       const reactElem = parser.parse(htmlInput);
 
-      assert.strictEqual(reactElem.props.value, '');
+      strictEqual(reactElem.props.value, '');
     });
 
     it('should handle boolean attributes with implicit value', function () {
@@ -300,7 +299,7 @@ describe('Html2React', () => {
 
         const reactElem = parser.parse(htmlInput);
 
-        assert.strictEqual(reactElem.props[attr], attr);
+        strictEqual(reactElem.props[attr], attr);
       });
     });
   });
@@ -313,7 +312,7 @@ describe('Html2React', () => {
       const reactComponent = parser.parse(htmlInput);
       const reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
 
-      assert.equal(reactHtml, htmlExpected);
+      equal(reactHtml, htmlExpected);
     });
 
     it('should handle invalid style tag', () => {
@@ -323,13 +322,13 @@ describe('Html2React', () => {
       const reactComponent = parser.parse(htmlInput);
       const reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
 
-      assert.equal(reactHtml, htmlExpected);
+      equal(reactHtml, htmlExpected);
     });
   });
 
   describe('with custom processing instructions', () => {
-    const parser = new Parser();
-    const processNodeDefinitions = new ProcessNodeDefinitions();
+    const parser = Parser();
+    const processNodeDefinitions = ProcessNodeDefinitions();
 
     describe('parse valid HTML', () => {
       it('should return nothing with only a single <p> element', () => {
@@ -338,7 +337,7 @@ describe('Html2React', () => {
           return true;
         };
         const processingInstructions = [{
-          shouldProcessNode: function (node) {
+          shouldProcessNode: (node: any) => {
             return node.name && node.name !== 'p';
           },
           processNode: processNodeDefinitions.processDefaultNode,
@@ -347,7 +346,7 @@ describe('Html2React', () => {
           processingInstructions);
 
           // With only 1 <p> element, nothing is rendered
-          assert.equal(reactComponent, false);
+          equal(reactComponent, false);
       });
 
       it('should return a single <h1> element within a div of <h1> and <p> as siblings',
@@ -360,7 +359,7 @@ describe('Html2React', () => {
         };
 
         const processingInstructions = [{
-          shouldProcessNode: function (node) {
+          shouldProcessNode: (node: any) => {
             return node.type === 'text' || node.name !== 'p';
           },
           processNode: processNodeDefinitions.processDefaultNode,
@@ -368,7 +367,7 @@ describe('Html2React', () => {
         const reactComponent = parser.parseWithInstructions(htmlInput, isValidNode,
           processingInstructions);
         const reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
-        assert.equal(reactHtml, htmlExpected);
+        equal(reactHtml, htmlExpected);
       });
 
       it('should replace the children of an element if configured so', () => {
@@ -382,16 +381,16 @@ describe('Html2React', () => {
         const processingInstructions = [
           {
             replaceChildren: true,
-            shouldProcessNode: function (node) {
+            shouldProcessNode: (node: any) => {
               return (node.attribs || {})['data-test'] === 'foo';
             },
-            processNode: function (node, children, index) {
+            processNode: (node: any, children: any, index: number) => {
               return React.createElement('h1', {key: index,}, 'Heading');
             },
           },
           {
             // Anything else
-            shouldProcessNode: function (node) {
+            shouldProcessNode: (node: any) => {
               return true;
             },
             processNode: processNodeDefinitions.processDefaultNode,
@@ -401,7 +400,7 @@ describe('Html2React', () => {
         const reactComponent = parser.parseWithInstructions(htmlInput, isValidNode,
           processingInstructions);
         const reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
-        assert.equal(reactHtml, htmlExpected);
+        equal(reactHtml, htmlExpected);
       });
 
       it('should return capitalized content for all <h1> elements', () => {
@@ -417,16 +416,16 @@ describe('Html2React', () => {
         const processingInstructions = [
           {
             // Custom <h1> processing
-            shouldProcessNode: function (node) {
+            shouldProcessNode: (node: any) => {
               return node.parent && node.parent.name &&
               node.parent.name === 'h1';
             },
-            processNode: function (node, children) {
+            processNode: (node: any, children: any) => {
               return node.data.toUpperCase();
             },
           }, {
             // Anything else
-            shouldProcessNode: function (node) {
+            shouldProcessNode: (node: any) => {
               return true;
             },
             processNode: processNodeDefinitions.processDefaultNode,
@@ -435,29 +434,29 @@ describe('Html2React', () => {
         const reactComponent = parser.parseWithInstructions(htmlInput, isValidNode,
           processingInstructions);
         const reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
-        assert.equal(reactHtml, htmlExpected);
+        equal(reactHtml, htmlExpected);
       });
 
       it('should return false in case of invalid node', () => {
         const htmlInput = '<p></p>';
         const processingInstructions = [{
-          shouldProcessNode: function (node) { return true; },
+          shouldProcessNode: (node: any) => { return true; },
           processNode: processNodeDefinitions.processDefaultNode,
         }, ];
         const reactComponent = parser.parseWithInstructions(htmlInput,
           () => { return false; }, processingInstructions);
 
-        assert.equal(reactComponent, false);
+        equal(reactComponent, false);
       });
 
       it('should generate only valid children', () => {
         const htmlInput = '<div> <p></p> <p></p> </div>';
 
         const processingInstructions = [{
-          shouldProcessNode: function (node) { return true; },
+          shouldProcessNode: (node: any) => { return true; },
           processNode: processNodeDefinitions.processDefaultNode,
         }, ];
-        const reactComponent = parser.parseWithInstructions(htmlInput, function (node) {
+        const reactComponent = parser.parseWithInstructions(htmlInput, (node: any) => {
           // skip whitespace text nodes to clean up children
           if (node.type === 'text') {
             return node.data.trim() !== '';
@@ -465,7 +464,7 @@ describe('Html2React', () => {
           return true;
         }, processingInstructions);
 
-        assert.equal(reactComponent.props.children.length, 2);
+        equal(reactComponent.props.children.length, 2);
       });
 
       it('should not affect unhandled whitespace', () => {
@@ -473,7 +472,7 @@ describe('Html2React', () => {
 
         const reactComponent = parser.parse(htmlInput);
 
-        assert.equal(reactComponent.props.children.length, 5);
+        equal(reactComponent.props.children.length, 5);
       });
     });
 
@@ -493,10 +492,10 @@ describe('Html2React', () => {
       // (i.e., it will only affect nodes touched by the previous preprocessor).
       const preprocessingInstructions = [
         {
-          shouldPreprocessNode: function (node) {
+          shouldPreprocessNode: (node: any) => {
             return (node.attribs || {})['data-process'] === 'shared';
           },
-          preprocessNode: function (node) {
+          preprocessNode: (node: any) => {
             if (node.attribs == null) {
               node.attribs = {};
             }
@@ -504,20 +503,20 @@ describe('Html2React', () => {
           },
         },
         {
-          shouldPreprocessNode: function (node) {
+          shouldPreprocessNode: (node: any) => {
             return (node.attribs || {})['data-preprocessed'] === 'true';
           },
-          preprocessNode: function (node) {
+          preprocessNode: (node: any) => {
             node.attribs.id = `preprocessed-${node.attribs.id}`;
           },
         },
       ];
       const processingInstructions = [
         {
-          shouldProcessNode: function (node) {
+          shouldProcessNode: (node: any) => {
             return (node.attribs || {}).id === 'preprocessed-first';
           },
-          processNode: function (node, children, index) {
+          processNode: (node: any, children: any, index: number) => {
             return React.createElement('h1', {
               key: index,
               id: node.attribs.id,
@@ -525,10 +524,10 @@ describe('Html2React', () => {
           },
         },
         {
-          shouldProcessNode: function (node) {
+          shouldProcessNode: (node: any) => {
             return (node.attribs || {}).id === 'preprocessed-second';
           },
-          processNode: function (node, children, index) {
+          processNode: (node: any, children: any, index: number) => {
             return React.createElement('h2', {
               key: index,
               id: node.attribs.id,
@@ -546,7 +545,7 @@ describe('Html2React', () => {
         processingInstructions, preprocessingInstructions);
 
       const reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
-      assert.strictEqual(reactHtml, htmlExpected);
+      strictEqual(reactHtml, htmlExpected);
     });
   });
 
@@ -563,7 +562,7 @@ describe('Html2React', () => {
         const reactComponent = parser.parse(input);
         const reactHtml = ReactDOMServer.renderToStaticMarkup(reactComponent);
 
-        assert(regExp.test(reactHtml), reactHtml + ' has expected attributes');
+        ok(regExp.test(reactHtml), reactHtml + ' has expected attributes');
       });
     });
   });
@@ -573,7 +572,7 @@ describe('Html2React', () => {
       const htmlInput = '<div></div><div></div>';
       const elements = parser.parse(htmlInput);
       const output = elements.map(ReactDOMServer.renderToStaticMarkup).join('');
-      assert.equal(htmlInput, output);
+      equal(htmlInput, output);
     });
   });
 });
