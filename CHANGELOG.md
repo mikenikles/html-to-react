@@ -2,6 +2,8 @@
 
 ## Master/Unreleased
 
+## [v1.6.0](https://github.com/aknuds1/html-to-react/tree/v1.6.0)
+
 - Use React as peer dependency [149](https://github.com/aknuds1/html-to-react/pull/149) ([woofers](https://github.com/woofers))
 - Add TypeScript type definitions [#146](https://github.com/aknuds1/html-to-react/pull/146) ([xnevz](https://github.com/xnevz), [aknuds1](https://github.com/aknuds1))
 
