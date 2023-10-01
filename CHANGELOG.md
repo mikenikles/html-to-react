@@ -2,6 +2,8 @@
 
 ## Master/Unreleased
 
+- Don't process attributes for custom elements [151](https://github.com/aknuds1/html-to-react/pull/151) ([bilobom](https://github.com/bilobom))
+
 ## [v1.6.0](https://github.com/aknuds1/html-to-react/tree/v1.6.0)
 
 - Use React as peer dependency [149](https://github.com/aknuds1/html-to-react/pull/149) ([woofers](https://github.com/woofers))
