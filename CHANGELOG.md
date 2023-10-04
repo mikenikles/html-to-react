@@ -2,6 +2,8 @@
 
 ## Master/Unreleased
 
+## [v1.7.0](https://github.com/aknuds1/html-to-react/tree/v1.7.0)
+
 - Don't process attributes for custom elements [151](https://github.com/aknuds1/html-to-react/pull/151) ([bilobom](https://github.com/bilobom))
 
 ## [v1.6.0](https://github.com/aknuds1/html-to-react/tree/v1.6.0)
