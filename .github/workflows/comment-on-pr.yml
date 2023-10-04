@@ -21,6 +21,6 @@ jobs:
       - name: Add comment to the PR
         id: notification
         run: |
-           gh pr comment $PR_URL --body "This is a GitHub Actions test"
+           gh pr comment ${{ github.event.pull_request.number }} --body "This is a GitHub Actions test"
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
