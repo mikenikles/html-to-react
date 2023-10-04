@@ -4,11 +4,11 @@
 
 ## [v1.7.0](https://github.com/aknuds1/html-to-react/tree/v1.7.0)
 
-- Don't process attributes for custom elements [151](https://github.com/aknuds1/html-to-react/pull/151) ([bilobom](https://github.com/bilobom))
+- Don't process attributes for custom elements [#151](https://github.com/aknuds1/html-to-react/pull/151) ([bilobom](https://github.com/bilobom))
 
 ## [v1.6.0](https://github.com/aknuds1/html-to-react/tree/v1.6.0)
 
-- Use React as peer dependency [149](https://github.com/aknuds1/html-to-react/pull/149) ([woofers](https://github.com/woofers))
+- Use React as peer dependency [#149](https://github.com/aknuds1/html-to-react/pull/149) ([woofers](https://github.com/woofers))
 - Add TypeScript type definitions [#146](https://github.com/aknuds1/html-to-react/pull/146) ([xnevz](https://github.com/xnevz), [aknuds1](https://github.com/aknuds1))
 
 ## [v1.5.1](https://github.com/aknuds1/html-to-react/tree/v1.5.1)
