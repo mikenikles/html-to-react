@@ -1,27 +1,29 @@
 {
   "name": "html-to-react",
-  "version": "1.0.0",
+  "version": "1.7.0",
   "description": "A lightweight library that converts raw HTML to a React DOM structure.",
   "main": "index.js",
+  "types": "types/index.d.ts",
   "scripts": {
-    "test": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage",
-    "test-html-coverage": "istanbul cover ./node_modules/mocha/bin/_mocha; open coverage/lcov-report/index.html"
+    "test": "./node_modules/.bin/eslint . && ./node_modules/.bin/mocha",
+    "test-coverage": "eslint . && nyc npm test && nyc report --reporter=lcov",
+    "test-html-coverage": "eslint . && nyc --reporter=html npm test; open coverage/index.html"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/mikenikles/html-to-react.git"
+    "url": "https://github.com/aknuds1/html-to-react.git"
   },
   "keywords": [
     "react",
     "react-component",
     "html"
   ],
-  "author": "Mike Nikles",
+  "author": "Arve Knudsen, Mike Nikles",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/mikenikles/html-to-react/issues"
+    "url": "https://github.com/aknuds1/html-to-react/issues"
   },
-  "homepage": "https://github.com/mikenikles/html-to-react",
+  "homepage": "https://github.com/aknuds1/html-to-react",
   "config": {
     "blanket": {
       "pattern": [
@@ -33,24 +35,29 @@
       ]
     }
   },
+  "peerDependencies": {
+    "react": "^0.13.0 || ^0.14.0 || >=15"
+  },
   "dependencies": {
-    "ent": "^2.2.0",
-    "htmlparser2": "^3.8.3",
-    "lodash.camelcase": "^4.3.0",
-    "lodash.find": "^4.6.0",
-    "lodash.frompairs": "^4.0.1",
-    "lodash.includes": "^4.3.0",
-    "lodash.isempty": "^4.4.0",
-    "lodash.map": "^4.6.0",
-    "lodash.merge": "^4.6.0"
+    "domhandler": "^5.0",
+    "htmlparser2": "^9.0",
+    "lodash.camelcase": "^4.3.0"
   },
   "devDependencies": {
-    "coveralls": "2.11.9",
-    "istanbul": "0.4.3",
-    "lodash": "^4.16.1",
-    "mocha": "2.4.5",
-    "mocha-lcov-reporter": "1.2.0",
-    "react": "^15.0",
-    "react-dom": "^15.0"
+    "@types/mocha": "^10.0.1",
+    "@types/react": "^18.0.33",
+    "@types/react-dom": "^18.0.11",
+    "coveralls": "^3.1.0",
+    "eslint": "^8.1",
+    "mocha": "^10.0",
+    "mocha-lcov-reporter": "^1.2.0",
+    "nyc": "^15.1.0",
+    "react": "^18.0",
+    "react-dom": "^18.0",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.0.3"
+  },
+  "volta": {
+    "node": "20.11.0"
   }
 }
