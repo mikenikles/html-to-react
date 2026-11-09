@@ -1,0 +1,5 @@
+{
+  "extension": ["ts"],
+  "spec": "test/**/*-tests.ts",
+  "node-option": ["disable-warning=MODULE_TYPELESS_PACKAGE_JSON"]
+}

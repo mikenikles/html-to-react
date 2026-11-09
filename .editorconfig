@@ -1,10 +1,16 @@
 root = true
 
 [*]
-indent_style = space
-end_of_line = lf
+trim_trailing_whitespace = true
 insert_final_newline = true
-max_line_length = 100
+end_of_line = lf
 
 [*.js]
-indent_size = 4
+indent_style = space
+max_line_length = 100
+indent_size = 2
+
+[*.yaml]
+indent_style = space
+max_line_length = 100
+indent_size = 2

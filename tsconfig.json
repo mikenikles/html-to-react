@@ -1,0 +1,14 @@
+{
+  "include": ["lib/**/*", "index.js", "test/**/*"],
+  "compilerOptions": {
+    "allowJs": true,
+    "strict": true,
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "module": "commonjs",
+    "target": "es2018",
+    "lib": ["es2018"],
+    "types": ["mocha", "node"],
+    "noEmit": true
+  }
+}
